@@ -69,6 +69,8 @@ A repository with applications that work with One-Core-API
 - Adobe Photoshop CC 2018
 
   <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/photoshop.png?raw=true" alt="picture" width="800" height="600">
+  
+  <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/photoshop2.jpg?raw=true" alt="picture">
 
 # FAQ
 - Microsoft Edge 109 doesn't work!
