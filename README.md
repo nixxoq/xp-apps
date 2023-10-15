@@ -55,6 +55,7 @@ A repository with applications that work with One-Core-API
 - JetBrains PyCharm Community 2018.3.7
 
 ### Utilities:
+- .NET Framework 4.8
 - .NET Framework 4.7.2
 - .NET Framework 4.5.2
 - JDK 21 (Java 21)
