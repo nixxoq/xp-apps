@@ -30,6 +30,10 @@ A repository with applications that work with One-Core-API
   <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/msedge1.png?raw=true" alt="picture" width="800" height="600">
   <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/msedge2.png?raw=true" alt="picture" width="800" height="600">
 
+  ### Opera 95.0.4635.84
+  <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/opera95_1.png?raw=true" alt="picture">
+  <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/opera95_2.png?raw=true" alt="picture">
+
 ## Windows Vista Applications:
  
   ### Microsoft Games from Windows Vista build 5259
