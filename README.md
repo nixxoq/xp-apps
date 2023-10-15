@@ -9,6 +9,8 @@ A repository with applications that work with One-Core-API
 
 **GoFile:** [click](https://gofile.io/d/HXuYeD)
 
+**Github Releases:** [click](https://github.com/Snaky1a/xp-apps/releases/)
+
 # Program list
 
 **Browsers:**
