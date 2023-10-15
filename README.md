@@ -3,6 +3,11 @@ A repository with applications that work with One-Core-API
 
 ### Note: This repository is regularly updating
 
+## Download link
+
+**Pixeldrain:** [click](https://pixeldrain.com/u/Z4nxfJKD)
+**GoFile:** [click](https://gofile.io/d/HXuYeD)
+
 # Program list
 
 **Browsers:**
