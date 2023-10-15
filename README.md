@@ -17,6 +17,10 @@ A repository with applications that work with One-Core-API
 - CatsXP (Chromium 117)
  <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/catsxp1.png?raw=true" alt="picture" width="800" height="600">
  <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/catsxp2.png?raw=true" alt="picture" width="800" height="600">
+
+- CatsXP (Chromium 118)
+ <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/catsxp118_1.png?raw=true" alt="picture">
+ <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/catsxp_118_2.png?raw=true" alt="picture">
   
 - Brave 101
  <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/brave1.png?raw=true" alt="picture" width="800" height="600">
@@ -70,8 +74,13 @@ A repository with applications that work with One-Core-API
 - Adobe Photoshop CC 2018
 
   <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/photoshop.png?raw=true" alt="picture" width="800" height="600">
-  
   <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/photoshop2.jpg?raw=true" alt="picture">
+
+- ShareX 15.0
+
+  <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/sharex1.png?raw=true" alt="picture">
+  <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/sharex2.png?raw=true" alt="picture">
+  
 
 # FAQ
 - Microsoft Edge 109 doesn't work!
