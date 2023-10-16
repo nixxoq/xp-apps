@@ -13,7 +13,7 @@ A repository with applications that work with One-Core-API
   ### WinRar 6.24
   <details><summary>click to view image</summary><img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/winrar.png?raw=true"></details>
 
-## Browsers:
+## Browsers & Download Managers
   ### CatsXP (Chromium 117)
   <details>
     <summary>click to view images</summary>
@@ -49,7 +49,13 @@ A repository with applications that work with One-Core-API
   <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/opera95_2.png?raw=true" alt="picture">
   </details>
 
-## Windows Vista Applications:
+  ### Internet Download Manager 6.40 build 11
+  <details>
+    <summary>click to view image</summary>
+  <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/internetdownloadmanager.png?raw=true" alt="picture">
+  </details>
+
+## Windows Vista Applications
  
   ### Microsoft Games from Windows Vista build 5259
   ### Microsoft Games from Windows Vista build 5270
@@ -77,7 +83,7 @@ A repository with applications that work with One-Core-API
   <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/k-lite.png?raw=true" alt="picture" width="800" height="600">
   </details>
 
-### Code Editors:
+### Code Editors
   ### JetBrains PyCharm Community 2017.3.4 Portable
   <details>
     <summary>click to view images</summary>
@@ -87,7 +93,7 @@ A repository with applications that work with One-Core-API
    
   ### JetBrains PyCharm Community 2018.3.7
 
-### Utilities:
+### Utilities
   ### .NET Framework 4.8
   ### .NET Framework 4.7.2
   ### .NET Framework 4.5.2
@@ -105,7 +111,7 @@ A repository with applications that work with One-Core-API
   <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/java21.png?raw=true" alt="picture">
   </details>
 
-### Other:
+### Other
   ### Adobe Photoshop CC 2018
 
   <details>
@@ -121,12 +127,30 @@ A repository with applications that work with One-Core-API
   <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/sharex1.png?raw=true" alt="picture">
   <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/sharex2.png?raw=true" alt="picture">
   </details>
-  
+
+### Programming & Code Editors
+  ### Python 3.9.13+
+  <details>
+    <summary>click to view image</summary>
+  <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/python39.png?raw=true" alt="picture">
+  </details>
+
+  ### Visual Studio Code 1.70.3
+  <details>
+    <summary>click to view image</summary>
+  <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/vscode.png?raw=true" alt="picture">
+  </details>
 
 # FAQ
 - Microsoft Edge 109 doesn't work!
 > Try enable 3d graphics in Virtual Machine or install drivers for video card
 
-- Photoshop is not working
+- Photoshop/Visual Studio Code is not working
 > Disable 3d graphics and try again
 
+
+# Changelog
+
+## 2023.16.10
+  - Updated `important.zip` file (updated One-Core-API to 3.0.3 Canary and batch scripts)
+  - Added Python 3.9, Visual Studio Code 1.70.3 and Internet Download Manager 6.40 build 11 to the programs list
