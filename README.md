@@ -141,6 +141,13 @@ A repository with applications that work with One-Core-API
   <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/vscode.png?raw=true" alt="picture">
   </details>
 
+  ### CLion 2021.3.4
+  #### Windows XP x64 bit only!!!!
+  <details>
+    <summary>click to view image</summary>
+  <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/clion_2021_3_4.png?raw=true" alt="picture">
+  </details>
+
 # FAQ
 - Microsoft Edge 109 doesn't work!
 > Try enable 3d graphics in Virtual Machine or install drivers for video card
