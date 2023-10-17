@@ -141,11 +141,19 @@ A repository with applications that work with One-Core-API
   <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/vscode.png?raw=true" alt="picture">
   </details>
 
-  ### CLion 2021.3.4
+  ### JetBrains CLion 2021.3.4
   #### Windows XP x64 bit only!!!!
   <details>
     <summary>click to view image</summary>
   <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/clion_2021_3_4.png?raw=true" alt="picture">
+  </details>
+
+  ### JetBrains CLion 2023.2.2 (LAST VERSION!!!)
+  #### Windows XP x64 bit only!!!!
+  <details>
+    <summary>click to view images</summary>
+  <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/clion_2023_2_2_1.png?raw=true" alt="picture">
+  <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/clion_2023_2_2_2.png?raw=true" alt="picture">
   </details>
 
 # FAQ
