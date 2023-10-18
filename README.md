@@ -76,11 +76,18 @@ A repository with applications that work with One-Core-API
   ### Windows Sidebar from Windows Vista RTM (build 6001)
 
 
-### Kodec & video
+### Codec & video & audio
   ### K-Lite Codec Pack 17.8.0 Full
   <details>
     <summary>click to view image</summary>
   <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/k-lite.png?raw=true" alt="picture" width="800" height="600">
+  </details>
+
+  ### AIMP 5.1.1.2436
+  #### Windows XP x64 bit only!!!!
+  <details>
+    <summary>click to view image</summary>
+  <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/aimp5.png?raw=true" alt="picture">
   </details>
 
 ### Code Editors
@@ -128,6 +135,15 @@ A repository with applications that work with One-Core-API
   <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/sharex2.png?raw=true" alt="picture">
   </details>
 
+### Office
+  ### FreeOffice (Alternative to Microsoft Office)
+  <details>
+    <summary>click to view images</summary>
+  <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/freeoffice_1.png?raw=true" alt="picture">
+  <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/freeoffice_2.png?raw=true" alt="picture">
+  <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/freeoffice_3.png?raw=true" alt="picture">
+  </details>
+
 ### Programming & Code Editors
   ### Python 3.9.13+
   <details>
@@ -154,6 +170,13 @@ A repository with applications that work with One-Core-API
     <summary>click to view images</summary>
   <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/clion_2023_2_2_1.png?raw=true" alt="picture">
   <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/clion_2023_2_2_2.png?raw=true" alt="picture">
+  </details>
+
+  ### JetBrains PyCharm 2023.2.2 (LAST VERSION!!!)
+  #### Windows XP x64 bit only!!!!
+  <details>
+    <summary>click to view image</summary>
+  <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/pycharm_2023.png?raw=true" alt="picture">
   </details>
 
 # FAQ
