@@ -7,9 +7,9 @@ A repository with applications that work with One-Core-API
 
 **Github Releases:** [click](https://github.com/Snaky1a/xp-apps/releases/)
 
-# Programs List
+# Contents
 
-> - [xp-apps](#xp-apps)
+> - [Main](#xp-apps)
 >  - [Download link](#download-link)
 >
 > - [Programs List](#programs-list)
@@ -64,6 +64,8 @@ A repository with applications that work with One-Core-API
 >  - [FAQ](#faq)
 >  - [Changelog](#changelog)
 >    - [2023.16.10](#20231610)
+
+# Programs List
 
 ## Archivers
   ### WinRar 6.24
