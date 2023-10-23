@@ -256,6 +256,13 @@ A repository with applications that work with One-Core-API
 
 # Changelog
 
+## 2023.22.10
+  - Added Visual Studio Code 1.83.1 to the programs list
+  - Added JDK 21 x64 (Java 21 x64) and JDK 11 x64 (Java 11 x64) to the programs list
+  - Updated important.zip file (deleted 2. Apply AppCompat Flags (need for photoshop, microsoft edge, pycharm 2018 and visual studio code).bat scripts, because it is useless)
+  - Updated pycharm2017.zip, pycharm2018.zip, k-lite.zip, Visual Studio Code 1.70.3.zip, Visual Studio Code 1.83.1.zip and photoshop cc 2018.zip files (updated batch scripts, text files)
+
+
 ## 2023.20.10
   - Updated `important.zip` file
 
