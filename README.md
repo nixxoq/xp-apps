@@ -63,6 +63,9 @@ A repository with applications that work with One-Core-API
 >    - [JetBrains PyCharm 2023.2.2 (LATEST VERSION!!!) (Windows XP x64 only)](#jetbrains-pycharm-202322-last-version)
 >  - [FAQ](#faq)
 >  - [Changelog](#changelog)
+>    - [2023.20.10](#20232010)
+>    - [2023.18.10](#20231810)
+>    - [2023.17.10](#20231710)
 >    - [2023.16.10](#20231610)
 
 # Programs List
@@ -252,6 +255,19 @@ A repository with applications that work with One-Core-API
 
 
 # Changelog
+
+## 2023.20.10
+  - Updated `important.zip` file
+
+## 2023.18.10
+  - Added JetBrains PyCharm 2023.2.2 to the programs list
+  - Added AIMP 5.1.1.2436 to the programs list
+  - Added FreeOffice (latest version) to the programs list (Free alternative to Microsoft Office)
+
+## 2023.17.10
+  - Added JetBrains CLion 2021.3.4 x64 to the programs list (Note: for Windows XP x64 bit only!!)
+  - Fixed the One-Core-API installer for Windows XP x64
+  - Added JetBrains CLion 2023.2.2 x64 to the programs list (Note: for Windows XP x64 bit only!!)
 
 ## 2023.16.10
   - Updated `important.zip` file (updated One-Core-API to 3.0.3 Canary and batch scripts)
