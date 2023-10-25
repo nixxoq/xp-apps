@@ -210,7 +210,6 @@ A repository with applications that work with One-Core-API
   </details>
 
   ### Visual Studio Code 1.83.1
-  #### Windows XP x64 bit only!!!!
   <details>
     <summary>click to view image</summary>
   <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/vscode_1_83_1.png?raw=true" alt="picture">
