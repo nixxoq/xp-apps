@@ -137,6 +137,22 @@ A repository with applications that work with One-Core-API
   ### Windows Sidebar from Windows Vista RC 2 (build 5744)
   ### Windows Sidebar from Windows Vista RTM (build 6001)
 
+## Windows 7 Applications
+
+  ### Windows 7 Games
+  <details>
+    <summary>click to view images</summary>
+  <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/win7games_1.png?raw=true">
+  <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/win7games_2.png?raw=true">
+  </details>
+
+  ### Wordpad
+  <details>
+    <summary>click to view image</summary>
+  <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/wordpad_windows7.png?raw=true">
+  </details>
+
+  
 
 ### Codec & video & audio
   ### K-Lite Codec Pack 17.8.0 Full
@@ -255,6 +271,11 @@ A repository with applications that work with One-Core-API
 
 
 # Changelog
+
+## 2023.03.11
+  - Added Wordpad from Windows 7 to the programs list
+  - Updated `important.zip` file (updated One-Core-API to 3.0.3 Canary 2 and created ReadMe file)
+  - Added Windows 7 Games to the programs list
 
 ## 2023.22.10
   - Added Visual Studio Code 1.83.1 to the programs list
