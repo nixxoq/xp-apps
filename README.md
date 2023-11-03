@@ -33,7 +33,11 @@ A repository with applications that work with One-Core-API
 >    - [Sidebars](#sidebars)
 >      - [Windows Sidebar from Windows Vista RC 2 (build 5744)](#windows-sidebar-from-windows-vista-rc-2-build-5744)
 >      - [Windows Sidebar from Windows Vista RTM (build 6001)](#windows-sidebar-from-windows-vista-rtm-build-6001)
-    
+
+>  - [Windows 7 Applications](#windows-7-applications)
+>    - [Windows 7 Games](#windows-7-games)
+>    - [Wordpad](#wordpad)
+
 >  - [Codec \& video \& audio](#codec--video--audio)
 >    - [K-Lite Codec Pack 17.8.0 Full](#k-lite-codec-pack-1780-full)
 >    - [AIMP 5.1.1.2436 (Windows XP x64 only)](#aimp-5112436)
@@ -63,6 +67,7 @@ A repository with applications that work with One-Core-API
 >    - [JetBrains PyCharm 2023.2.2 (LATEST VERSION!!!) (Windows XP x64 only)](#jetbrains-pycharm-202322-last-version)
 >  - [FAQ](#faq)
 >  - [Changelog](#changelog)
+>    - [2023.03.11](#20230311)
 >    - [2023.22.10](#20232210)
 >    - [2023.20.10](#20232010)
 >    - [2023.18.10](#20231810)
@@ -152,7 +157,6 @@ A repository with applications that work with One-Core-API
   <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/wordpad_windows7.png?raw=true">
   </details>
 
-  
 
 ### Codec & video & audio
   ### K-Lite Codec Pack 17.8.0 Full
