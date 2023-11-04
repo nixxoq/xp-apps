@@ -23,6 +23,8 @@ A repository with applications that work with One-Core-API
 >    - [Microsoft Edge 109 (109.0.1518.140)](#microsoft-edge-109-10901518140)
 >    - [Opera 95.0.4635.84](#opera-950463584)
 >    - [Internet Download Manager 6.40 build 11](#internet-download-manager-640-build-11)
+>    - [Epic Privacy Browser version 91](#epic-privacy-browser-version-91)
+>    - [Epic Privacy Browser version 104](#epic-privacy-browser-version-104)
     
 >  - [Windows Vista Applications](#windows-vista-applications)
 >    - [Microsoft Games from Windows Vista build 5259](#microsoft-games-from-windows-vista-build-5259)
@@ -37,6 +39,7 @@ A repository with applications that work with One-Core-API
 >  - [Windows 7 Applications](#windows-7-applications)
 >    - [Windows 7 Games](#windows-7-games)
 >    - [Wordpad](#wordpad)
+>    - [Paint](#paint)
 
 >  - [Codec \& video \& audio](#codec--video--audio)
 >    - [K-Lite Codec Pack 17.8.0 Full](#k-lite-codec-pack-1780-full)
@@ -122,6 +125,18 @@ A repository with applications that work with One-Core-API
   <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/internetdownloadmanager.png?raw=true" alt="picture">
   </details>
 
+  ### Epic Privacy Browser version 91
+  <details>
+    <summary>click to view image</summary>
+  <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/epic_browser_91.png?raw=true" alt="picture">
+  </details>
+  
+  ### Epic Privacy Browser version 104
+  <details>
+    <summary>click to view image</summary>
+  <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/epic_browser_104.png?raw=true" alt="picture">
+  </details>
+
 ## Windows Vista Applications
  
   ### Microsoft Games from Windows Vista build 5259
@@ -155,6 +170,12 @@ A repository with applications that work with One-Core-API
   <details>
     <summary>click to view image</summary>
   <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/wordpad_windows7.png?raw=true">
+  </details>
+
+  ### Paint
+  <details>
+    <summary>click to view image</summary>
+  <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/mspaint.png?raw=true">
   </details>
 
 
