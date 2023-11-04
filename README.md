@@ -70,6 +70,7 @@ A repository with applications that work with One-Core-API
 >    - [JetBrains PyCharm 2023.2.2 (LATEST VERSION!!!) (Windows XP x64 only)](#jetbrains-pycharm-202322-last-version)
 >  - [FAQ](#faq)
 >  - [Changelog](#changelog)
+>    - [2023.04.11](#20230411)
 >    - [2023.03.11](#20230311)
 >    - [2023.22.10](#20232210)
 >    - [2023.20.10](#20232010)
@@ -296,6 +297,11 @@ A repository with applications that work with One-Core-API
 
 
 # Changelog
+
+## 2023.04.11
+  - Added Microsoft Paint from Windows 7 to the programs list
+  - Added Epic Privacy Browser version 91 to the programs list
+  - Added Epic Privacy Browser version 104 to the programs list
 
 ## 2023.03.11
   - Added Wordpad from Windows 7 to the programs list
