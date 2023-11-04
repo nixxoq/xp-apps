@@ -77,6 +77,7 @@ A repository with applications that work with One-Core-API
 >    - [2023.18.10](#20231810)
 >    - [2023.17.10](#20231710)
 >    - [2023.16.10](#20231610)
+>  - [Special Thanks](#special-thanks-to)
 
 # Programs List
 
@@ -287,6 +288,10 @@ A repository with applications that work with One-Core-API
     <summary>click to view image</summary>
   <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/pycharm_2023.png?raw=true" alt="picture">
   </details>
+
+# Special Thanks to
+  - [Skulltrail192](https://github.com/Skulltrail192/One-Core-API-Binaries) - for One-Core-API
+  - [tortilla5](https://archive.org/details/@tortilla_5) - for Epic Privacy Browser versions 91 and 104
 
 # FAQ
 - Microsoft Edge 109 doesn't work!
