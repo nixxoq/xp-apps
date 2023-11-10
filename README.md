@@ -25,6 +25,7 @@ A repository with applications that work with One-Core-API
 >    - [Internet Download Manager 6.40 build 11](#internet-download-manager-640-build-11)
 >    - [Epic Privacy Browser version 91](#epic-privacy-browser-version-91)
 >    - [Epic Privacy Browser version 104](#epic-privacy-browser-version-104)
+>    - [Firefox 79.0](#firefox-790)
     
 >  - [Windows Vista Applications](#windows-vista-applications)
 >    - [Microsoft Games from Windows Vista build 5259](#microsoft-games-from-windows-vista-build-5259)
@@ -51,6 +52,8 @@ A repository with applications that work with One-Core-API
 >    - [.NET Framework 4.5.2](#net-framework-452)
 >    - [JDK 21 (Java 21)](#jdk-21-java-21)
 >    - [JDK 11 (Java 11)](#jdk-11-java-11)
+>    - [OpenJDK 1.8 (Java 1.8)](#openjdk-18-java-18)
+>    - [OpenJDK 17 (Java 17)](#openjdk-17-java-17)
     
 >  - [Other](#other)
 >    - [Adobe Photoshop CC 2018](#adobe-photoshop-cc-2018)
@@ -70,6 +73,7 @@ A repository with applications that work with One-Core-API
 >    - [JetBrains PyCharm 2023.2.2 (LATEST VERSION!!!) (Windows XP x64 only)](#jetbrains-pycharm-202322-last-version)
 >  - [FAQ](#faq)
 >  - [Changelog](#changelog)
+>    - [2023.10.11](#20231011)
 >    - [2023.04.11](#20230411)
 >    - [2023.03.11](#20230311)
 >    - [2023.22.10](#20232210)
@@ -137,6 +141,12 @@ A repository with applications that work with One-Core-API
   <details>
     <summary>click to view image</summary>
   <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/epic_browser_104.png?raw=true" alt="picture">
+  </details>
+
+  ### Firefox 79.0
+  <details>
+    <summary>click to view image</summary>
+  <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/firefox_79.png?raw=true" alt="picture">
   </details>
 
 ## Windows Vista Applications
@@ -211,6 +221,18 @@ A repository with applications that work with One-Core-API
   <details>
     <summary>click to view image</summary>
   <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/java21.png?raw=true" alt="picture">
+  </details>
+
+  ### OpenJDK 1.8 (Java 1.8)
+  <details>
+    <summary>click to view image</summary>
+  <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/openjdk1_8.png?raw=true" alt="picture">
+  </details>
+
+  ### OpenJDK 17 (Java 17)
+  <details>
+    <summary>click to view image</summary>
+  <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/openjdk17.png?raw=true" alt="picture">
   </details>
 
 ### Other
@@ -302,6 +324,10 @@ A repository with applications that work with One-Core-API
 
 
 # Changelog
+
+## 2023.10.11
+  - Updated `important.zip` archive (updated One-Core-API to 3.0.3 Release)
+  - Added Firefox 79, OpenJDK 1.8 and OpenJDK 17 to the programs list
 
 ## 2023.04.11
   - Added Microsoft Paint from Windows 7 to the programs list
