@@ -313,7 +313,7 @@ A repository with applications that work with One-Core-API
 
 # Special Thanks to
   - [Skulltrail192](https://github.com/Skulltrail192/One-Core-API-Binaries) - for One-Core-API
-  - [tortilla5](https://archive.org/details/@tortilla_5) - for Epic Privacy Browser versions 91 and 104
+  - [tortilla5](https://archive.org/details/@tortilla_5) - for Epic Privacy Browser versions 91 and 104, OpenJDK 1.8, and OpenJDK 1.17
 
 # FAQ
 - Microsoft Edge 109 doesn't work!
