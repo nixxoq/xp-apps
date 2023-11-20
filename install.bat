@@ -21,17 +21,19 @@ set "installed_oca_version=0"
 
 set "need_update_OCA=0"
 
-for /f "tokens=4-5 delims=. " %%i in ('ver') do SET VERSION=%%i.%%j 
+for /f "delims=" %%a in ('ver ^| findstr 5.1') do set "result=%%a"
 
-IF %VERSION%==5.1 (
+IF errorlevel 0 (
     goto menu    
-) ELSE IF %VERSION%==5.2 (
-    goto menu 
-) else (
-    echo This program doesn't work on Windows 2000, Windows Vista and later
-    pause
-    goto :eof
-   rem goto menu
+) ELSE IF errorlevel 1 (
+    for /f "delims=" %%a in ('ver ^| findstr 5.2') do set "result=%%a"
+    if errorlevel 1 (
+       goto menu 
+    ) else (
+       echo This program doesn't work on Windows 2000, Windows Vista and later
+       pause
+       goto :eof
+    )
 )
 
 
