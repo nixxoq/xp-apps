@@ -106,7 +106,8 @@ if "%selected%"=="1" (
 
    echo Installing One-Core-API, please wait...
    cls
-   call "%current_path%Important\Install One-Core-API.bat" no
+   call "%current_path%Important\Install One-Core-API.bat"
+   shutdown /a
    echo Installing Visual C++ 2005 x86
    start /wait "installing" "%current_path%Important\vcredist_x86_2005.exe" /Q
    echo Installing Visual C++ 2008 x86
