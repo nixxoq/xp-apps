@@ -26,7 +26,7 @@ A repository with applications that work with One-Core-API
 >    - [Epic Privacy Browser version 91](#epic-privacy-browser-version-91)
 >    - [Epic Privacy Browser version 104](#epic-privacy-browser-version-104)
 >    - [Firefox 79.0](#firefox-790)
->    - [Chromium 121]()
+>    - [Chromium 121](#chromium-121-dev)
     
 >  - [Windows Vista Applications](#windows-vista-applications)
 >    - [Microsoft Games from Windows Vista build 5259](#microsoft-games-from-windows-vista-build-5259)
