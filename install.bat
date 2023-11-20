@@ -123,8 +123,6 @@ if "%selected%"=="1" (
    echo Installing Visual C++ 2015-2019 x86
    start /wait "installing" "%current_path%Important\vcredist_x86_2015_2019.exe" /quiet /norestart
 
-   rem do install vs 2005
-
    if "%os_bit%"=="x64" (
        echo Installing Visual C++ 2005 x64
        start /wait "installing" "%current_path%Important\vcredist_x64_2005.exe" /Q
@@ -142,6 +140,7 @@ if "%selected%"=="1" (
 
    echo Installing .NET Framework 4.8...
    call "%current_path%Important\Install dot net 4.8.bat"
+   goto :menu
 
 ) else if "%selected%"=="catsxp117" (
     echo Downloading archive, please wait...
