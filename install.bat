@@ -140,6 +140,19 @@ if "%selected%"=="1" (
 
    echo Installing .NET Framework 4.8...
    call "%current_path%Important\Install dot net 4.8.bat"
+
+   echo %OCAPI%
+   echo.
+   echo ========================================================
+   echo - %OCAPI% Was installed!
+   echo - Your OS will be restarted in 30 seconds
+   echo ========================================================
+   echo.
+    
+    
+   shutdown /r /t 30 /c "%OCAPI% Was installed! Your OS will be restarted in 30 seconds"
+   pause
+    
    goto :menu
 
 ) else if "%selected%"=="catsxp117" (
