@@ -173,16 +173,15 @@ if "%selected%"=="1" (
    echo Installing .NET Framework 4.8...
    call "%current_path%Important\Install dot net 4.8.bat"
 
-   echo %OCAPI%
    echo.
    echo ========================================================
-   echo - %OCAPI% Was installed!
+   echo - One-Core-API %latest_OCA% Was installed!
    echo - Your OS will be restarted in 30 seconds
    echo ========================================================
    echo.
     
     
-   shutdown /r /t 30 /c "%OCAPI% Was installed! Your OS will be restarted in 30 seconds"
+   shutdown /r /t 30 /c "One-Core-API %latest_OCA% was installed! Your OS will be restarted in 30 seconds"
    pause
     
    goto :menu
@@ -406,10 +405,10 @@ if "%selected%"=="1" (
     goto :menu
 ) else if "%selected%"=="jdk18_17" (
    echo Downloading archive, please wait...
-    "%CURL_PATH%" -# -L -o jdk11.zip https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/jdk11.java.11.zip
+    "%CURL_PATH%" -# -L -o openjdk1_8_17.zip https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/openjdk-1.8_openjdk-17.zip 
        
     echo Unpacking, please wait...
-    "%ZIP_PATH%" x jdk11.zip -y -bsp2 -bso0
+    "%ZIP_PATH%" x openjdk1_8_17.zip -y -bsp2 -bso0
     
     echo Path to OpenJDK 1.8 and OpenJDK 17: "%current_path%\openjdk-1.8_openjdk-17\".
     pause
