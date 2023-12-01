@@ -14,7 +14,7 @@ set "current_path=%~dp0"
 set "CURL_PATH=%current_path%\tools\curl\curl.exe"
 set "ZIP_PATH=%current_path%\tools\7z.exe"
 
-set "latest_OCA=3.0.4-Canary"
+set "latest_OCA=3.0.4.Canary.b2"
 
 set "oca_is_installed=0"
 set "installed_oca_version=0"
@@ -87,6 +87,24 @@ if "%option%"=="1" (
    call :DoInstall %option%  
 ) else if "%option%"=="2" (
    goto :BrowserMenu
+) else if "%option%"=="3" (
+   goto :VistaApps
+) else if "%option%"=="4" (
+   goto :WinSevenApps
+) else if "%option%"=="5" (
+   goto :CodecandAudioMenu
+) else if "%option%"=="6" (
+   goto :UtilitiesMenu
+) else if "%option%"=="7" (
+   goto :OtherMenu
+) else if "%option%"=="8" (
+   goto :OfficeMenu
+) else if "%option%"=="9" (
+   goto :Progrmenu
+) else (
+   echo Not implemented. Check new updates...
+   pause
+   goto menu
 )
 
 :: Installer
