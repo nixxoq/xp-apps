@@ -81,6 +81,7 @@ echo 6. Open the Utilities category
 echo 7. Open the Other category
 echo 8. Open the Office category
 echo 9. Open the Programming/Code editors category
+echo 0. Exit
 
 set /P option=Select Option: 
 if "%option%"=="1" (
@@ -101,6 +102,8 @@ if "%option%"=="1" (
    goto :OfficeMenu
 ) else if "%option%"=="9" (
    goto :Progrmenu
+) else if "%option%"=="0" (
+   goto :eof
 ) else (
    echo Not implemented. Check new updates...
    pause
@@ -607,6 +610,7 @@ echo 7. Epic Privacy Browser version 104
 echo 8. Firefox 79
 echo 9. Chromium 121.0.6138.0 (latest dev) x64
 echo 10. Chromium 121.0.6138.0 (latest dev) x86
+echo 0. Back to the main menu
 echo.
 
 set /p output="Input number: " 
@@ -631,6 +635,8 @@ if "%output%"=="1" (
    call :DoInstall chromium121_x64
 ) else if "%output%"=="10" (
    call :DoInstall chromium121_x86
+) else if "%output%"=="0" (
+   goto :menu
 ) else (
    echo Please enter a number!
    pause
@@ -645,6 +651,7 @@ echo.
 echo 1. Microsoft Games from Windows Vista build 5259 and 5270
 echo 2. Windows Movie Maker from Windows Vista build 5270
 echo 3. Windows Sidebar from Windows Vista build 5744 and from Windows Vista RTM
+echo 0. Back to the main menu
 
 echo.
 
@@ -656,10 +663,12 @@ if "%output%"=="1" (
    call :DoInstall msmoviemaker
 ) else if "%output%"=="3" (
    call :DoInstall mssidebar
+) else if "%output%"=="0" (
+   goto :menu
 ) else (
    echo Please enter a number!
    pause
-   goto BrowserMenu
+   goto VistaApps
 )
 rem ) else if "%output%"=="4" (
 rem    call :DoInstall inkball
@@ -673,6 +682,7 @@ echo.
 echo 1. Windows 7 Games
 echo 2. Wordpad
 echo 3. Paint
+echo 0. Back to the main menu
 echo.
 
 set /p output="Input number: " 
@@ -683,10 +693,12 @@ if "%output%"=="1" (
    call :DoInstall wordpad
 ) else if "%output%"=="3" (
    call :Doinstall mspaint
+) else if "%output%"=="0" (
+   goto :menu
 ) else (
    echo Please enter a number!
    pause
-   goto BrowserMenu
+   goto WinSevenApps
 )
 
 :CodecandAudioMenu
@@ -696,6 +708,7 @@ echo    Internet: %internet%
 echo.
 echo 1. K-Lite Codec Pack 17.8.0 Full
 echo 2. AIMP 5.1.1.2436
+echo 0. Back to the main menu
 echo.
 
 set /p output="Input number: " 
@@ -704,10 +717,12 @@ if "%output%"=="1" (
    call :DoInstall klite
 ) else if "%output%"=="2" (
    call :DoInstall aimp5
+) else if "%output%"=="0" (
+   goto :menu
 ) else (
    echo Please enter a number!
    pause
-   goto BrowserMenu
+   goto CodecandAudioMenu
 )
 
 :UtilitiesMenu
@@ -722,6 +737,7 @@ echo 4. JDK 11/Java 11
 echo 5. OpenJDK 1.8 and OpenJDK 17
 echo 6. JDK 21/Java 21 [x64]
 echo 7. JDK 11/Java 11 [x64]
+echo 0. Back to the main menu
 
 echo.
 
@@ -741,10 +757,12 @@ if "%output%"=="1" (
    call :DoInstall jdk21x64
 ) else if "%output%"=="7" (
    call :DoInstall jdk11x64
+) else if "%output%"=="0" (
+   goto :menu
 ) else (
    echo Please enter a number!
    pause
-   goto BrowserMenu
+   goto UtilitiesMenu
 )
 
 :OtherMenu
@@ -754,6 +772,7 @@ echo    Internet: %internet%
 echo.
 echo 1. Adobe Photoshop CC 2018
 echo 2. ShareX 15.0
+echo 0. Back to the main menu
 
 echo.
 
@@ -763,10 +782,12 @@ if "%output%"=="1" (
    call :DoInstall photoshop2018
 ) else if "%output%"=="2" (
    call :DoInstall sharex
+) else if "%output%"=="0" (
+   goto :menu
 ) else (
    echo Please enter a number!
    pause
-   goto BrowserMenu
+   goto OtherMenu
 )
 
 :OfficeMenu
@@ -775,6 +796,7 @@ echo    Internet: %internet%
 
 echo.
 echo 1. FreeOffice
+echo 0. Back to the main menu
 
 echo.
 
@@ -782,10 +804,12 @@ set /p output="Input number: "
 
 if "%output%"=="1" (
    call :DoInstall freeoffice
+) else if "%output%"=="0" (
+   goto :menu
 ) else (
    echo Please enter a number!
    pause
-   goto BrowserMenu
+   goto OfficeMenu
 )
 
 :Progrmenu
@@ -801,6 +825,7 @@ echo 5. JetBrains PyCharm Community 2018.3.7
 echo 6. JetBrains CLion 2021.3.4
 echo 7. JetBrains CLion 2023.2.2
 echo 8. JetBrains PyCharm Community 2023.2.2 [x64 only]
+echo 0. Back to the main menu
 
 
 echo.
@@ -823,8 +848,10 @@ if "%output%"=="1" (
    call :DoInstall clion_2023 
 ) else if "%output%"=="8" (
    call :DoInstall pycharm2023
+) else if "%output%"=="0" (
+   goto :menu
 ) else (
    echo Please enter a number!
    pause
-   goto BrowserMenu
+   goto Progrmenu
 )
