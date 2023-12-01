@@ -4,11 +4,7 @@ setlocal enabledelayedexpansion
 :: base settings
 title xp-apps - installation
 
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
-   set "os_bit=x64"
-) else (
-   set "os_bit=x32"
-)
+if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (set "os_bit=x64") else (set "os_bit=x32")
 
 set "current_path=%~dp0"
 set "CURL_PATH=%current_path%\tools\curl\curl.exe"
@@ -53,7 +49,9 @@ echo checking internet connection..
 Ping www.google.com -n 1 -w 1000 >NUL
     
 if errorlevel 1 (set "internet=not_connected") else (set "internet=connected")
-
+if "%internet%"=="connected" (
+   "%CURL_PATH%" -# -L -o currentversion.txt https://raw.githubusercontent.com/Snaky1a/xp-apps/main/currentversion.txt
+)
 cls
 
 echo                                 XP-tool
@@ -68,34 +66,35 @@ if "%oca_is_installed%"=="1" (
 
 if not "%installed_oca_verrsion%" == "%latest_OCA%" (
     echo.
-    echo    MESSAGE: A new version of One-Core-API has been released! To update, select option 1
+    echo    MESSAGE: A new version of One-Core-API has been released. To update, select option 1
 ) 
 
-if "%internet%"=="connected" (
-    "%CURL_PATH%" -# -L -o currentversion.txt https://raw.githubusercontent.com/Snaky1a/xp-apps/main/currentversion.txt
-    FOR /F %%i IN (currentversion.txt) DO (set new_version=%%i)
-    
-    echo %new_version% | findstr %program_version%
-    if errorlevel 1 (
-       echo.
-       echo  MESSAGE: A new version of installer has been released.
-    )
+FOR /F %%i IN (currentversion.txt) DO (set new_version=%%i)
+
+echo %new_version% | findstr %program_version% >NUL
+if errorlevel 1 (
+   echo.
+   echo    MESSAGE: A new version of installer has been released.
 )
+
 
 echo.
 
-echo 1. Download and install Important components (One-Core-API and Visual C++ redists)
-echo 2. Open the browser category
-echo 3. Open the Windows Vista Applications category
-echo 4. Open the Windows 7 Applications menu
-echo 5. Open the Codec/Audio/Video category
-echo 6. Open the Utilities category
-echo 7. Open the Other category
-echo 8. Open the Office category
-echo 9. Open the Programming/Code editors category
-echo 0. Exit
+echo [1] Download and install Important components (One-Core-API and Visual C++ redists)
+echo [2] Open the browser category
+echo [3] Open the Windows Vista Applications category
+echo [4] Open the Windows 7 Applications menu
+echo [5] Open the Codec/Audio/Video category
+echo [6] Open the Utilities category
+echo [7] Open the Other category
+echo [8] Open the Office category
+echo [9] Open the Programming/Code editors category
+echo.
+echo [0] Exit
 
 set /P option=Select Option: 
+
+cls
 if "%option%"=="1" (
    call :DoInstall %option%  
 ) else if "%option%"=="2" (
@@ -612,17 +611,18 @@ echo                                 XP-tool
 echo    Internet: %internet%
 
 echo.
-echo 1. CatsXP (Chromium 117)
-echo 2. CatsXP (Chromium 118)
-echo 3. Brave 101
-echo 4. Microsoft Edge 109 (109.0.1518.140)
-echo 5. Internet Download Manager 6.40 build 11
-echo 6. Epic Privacy Browser version 91
-echo 7. Epic Privacy Browser version 104
-echo 8. Firefox 79
-echo 9. Chromium 121.0.6138.0 (latest dev) x64
-echo 10. Chromium 121.0.6138.0 (latest dev) x86
-echo 0. Back to the main menu
+echo [1] CatsXP (Chromium 117)
+echo [2] CatsXP (Chromium 118)
+echo [3] Brave 101
+echo [4] Microsoft Edge 109 (109.0.1518.140)
+echo [5] Internet Download Manager 6.40 build 11
+echo [6] Epic Privacy Browser version 91
+echo [7] Epic Privacy Browser version 104
+echo [8] Firefox 79
+echo [9] Chromium 121.0.6138.0 (latest dev) x64
+echo [10] Chromium 121.0.6138.0 (latest dev) x86
+echo.
+echo [0] Back to the main menu
 echo.
 
 set /p output="Input number: " 
@@ -660,10 +660,11 @@ echo                                 XP-tool
 echo    Internet: %internet%
 
 echo.
-echo 1. Microsoft Games from Windows Vista build 5259 and 5270
-echo 2. Windows Movie Maker from Windows Vista build 5270
-echo 3. Windows Sidebar from Windows Vista build 5744 and from Windows Vista RTM
-echo 0. Back to the main menu
+echo [1.] Microsoft Games from Windows Vista build 5259 and 5270
+echo [2.] Windows Movie Maker from Windows Vista build 5270
+echo [3.] Windows Sidebar from Windows Vista build 5744 and RTM
+echo.
+echo [0.] Back to the main menu
 
 echo.
 
@@ -691,10 +692,11 @@ echo                                 XP-tool
 echo    Internet: %internet%
 
 echo.
-echo 1. Windows 7 Games
-echo 2. Wordpad
-echo 3. Paint
-echo 0. Back to the main menu
+echo [1] Windows 7 Games
+echo [2] Wordpad
+echo [3] Paint
+echo.
+echo [0] Back to the main menu
 echo.
 
 set /p output="Input number: " 
@@ -718,9 +720,10 @@ echo                                 XP-tool
 echo    Internet: %internet%
 
 echo.
-echo 1. K-Lite Codec Pack 17.8.0 Full
-echo 2. AIMP 5.1.1.2436
-echo 0. Back to the main menu
+echo [1] K-Lite Codec Pack 17.8.0 Full
+echo [2] AIMP 5.1.1.2436
+echo.
+echo [0] Back to the main menu
 echo.
 
 set /p output="Input number: " 
@@ -742,14 +745,15 @@ echo                                 XP-tool
 echo    Internet: %internet%
 
 echo.
-echo 1. .NET Framework 4.7.2
-echo 2. .NET Framework 4.5.2
-echo 3. JDK 21/Java 21
-echo 4. JDK 11/Java 11
-echo 5. OpenJDK 1.8 and OpenJDK 17
-echo 6. JDK 21/Java 21 [x64]
-echo 7. JDK 11/Java 11 [x64]
-echo 0. Back to the main menu
+echo [1] .NET Framework 4.7.2
+echo [2] .NET Framework 4.5.2
+echo [3] JDK 21/Java 21
+echo [4] JDK 11/Java 11
+echo [5] OpenJDK 1.8 and OpenJDK 17
+echo [6] JDK 21/Java 21 [x64]
+echo [7] JDK 11/Java 11 [x64]
+echo.
+echo [0] Back to the main menu
 
 echo.
 
@@ -782,9 +786,10 @@ echo                                 XP-tool
 echo    Internet: %internet%
 
 echo.
-echo 1. Adobe Photoshop CC 2018
-echo 2. ShareX 15.0
-echo 0. Back to the main menu
+echo [1] Adobe Photoshop CC 2018
+echo [2] ShareX 15.0
+echo.
+echo [0] Back to the main menu
 
 echo.
 
@@ -807,8 +812,9 @@ echo                                 XP-tool
 echo    Internet: %internet%
 
 echo.
-echo 1. FreeOffice
-echo 0. Back to the main menu
+echo [1] FreeOffice
+echo.
+echo [0] Back to the main menu
 
 echo.
 
@@ -829,15 +835,16 @@ echo                                 XP-tool
 echo    Internet: %internet%
 
 echo.
-echo 1. Python 3.9.13+
-echo 2. Visual Studio Code 1.70.3
-echo 3. Visual Studio Code 1.83.1
-echo 4. JetBrains PyCharm Community 2017.3.4 Portable
-echo 5. JetBrains PyCharm Community 2018.3.7
-echo 6. JetBrains CLion 2021.3.4
-echo 7. JetBrains CLion 2023.2.2
-echo 8. JetBrains PyCharm Community 2023.2.2 [x64 only]
-echo 0. Back to the main menu
+echo [1] Python 3.9.13+
+echo [2] Visual Studio Code 1.70.3
+echo [3] Visual Studio Code 1.83.1
+echo [4] JetBrains PyCharm Community 2017.3.4 Portable
+echo [5] JetBrains PyCharm Community 2018.3.7
+echo [6] JetBrains CLion 2021.3.4
+echo [7] JetBrains CLion 2023.2.2
+echo [8] JetBrains PyCharm Community 2023.2.2 [x64 only]
+echo.
+echo [0] Back to the main menu
 
 
 echo.
