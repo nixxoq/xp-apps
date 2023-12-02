@@ -133,7 +133,7 @@ if "%selected%"=="1" (
    echo Downloading archive, please wait...
    "%CURL_PATH%" -# -L -o Important.zip https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/Important.zip
    
-   echo Unpacking, please wait...
+   echo Extracting, please wait...
    "%ZIP_PATH%" x Important.zip -y -bsp2 -bso0
 
    echo Installing One-Core-API, please wait...
@@ -190,7 +190,7 @@ if "%selected%"=="1" (
     echo Downloading archive, please wait...
     "%CURL_PATH%" -# -L -o CatsXP117.zip https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/catsxp.chrome.117.zip
        
-    echo Unpacking, please wait...
+    echo Extracting, please wait...
     "%ZIP_PATH%" x CatsXP117.zip -y -bsp2 -bso0
     
     echo Path to program: "%current_path%\catsxp (chrome 117)". Do you want run this program now?
@@ -207,7 +207,7 @@ if "%selected%"=="1" (
     echo Downloading archive, please wait...
     "%CURL_PATH%" -# -L -o CatsXP118.zip https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/catsxp.chrome.118.zip
        
-    echo Unpacking, please wait...
+    echo Extracting, please wait...
     "%ZIP_PATH%" x CatsXP118.zip -y -bsp2 -bso0
     
     echo Path to program: "%current_path%\catsxp (chrome 118)". Do you want run this program now?
@@ -224,7 +224,7 @@ if "%selected%"=="1" (
    echo Downloading archive, please wait...
     "%CURL_PATH%" -# -L -o Brave101.zip https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/brave.101.zip
        
-    echo Unpacking, please wait...
+    echo Extracting, please wait...
     "%ZIP_PATH%" x Brave101.zip -y -bsp2 -bso0
     
     echo Path to program: "%current_path%\brave 101\Brave Browser 101 Portable 32bits\BRAVE 101 By Tortilla5\". Do you want run this program now?
@@ -241,7 +241,7 @@ if "%selected%"=="1" (
    echo Downloading archive, please wait...
     "%CURL_PATH%" -# -L -o medge109.zip https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/Microsoft.Edge.109.zip 
        
-    echo Unpacking, please wait...
+    echo Extracting, please wait...
     "%ZIP_PATH%" x msedge109.zip -y -bsp2 -bso0
     
     echo Path to program: "%current_path%\Microsoft Edge (109)\". Do you want run this program now?
@@ -258,7 +258,7 @@ if "%selected%"=="1" (
    echo Downloading archive, please wait...
     "%CURL_PATH%" -# -L -o idm.zip https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/Internet.Download.Manager.6.40.build.11.zip 
        
-    echo Unpacking, please wait...
+    echo Extracting, please wait...
     "%ZIP_PATH%" x idm.zip -y -bsp2 -bso0
     
     echo Path to program: "%current_path%\Internet Download Manager 6.40 build 11\Internet Download Manager\". Do you want run this program now?
@@ -275,7 +275,7 @@ if "%selected%"=="1" (
    echo Downloading archive, please wait...
     "%CURL_PATH%" -# -L -o epic91.zip https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/Epic.Browser.91.zip 
        
-    echo Unpacking, please wait...
+    echo Extracting, please wait...
     "%ZIP_PATH%" x epic91.zip -y -bsp2 -bso0
     
     echo Path to program: "%current_path%\Epic Browser 91\". Do you want run this program now?
@@ -291,7 +291,7 @@ if "%selected%"=="1" (
    echo Downloading archive, please wait...
     "%CURL_PATH%" -# -L -o epic104.zip https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/Epic.Browser.104.zip 
        
-    echo Unpacking, please wait...
+    echo Extracting, please wait...
     "%ZIP_PATH%" x epic104.zip -y -bsp2 -bso0
     
     echo Path to program: "%current_path%\Epic Browser 104\". Do you want run this program now?
@@ -307,7 +307,7 @@ if "%selected%"=="1" (
    echo Downloading archive, please wait...
     "%CURL_PATH%" -# -L -o firefox79.zip https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/Firefox.79.zip
        
-    echo Unpacking, please wait...
+    echo Extracting, please wait...
     "%ZIP_PATH%" x firefox79.zip -y -bsp2 -bso0
     
     echo Path to Firefox 79: "%current_path%\Firefox 79\"
@@ -317,7 +317,7 @@ if "%selected%"=="1" (
    echo Downloading archive, please wait...
     "%CURL_PATH%" -# -L -o msgamesvista.zip https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/Microsoft.Games.Windows.Vista.zip
        
-    echo Unpacking, please wait...
+    echo Extracting, please wait...
     "%ZIP_PATH%" x msgamesvista.zip -y -bsp2 -bso0
     
     echo Path to games: "%current_path%\Microsoft Games (Windows Vista)\".
@@ -327,7 +327,7 @@ if "%selected%"=="1" (
    echo Downloading archive, please wait...
     "%CURL_PATH%" -# -L -o msmovie.zip https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/Windows.Movie.Maker.zip
        
-    echo Unpacking, please wait...
+    echo Extracting, please wait...
     "%ZIP_PATH%" x msmovie.zip -y -bsp2 -bso0
     
     echo Path to Windows Movie Maker: "%current_path%\Windows Movie Maker\".
@@ -337,7 +337,7 @@ if "%selected%"=="1" (
    echo Downloading archive, please wait...
     "%CURL_PATH%" -# -L -o sidebars.zip https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/Windows.Sidebars.zip
        
-    echo Unpacking, please wait...
+    echo Extracting, please wait...
     "%ZIP_PATH%" x sidebars.zip -y -bsp2 -bso0
     
     echo Path to Windows Sidebars: "%current_path%\Windows Sidebars\".
@@ -347,7 +347,7 @@ if "%selected%"=="1" (
    echo Downloading archive, please wait...
     "%CURL_PATH%" -# -L -o klite.zip https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/k-lite.zip
        
-    echo Unpacking, please wait...
+    echo Extracting, please wait...
     "%ZIP_PATH%" x klite.zip -y -bsp2 -bso0
     
     echo Path to Kodec Lite: "%current_path%\k-lite\".
@@ -357,7 +357,7 @@ if "%selected%"=="1" (
    echo Downloading archive, please wait...
     "%CURL_PATH%" -# -L -o aimp5.zip https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/AIMP.zip
        
-    echo Unpacking, please wait...
+    echo Extracting, please wait...
     "%ZIP_PATH%" x aimp5.zip -y -bsp2 -bso0
     
     echo Path to Aimp 5: "%current_path%\AIMP\".
@@ -367,7 +367,7 @@ if "%selected%"=="1" (
    echo Downloading archive, please wait...
     "%CURL_PATH%" -# -L -o dotnet472.zip https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/dot.net.472.zip
        
-    echo Unpacking, please wait...
+    echo Extracting, please wait...
     "%ZIP_PATH%" x dotnet472.zip -y -bsp2 -bso0
     
     echo Path to .NET Framework 4.7.2: "%current_path%\dot net 472\".
@@ -377,7 +377,7 @@ if "%selected%"=="1" (
    echo Downloading archive, please wait...
     "%CURL_PATH%" -# -L -o dotnet452.zip https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/dot.net.452.zip
        
-    echo Unpacking, please wait...
+    echo Extracting, please wait...
     "%ZIP_PATH%" x dotnet452.zip -y -bsp2 -bso0
     
     echo Path to .NET Framework 4.5.2: "%current_path%\dot.net.452\".
@@ -387,7 +387,7 @@ if "%selected%"=="1" (
    echo Downloading archive, please wait...
     "%CURL_PATH%" -# -L -o jdk21.zip https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/jdk21.java.21.zip
        
-    echo Unpacking, please wait...
+    echo Extracting, please wait...
     "%ZIP_PATH%" x jdk21.zip -y -bsp2 -bso0
     
     echo Path to JDK 21/Java 21: "%current_path%\jdk21 (java 21)\".
@@ -397,7 +397,7 @@ if "%selected%"=="1" (
    echo Downloading archive, please wait...
     "%CURL_PATH%" -# -L -o jdk11.zip https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/jdk11.java.11.zip
        
-    echo Unpacking, please wait...
+    echo Extracting, please wait...
     "%ZIP_PATH%" x jdk11.zip -y -bsp2 -bso0
     
     echo Path to JDK 11/Java 11: "%current_path%\jdk11 (java 11)\".
@@ -407,7 +407,7 @@ if "%selected%"=="1" (
    echo Downloading archive, please wait...
     "%CURL_PATH%" -# -L -o openjdk1_8_17.zip https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/openjdk-1.8_openjdk-17.zip 
        
-    echo Unpacking, please wait...
+    echo Extracting, please wait...
     "%ZIP_PATH%" x openjdk1_8_17.zip -y -bsp2 -bso0
     
     echo Path to OpenJDK 1.8 and OpenJDK 17: "%current_path%\openjdk-1.8_openjdk-17\".
@@ -417,7 +417,7 @@ if "%selected%"=="1" (
    echo Downloading archive, please wait...
     "%CURL_PATH%" -# -L -o jdk21x64.zip https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/jdk-21.0.1_x64.zip
        
-    echo Unpacking, please wait...
+    echo Extracting, please wait...
     "%ZIP_PATH%" x jdk21x64.zip -y -bsp2 -bso0
     
     echo Path to JDK 21/Java 21 [x64]: "%current_path%\jdk-21.0.1_x64\jdk-21.0.1\".
@@ -427,7 +427,7 @@ if "%selected%"=="1" (
    echo Downloading archive, please wait...
     "%CURL_PATH%" -# -L -o jdk11x64.zip https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/jdk-11.0.21_x64.zip
        
-    echo Unpacking, please wait...
+    echo Extracting, please wait...
     "%ZIP_PATH%" x jdk11x64.zip -y -bsp2 -bso0
     
     echo Path to JDK 11/Java 11 [x64]: "%current_path%\jdk-11.0.21_x64\jdk-11.0.21\".
@@ -437,7 +437,7 @@ if "%selected%"=="1" (
    echo Downloading archive, please wait...
     "%CURL_PATH%" -# -L -o photoshop.zip https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/photoshop.cc.2018.zip
        
-    echo Unpacking, please wait...
+    echo Extracting, please wait...
     "%ZIP_PATH%" x photoshop.zip -y -bsp2 -bso0
     
     echo Path to Photoshop CC 2018 [x64]: "%current_path%\photoshop cc 2018\".
@@ -447,7 +447,7 @@ if "%selected%"=="1" (
    echo Downloading archive, please wait...
     "%CURL_PATH%" -# -L -o sharex.zip https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/ShareX.zip
        
-    echo Unpacking, please wait...
+    echo Extracting, please wait...
     "%ZIP_PATH%" x sharex.zip -y -bsp2 -bso0
     
     echo Path to ShareX 15.0: "%current_path%\ShareX\".
@@ -458,7 +458,7 @@ if "%selected%"=="1" (
    echo Downloading archive, please wait...
     "%CURL_PATH%" -# -L -o freeoffice.zip https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/freeoffice.zip
        
-    echo Unpacking, please wait...
+    echo Extracting, please wait...
     "%ZIP_PATH%" x freeoffice.zip -y -bsp2 -bso0
     
     echo Path to FreeOffice: "%current_path%\freeoffice\".
@@ -468,7 +468,7 @@ if "%selected%"=="1" (
    echo Downloading archive, please wait...
     "%CURL_PATH%" -# -L -o python39.zip https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/Python.3.9.13+.zip
        
-    echo Unpacking, please wait...
+    echo Extracting, please wait...
     "%ZIP_PATH%" x python39.zip -y -bsp2 -bso0
     
     echo Path to Python 3.9.13+: "%current_path%\Python 3.9.13+\".
@@ -478,7 +478,7 @@ if "%selected%"=="1" (
     echo Downloading archive, please wait...
     "%CURL_PATH%" -# -L -o vscode1_70.zip https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/Visual.Studio.Code.1.70.3.zip
        
-    echo Unpacking, please wait...
+    echo Extracting, please wait...
     "%ZIP_PATH%" x vscode1_70.zip -y -bsp2 -bso0
     
     echo Path to Visual Studio Code 1.70.3: "%current_path%\Visual Studio Code 1.70.3\".
@@ -496,7 +496,7 @@ if "%selected%"=="1" (
    echo Downloading archive, please wait...
     "%CURL_PATH%" -# -L -o vscode1_83.zip https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/Visual.Studio.Code.1.83.1.zip
        
-    echo Unpacking, please wait...
+    echo Extracting, please wait...
     "%ZIP_PATH%" x vscode1_83.zip -y -bsp2 -bso0
     
     echo Path to Visual Studio Code 1.83.1: "%current_path%\Visual Studio Code 1.83.1\".
@@ -514,7 +514,7 @@ if "%selected%"=="1" (
    echo Downloading archive, please wait...
     "%CURL_PATH%" -# -L -o pycharm2017.zip https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/pycharm2017.zip
        
-    echo Unpacking, please wait...
+    echo Extracting, please wait...
     "%ZIP_PATH%" x pycharm2017.zip -y -bsp2 -bso0
     
     echo Path to Pycharm Community 2017: "%current_path%\pycharm2017\".
@@ -524,7 +524,7 @@ if "%selected%"=="1" (
    echo Downloading archive, please wait...
     "%CURL_PATH%" -# -L -o pycharm2018.zip https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/pycharm2018.zip
        
-    echo Unpacking, please wait...
+    echo Extracting, please wait...
     "%ZIP_PATH%" x pycharm2018.zip -y -bsp2 -bso0
     
     echo Path to Pycharm Community 2018: "%current_path%\pycharm2018.3.7\".
@@ -534,7 +534,7 @@ if "%selected%"=="1" (
    echo Downloading archive, please wait...
     "%CURL_PATH%" -# -L -o pycharm2023.zip https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/pycharm2023.zip
        
-    echo Unpacking, please wait...
+    echo Extracting, please wait...
     "%ZIP_PATH%" x pycharm2023.zip -y -bsp2 -bso0
     
     echo Path to Pycharm Community 2023: "%current_path%\pycharm2023\".
@@ -544,7 +544,7 @@ if "%selected%"=="1" (
    echo Downloading archive, please wait...
     "%CURL_PATH%" -# -L -o clion2021.zip https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/clion_2021_3_4.zip
        
-    echo Unpacking, please wait...
+    echo Extracting, please wait...
     "%ZIP_PATH%" x clion2021.zip -y -bsp2 -bso0
     
     echo Path to CLion 2021.3.4: "%current_path%\clion_2021_3_4\".
@@ -554,7 +554,7 @@ if "%selected%"=="1" (
    echo Downloading archive, please wait...
     "%CURL_PATH%" -# -L -o clion2023.zip https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/clion2023_2_2.zip
        
-    echo Unpacking, please wait...
+    echo Extracting, please wait...
     "%ZIP_PATH%" x clion2023.zip -y -bsp2 -bso0
     
     echo Path to CLion 2023.2.2: "%current_path%\clion2023_2_2\".
@@ -564,7 +564,7 @@ if "%selected%"=="1" (
    echo Downloading archive, please wait...
     "%CURL_PATH%" -# -L -o win7games.zip https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/Windows.7.Games.zip
        
-    echo Unpacking, please wait...
+    echo Extracting, please wait...
     "%ZIP_PATH%" x win7games.zip -y -bsp2 -bso0
     
     echo Path to Microsoft Windows 7 Games: "%current_path%\Windows 7 Games\".
@@ -574,7 +574,7 @@ if "%selected%"=="1" (
    echo Downloading archive, please wait...
     "%CURL_PATH%" -# -L -o wordpad.zip https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/wordpad.zip
        
-    echo Unpacking, please wait...
+    echo Extracting, please wait...
     "%ZIP_PATH%" x wordpad.zip -y -bsp2 -bso0
     
     echo Path to Wordpad from Windows 7: "%current_path%\wordpad\".
@@ -584,7 +584,7 @@ if "%selected%"=="1" (
    echo Downloading archive, please wait...
     "%CURL_PATH%" -# -L -o chromium121.zip https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/chromium121_x64.zip
        
-    echo Unpacking, please wait...
+    echo Extracting, please wait...
     "%ZIP_PATH%" x chromium121.zip -y -bsp2 -bso0
     
     echo Path to Chromium 121: "%current_path%\chromium121_x64\".
@@ -594,10 +594,40 @@ if "%selected%"=="1" (
    echo Downloading archive, please wait...
     "%CURL_PATH%" -# -L -o chromium121.zip https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/chromium121_x86.zip
        
-    echo Unpacking, please wait...
+    echo Extracting, please wait...
     "%ZIP_PATH%" x chromium121.zip -y -bsp2 -bso0
     
     echo Path to Chromium 121: "%current_path%\chromium121_x86\".
+    pause
+    goto :menu
+) else if "%selected%"=="flstudio20" (
+    echo Downloading archive, please wait...
+    "%CURL_PATH%" -# -L -o flstudio20.zip https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/Image-Line.FL.Studio.Producer.Edition.v20.9.2.2963.zip
+       
+    echo Extracting, please wait...
+    "%ZIP_PATH%" x flstudio20.zip -y -bsp2 -bso0
+    
+    echo Path to FL Studio 20.9.2: "%current_path%\Image-Line FL Studio Producer Edition v20.9.2.2963\".
+    pause
+    goto :menu
+) else if "%selected%"=="telegram" (
+   echo Downloading archive, please wait...
+    "%CURL_PATH%" -# -L -o telegram.zip https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/Telegram.zip
+       
+    echo Extracting, please wait...
+    "%ZIP_PATH%" x flstudio20.zip -y -bsp2 -bso0
+    
+    echo Path to Telegram Desktop: "%current_path%\Telegram\".
+    pause
+    goto :menu
+) else if "%selected%"=="libreoffice6003" (
+   echo Downloading archive, please wait...
+    "%CURL_PATH%" -# -L -o libreoffice6003.zip https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/LibreOfficePortable.zip
+       
+    echo  Extracting, please wait...
+    "%ZIP_PATH%" x libreoffice6003.zip -y -bsp2 -bso0
+    
+    echo Path to LibreOffice 6.0.0.3 Portable: "%current_path%\LibreOfficePortable\".
     pause
     goto :menu
 ) else (
@@ -721,6 +751,7 @@ echo    Internet: %internet%
 echo.
 echo [1] K-Lite Codec Pack 17.8.0 Full
 echo [2] AIMP 5.1.1.2436
+echo [3] FL Studio 20 (Windows XP x64 only)
 echo.
 echo [0] Back to the main menu
 echo.
@@ -731,6 +762,8 @@ if "%output%"=="1" (
    call :DoInstall klite
 ) else if "%output%"=="2" (
    call :DoInstall aimp5
+) else if "%output%"=="3" (
+   call :DoInstall flstudio20  
 ) else if "%output%"=="0" (
    goto :menu
 ) else (
@@ -787,6 +820,7 @@ echo    Internet: %internet%
 echo.
 echo [1] Adobe Photoshop CC 2018
 echo [2] ShareX 15.0
+echo [3] Telegram Desktop
 echo.
 echo [0] Back to the main menu
 
@@ -798,6 +832,8 @@ if "%output%"=="1" (
    call :DoInstall photoshop2018
 ) else if "%output%"=="2" (
    call :DoInstall sharex
+) else if "%output%"=="3" (
+   call :DoInstall telegram
 ) else if "%output%"=="0" (
    goto :menu
 ) else (
@@ -812,6 +848,7 @@ echo    Internet: %internet%
 
 echo.
 echo [1] FreeOffice
+echo [2] LibreOffice 6.0.0.3 Portable
 echo.
 echo [0] Back to the main menu
 
@@ -821,6 +858,8 @@ set /p output="Input number: "
 
 if "%output%"=="1" (
    call :DoInstall freeoffice
+) else if "%selected%"=="2" (
+   call :DoInstall libreoffice6003
 ) else if "%output%"=="0" (
    goto :menu
 ) else (

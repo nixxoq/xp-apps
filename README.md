@@ -46,6 +46,8 @@ A repository with applications that work with One-Core-API
 >  - [Codec \& video \& audio](#codec--video--audio)
 >    - [K-Lite Codec Pack 17.8.0 Full](#k-lite-codec-pack-1780-full)
 >    - [AIMP 5.1.1.2436 (Windows XP x64 only)](#aimp-5112436)
+>    - [FL Studio 20 (Windows XP x64 only)](#fl-studio-20-windows-xp-x64-only)
+>    - [LMMS Studio (latest)](#lmms-studio-latest)
 
 >  - [Utilities](#utilities)
 >    - [.NET Framework 4.8](#net-framework-48)
@@ -59,9 +61,12 @@ A repository with applications that work with One-Core-API
 >  - [Other](#other)
 >    - [Adobe Photoshop CC 2018](#adobe-photoshop-cc-2018)
 >    - [ShareX 15.0](#sharex-150)
+>    - [Krita 4.1.1](#krita-411)
+>    - [Telegram Desktop](#telegram-desktop)
     
 >  - [Office](#office)
 >    - [FreeOffice (Alternative to Microsoft Office)](#freeoffice-alternative-to-microsoft-office)
+>    - [LibreOffice 6.0](#libreoffice-60)
     
 >  - [Programming \& Code Editors](#programming--code-editors)
 >    - [Python 3.9.13+](#python-3913)
@@ -213,6 +218,16 @@ A repository with applications that work with One-Core-API
   <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/aimp5.png?raw=true" alt="picture">
   </details>
 
+  ### FL Studio 20 (Windows XP x64 only)
+  <details>
+    <summary>click to view image</summary>
+  <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/fl-studio_20.png?raw=true" alt="picture">
+  </details>
+
+
+  ### LMMS Studio (latest)
+
+
 ### Utilities
   ### .NET Framework 4.8
   ### .NET Framework 4.7.2
@@ -260,6 +275,22 @@ A repository with applications that work with One-Core-API
   <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/sharex2.png?raw=true" alt="picture">
   </details>
 
+  ### Krita 4.1.1
+  <details>
+    <summary>click to view image</summary>
+  <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/krita.png?raw=true">
+  </details>
+
+  ### Telegram Desktop (latest)
+
+  <details>
+    <summary>click to view image</summary>
+  <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/telegramdesktop1.png?raw=true">
+  </details>
+
+
+
+
 ### Office
   ### FreeOffice (Alternative to Microsoft Office)
   <details>
@@ -268,6 +299,13 @@ A repository with applications that work with One-Core-API
   <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/freeoffice_2.png?raw=true" alt="picture">
   <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/freeoffice_3.png?raw=true" alt="picture">
   </details>
+
+  ### LibreOffice 6.0
+  <details>
+    <summary>click to view image</summary>
+  <img src="https://raw.githubusercontent.com/Snaky1a/xp-apps/main/imgs/libreoffice_6.png?raw=true" alt="picture">
+  </details>
+
 
 ### Programming & Code Editors
   ### Python 3.9.13+
@@ -321,7 +359,13 @@ A repository with applications that work with One-Core-API
 
 # Special Thanks to
   - [Skulltrail192](https://github.com/Skulltrail192/One-Core-API-Binaries) - for One-Core-API
-  - [tortilla5](https://archive.org/details/@tortilla_5) - for Epic Privacy Browser versions 91 and 104, OpenJDK 1.8, and OpenJDK 1.17
+  - [tortilla5](https://archive.org/details/@tortilla_5) - for sharing these programs:
+    - Epic Privacy Browser versions 91 and 104
+    - OpenJDK 1.8 and 1.17
+    - Krita 4.1.1
+    - Telegram Desktop
+    - Libreoffice 6.0.0.3
+    - FL Studio 20
 
 # FAQ
 - Microsoft Edge 109 doesn't work!
@@ -332,6 +376,9 @@ A repository with applications that work with One-Core-API
 
 
 # Changelog
+
+## 2023.02.12
+  - Added FL Studio 20 (Windows XP x64 only), Krita 4.1.1, Telegram Desktop and Libreoffice 6.0.0.3 to the programs list
 
 ## 2023.01.12
   - Updated `important.zip` archive (updated One-Core-API to 3.0.4 Canary b2)
