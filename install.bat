@@ -11,7 +11,7 @@ set "CURL_PATH=%current_path%\tools\curl\curl.exe"
 set "ZIP_PATH=%current_path%\tools\7z.exe"
 
 set "latest_OCA=3.0.4.canary.b2"
-set "program_version=0.0.3"
+set "program_version=0.0.4"
 
 set "oca_is_installed=0"
 set "installed_oca_version=0"
@@ -616,7 +616,7 @@ if "%selected%"=="1" (
     "%CURL_PATH%" -# -L -o telegram.zip https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/Telegram.zip
        
     echo Extracting, please wait...
-    "%ZIP_PATH%" x flstudio20.zip -y -bsp2 -bso0
+    "%ZIP_PATH%" x telegram.zip -y -bsp2 -bso0
     
     echo Path to Telegram Desktop: "%current_path%\Telegram\".
     pause
