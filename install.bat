@@ -10,7 +10,7 @@ set "current_path=%~dp0"
 set "CURL_PATH=%current_path%\tools\curl\curl.exe"
 set "ZIP_PATH=%current_path%\tools\7z.exe"
 
-set "latest_OCA=3.0.4.Canary.b2"
+set "latest_OCA=3.0.4.?anary.b2"
 set "program_version=0.0.3"
 
 set "oca_is_installed=0"
