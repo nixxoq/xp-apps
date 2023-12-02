@@ -74,7 +74,7 @@ FOR /F %%i IN (currentversion.txt) DO (set new_version=%%i)
 echo %new_version% | findstr %program_version% >NUL
 if errorlevel 1 (
    echo.
-   echo    MESSAGE: A new version of installer has been released.
+   echo    MESSAGE: A new version of installer has been released. To update, exit from program and run update.bat script
 )
 
 
