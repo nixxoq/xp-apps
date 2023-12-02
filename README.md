@@ -62,7 +62,7 @@ A repository with applications that work with One-Core-API
 >    - [Adobe Photoshop CC 2018](#adobe-photoshop-cc-2018)
 >    - [ShareX 15.0](#sharex-150)
 >    - [Krita 4.1.1](#krita-411)
->    - [Telegram Desktop](#telegram-desktop)
+>    - [Telegram Desktop](#telegram-desktop-latest)
     
 >  - [Office](#office)
 >    - [FreeOffice (Alternative to Microsoft Office)](#freeoffice-alternative-to-microsoft-office)

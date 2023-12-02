@@ -11,7 +11,7 @@ set "CURL_PATH=%current_path%\tools\curl\curl.exe"
 set "ZIP_PATH=%current_path%\tools\7z.exe"
 
 set "latest_OCA=3.0.4.Canary.b2"
-set "program_version=0.0.2"
+set "program_version=0.0.3"
 
 set "oca_is_installed=0"
 set "installed_oca_version=0"
