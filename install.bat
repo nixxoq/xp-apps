@@ -10,7 +10,7 @@ set "current_path=%~dp0"
 set "CURL_PATH=%current_path%\tools\curl\curl.exe"
 set "ZIP_PATH=%current_path%\tools\7z.exe"
 
-set "latest_OCA=3.0.4.?anary.b2"
+set "latest_OCA=3.0.4.canary.b2"
 set "program_version=0.0.3"
 
 set "oca_is_installed=0"
@@ -64,7 +64,7 @@ if "%oca_is_installed%"=="1" (
     echo    Is OCA installed? No
 )
 
-if not "%installed_oca_verrsion%" == "%latest_OCA%" (
+if "%installed_oca_version%" neq "%latest_OCA%" (
     echo.
     echo    MESSAGE: A new version of One-Core-API has been released. To update, select option 1
 ) 
@@ -74,7 +74,7 @@ FOR /F %%i IN (currentversion.txt) DO (set new_version=%%i)
 echo %new_version% | findstr %program_version% >NUL
 if errorlevel 1 (
    echo.
-   "%CURL_PATH%" -# -L -o update.bat https://raw.githubusercontent.com/Snaky1a/xp-apps/main/update.bat
+   "%CURL_PATH%" -# -L -o update.bat https://raw.githubusercontent.com/Snaky1a/xp-apps/main/update.bat 2>nul
    echo    MESSAGE: A new version of installer has been released. To update, exit from this program and run the update.bat script
 )
 
