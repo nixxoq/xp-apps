@@ -377,6 +377,10 @@ A repository with applications that work with One-Core-API
 
 # Changelog
 
+## 2023.07.12
+  - Updated important.zip (Updated One-Core-API to 3.0.4 release)
+
+
 ## 2023.02.12
   - Added FL Studio 20 (Windows XP x64 only), Krita 4.1.1, Telegram Desktop and Libreoffice 6.0.0.3 to the programs list
 
