@@ -11,7 +11,7 @@ set "CURL_PATH=%current_path%\tools\curl\curl.exe"
 set "ZIP_PATH=%current_path%\tools\7z.exe"
 
 set "latest_OCA=3.0.4"
-set "program_version=0.0.4"
+set "program_version=0.0.5"
 
 set "oca_is_installed=0"
 set "installed_oca_version=0"
@@ -35,6 +35,7 @@ IF errorlevel 0 (
 
 
 :menu
+
 :: check if oca is installed
 for /f "delims=" %%a in ('wmic qfe list full ^| findstr OCAB') do set "result=%%a"
 if "%result%" == "ServicePackInEffect=OCAB" (
@@ -115,7 +116,7 @@ if "%option%"=="1" (
 ) else if "%option%"=="9" (
    goto :Progrmenu
 ) else if "%option%"=="0" (
-   goto :eof
+   exit
 ) else (
    echo Not implemented. Check new updates...
    pause
@@ -140,7 +141,9 @@ if "%selected%"=="1" (
    echo Installing One-Core-API, please wait...
    cls
    call "%current_path%Important\Install One-Core-API.bat"
+
    shutdown /a
+
    echo Installing Visual C++ 2005 x86
    start /wait "installing" "%current_path%Important\vcredist_x86_2005.exe" /Q
    echo Installing Visual C++ 2008 x86
