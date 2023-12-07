@@ -79,6 +79,7 @@ A repository with applications that work with One-Core-API
 >    - [JetBrains PyCharm 2023.2.2 (LATEST VERSION!!!) (Windows XP x64 only)](#jetbrains-pycharm-202322-last-version)
 >  - [FAQ](#faq)
 >  - [Changelog](#changelog)
+>    - [2023.07.12](#20230712)
 >    - [2023.01.12](#20230112)
 >    - [2023.10.11](#20231011)
 >    - [2023.04.11](#20230411)
