@@ -7,11 +7,15 @@ title xp-apps - installation
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (set "os_bit=x64") else (set "os_bit=x32")
 
 set "current_path=%~dp0"
+set "first_param=%1"
+
+if "%first_param%"=="/second" goto :SecondStage
+
 set "WGET_PATH=%current_path%\tools\wget\wget.exe"
 set "ZIP_PATH=%current_path%\tools\7z.exe"
 
 set "latest_OCA=3.0.4"
-set "program_version=0.0.4"
+set "program_version=0.0.6"
 
 set "oca_is_installed=0"
 set "installed_oca_version=0"
@@ -141,6 +145,57 @@ pause
 exit
 
 
+:SecondStage
+echo ============
+echo SECOND STAGE
+echo ============
+echo.
+
+echo Installing Visual C++ 2005 x86
+start /wait "installing" "%current_path%Important\vcredist_x86_2005.exe" /Q
+echo Installing Visual C++ 2008 x86
+start /wait "installing" "%current_path%Important\vcredist_x86_2008.exe" /Q
+echo Installing Visual C++ 2010 x86
+start /wait "installing" "%current_path%Important\vcredist_x86_2010.exe" /q /norestart
+echo Installing Visual C++ 2012 x86
+start /wait "installing" "%current_path%Important\vcredist_x86_2012.exe" /quiet /norestart
+echo Installing Visual C++ 2013 x86
+start /wait "installing" "%current_path%Important\vcredist_x86_2013.exe" /quiet /norestart
+echo Installing Visual C++ 2015 x86
+start /wait "installing" "%current_path%Important\vcredist_x86_2015.exe" /quiet /norestart
+echo Installing Visual C++ 2015-2019 x86
+start /wait "installing" "%current_path%Important\vcredist_x86_2015_2019.exe" /quiet /norestart
+
+if "%os_bit%"=="x64" (
+   echo Installing Visual C++ 2005 x64
+   start /wait "installing" "%current_path%Important\vcredist_x64_2005.exe" /Q
+   echo Installing Visual C++ 2008 x64
+   start /wait "installing" "%current_path%Important\vcredist_x64_2008.exe" /Q
+   echo Installing Visual C++ 2010 x64
+   start /wait "installing" "%current_path%Important\vcredist_x64_2010.exe" /q /norestart
+   echo Installing Visual C++ 2012 x64
+   start /wait "installing" "%current_path%Important\vcredist_x64_2012.exe" /quiet /norestart
+   echo Installing Visual C++ 2013 x64
+   start /wait "installing" "%current_path%Important\vcredist_x64_2013.exe" /quiet /norestart
+   echo Installing Visual C++ 2015-2019 x64
+   start /wait "installing" "%current_path%Important\vcredist_x64_2015_2019.exe" /quiet /norestart
+)
+
+call "%current_path%Important\Install dot net 4.8.bat"
+
+echo.
+echo ========================================================
+echo - One-Core-API %latest_OCA% Was installed!
+echo - Your OS will be restarted in 30 seconds
+echo ========================================================
+echo.
+   
+   
+REG DELETE HKCU\Software\Microsoft\Windows\CurrentVersion\Run /v "Xp-apps" /f
+shutdown /r /t 30 /c "One-Core-API %latest_OCA% was installed! Your OS will be restarted in 30 seconds"
+exit
+
+
 :: Installer
 :DoInstall
 
@@ -157,56 +212,14 @@ if "%selected%"=="1" (
    "%ZIP_PATH%" x Important.zip -y -bsp2 -bso0
 
    echo Installing One-Core-API, please wait...
-   cls
    call "%current_path%Important\Install One-Core-API.bat"
 
    shutdown /a
 
-   echo Installing Visual C++ 2005 x86
-   start /wait "installing" "%current_path%Important\vcredist_x86_2005.exe" /Q
-   echo Installing Visual C++ 2008 x86
-   start /wait "installing" "%current_path%Important\vcredist_x86_2008.exe" /Q
-   echo Installing Visual C++ 2010 x86
-   start /wait "installing" "%current_path%Important\vcredist_x86_2010.exe" /q /norestart
-   echo Installing Visual C++ 2012 x86
-   start /wait "installing" "%current_path%Important\vcredist_x86_2012.exe" /quiet /norestart
-   echo Installing Visual C++ 2013 x86
-   start /wait "installing" "%current_path%Important\vcredist_x86_2013.exe" /quiet /norestart
-   echo Installing Visual C++ 2015 x86
-   start /wait "installing" "%current_path%Important\vcredist_x86_2015.exe" /quiet /norestart
-   echo Installing Visual C++ 2015-2019 x86
-   start /wait "installing" "%current_path%Important\vcredist_x86_2015_2019.exe" /quiet /norestart
+   REG ADD HKCU\Software\Microsoft\Windows\CurrentVersion\Run /v "Xp-apps" /t REG_SZ /d "\"%~dp0install.bat\" /second" /f
 
-   if "%os_bit%"=="x64" (
-       echo Installing Visual C++ 2005 x64
-       start /wait "installing" "%current_path%Important\vcredist_x64_2005.exe" /Q
-       echo Installing Visual C++ 2008 x64
-       start /wait "installing" "%current_path%Important\vcredist_x64_2008.exe" /Q
-       echo Installing Visual C++ 2010 x64
-       start /wait "installing" "%current_path%Important\vcredist_x64_2010.exe" /q /norestart
-       echo Installing Visual C++ 2012 x64
-       start /wait "installing" "%current_path%Important\vcredist_x64_2012.exe" /quiet /norestart
-       echo Installing Visual C++ 2013 x64
-       start /wait "installing" "%current_path%Important\vcredist_x64_2013.exe" /quiet /norestart
-       echo Installing Visual C++ 2015-2019 x64
-       start /wait "installing" "%current_path%Important\vcredist_x64_2015_2019.exe" /quiet /norestart
-   )
-
-   echo Installing .NET Framework 4.8...
-   call "%current_path%Important\Install dot net 4.8.bat"
-
-   echo.
-   echo ========================================================
-   echo - One-Core-API %latest_OCA% Was installed!
-   echo - Your OS will be restarted in 30 seconds
-   echo ========================================================
-   echo.
-    
-    
-   shutdown /r /t 30 /c "One-Core-API %latest_OCA% was installed! Your OS will be restarted in 30 seconds"
-   pause
-    
-   goto :menu
+   shutdown /r /t 30 /c "First stage completed, now restarting..."
+   exit
 
 ) else if "%selected%"=="catsxp117" (
     echo Downloading archive, please wait...
