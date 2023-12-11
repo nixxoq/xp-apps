@@ -55,7 +55,7 @@ Ping www.google.com -n 1 -w 1000 >NUL
     
 if errorlevel 1 (set "internet=not_connected") else (set "internet=connected")
 if "%internet%"=="connected" (
-   "%WGET_PATH%" -q --show-progress -O currentversion.txt https://raw.githubusercontent.com/Snaky1a/xp-apps/main/currentversion.txt >NUL
+   "%WGET_PATH%" -q --show-progress -O currentversion.txt https://raw.githubusercontent.com/Snaky1a/xp-apps/debug/currentversion.txt >NUL
 )
 cls
 
@@ -138,7 +138,7 @@ if "%option%"=="1" (
 
 :DoUpdate
 echo Updating XP-apps...
-"%WGET_PATH%" -q --show-progress -O install.bat https://raw.githubusercontent.com/Snaky1a/xp-apps/main/install.bat
+"%WGET_PATH%" -q --show-progress -O install.bat https://raw.githubusercontent.com/Snaky1a/xp-apps/debug/install.bat
 echo Done, please re-run this script.
 echo.
 pause
