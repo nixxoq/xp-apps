@@ -69,6 +69,8 @@ if "%oca_is_installed%"=="1" (
     echo    Is OCA installed? No
 )
 
+echo    Program version: %program_version%
+
 if "%installed_oca_version%" neq "%latest_OCA%" (
     echo.
     echo    MESSAGE: A new version of One-Core-API has been released. To update, select option 1
