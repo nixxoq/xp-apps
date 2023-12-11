@@ -137,6 +137,283 @@ if "%option%"=="1" (
    )
 )
 
+:BrowserMenu
+echo                                 XP-tool
+echo    Internet: %internet%
+
+echo.
+echo [1] CatsXP (Chromium 117)
+echo [2] CatsXP (Chromium 118)
+echo [3] Brave 101
+echo [4] Microsoft Edge 109 (109.0.1518.140)
+echo [5] Internet Download Manager 6.40 build 11
+echo [6] Epic Privacy Browser version 91
+echo [7] Epic Privacy Browser version 104
+echo [8] Firefox 79
+echo [9] Chromium 121.0.6138.0 (latest dev) x64
+echo [10] Chromium 121.0.6138.0 (latest dev) x86
+echo.
+echo [0] Back to the main menu
+echo.
+
+set /p output="Input number: " 
+
+if "%output%"=="1" (
+   call :DoInstall catsxp117
+) else if "%output%"=="2" (
+   call :DoInstall catsxp118
+) else if "%output%"=="3" (
+   call :DoInstall brave101
+) else if "%output%"=="4" (
+   call :DoInstall msedge109
+) else if "%output%"=="5" (
+   call :DoInstall idm
+) else if "%output%"=="6" (
+   call :DoInstall epic91
+) else if "%output%"=="7" (
+   call :DoInstall epic104 
+) else if "%output%"=="8" (
+   call :DoInstall firefox79
+) else if "%output%"=="9" (
+   call :DoInstall chromium121_x64
+) else if "%output%"=="10" (
+   call :DoInstall chromium121_x86
+) else if "%output%"=="0" (
+   goto :menu
+) else (
+   echo Please enter a number!
+   pause
+   goto BrowserMenu
+)
+
+:VistaApps
+echo                                 XP-tool
+echo    Internet: %internet%
+
+echo.
+echo [1.] Microsoft Games from Windows Vista build 5259 and 5270
+echo [2.] Windows Movie Maker from Windows Vista build 5270
+echo [3.] Windows Sidebar from Windows Vista build 5744 and RTM
+echo.
+echo [0.] Back to the main menu
+
+echo.
+
+set /p output="Input number: " 
+
+if "%output%"=="1" (
+   call :DoInstall msgamesvista
+) else if "%output%"=="2" (
+   call :DoInstall msmoviemaker
+) else if "%output%"=="3" (
+   call :DoInstall mssidebar
+) else if "%output%"=="0" (
+   goto :menu
+) else (
+   echo Please enter a number!
+   pause
+   goto VistaApps
+)
+rem ) else if "%output%"=="4" (
+rem    call :DoInstall inkball
+rem ) else (
+
+:WinSevenApps
+echo                                 XP-tool
+echo    Internet: %internet%
+
+echo.
+echo [1] Windows 7 Games
+echo [2] Wordpad
+echo [3] Paint
+echo.
+echo [0] Back to the main menu
+echo.
+
+set /p output="Input number: " 
+
+if "%output%"=="1" (
+   call :DoInstall msgames7
+) else if "%output%"=="2" (
+   call :DoInstall wordpad
+) else if "%output%"=="3" (
+   call :Doinstall mspaint
+) else if "%output%"=="0" (
+   goto :menu
+) else (
+   echo Please enter a number!
+   pause
+   goto WinSevenApps
+)
+
+:CodecandAudioMenu
+echo                                 XP-tool
+echo    Internet: %internet%
+
+echo.
+echo [1] K-Lite Codec Pack 17.8.0 Full
+echo [2] AIMP 5.1.1.2436
+echo [3] FL Studio 20 (Windows XP x64 only)
+echo.
+echo [0] Back to the main menu
+echo.
+
+set /p output="Input number: " 
+
+if "%output%"=="1" (
+   call :DoInstall klite
+) else if "%output%"=="2" (
+   call :DoInstall aimp5
+) else if "%output%"=="3" (
+   call :DoInstall flstudio20  
+) else if "%output%"=="0" (
+   goto :menu
+) else (
+   echo Please enter a number!
+   pause
+   goto CodecandAudioMenu
+)
+
+:UtilitiesMenu
+echo                                 XP-tool
+echo    Internet: %internet%
+
+echo.
+echo [1] .NET Framework 4.7.2
+echo [2] .NET Framework 4.5.2
+echo [3] JDK 21/Java 21
+echo [4] JDK 11/Java 11
+echo [5] OpenJDK 1.8 and OpenJDK 17
+echo [6] JDK 21/Java 21 [x64]
+echo [7] JDK 11/Java 11 [x64]
+echo.
+echo [0] Back to the main menu
+
+echo.
+
+set /p output="Input number: " 
+
+if "%output%"=="1" (
+   call :DoInstall dotnet472
+) else if "%output%"=="2" (
+   call :DoInstall dotnet452
+) else if "%output%"=="3" (
+   call :DoInstall jdk21
+) else if "%output%"=="4" (
+   call :DoInstall jdk11
+) else if "%output%"=="5" (
+   call :DoInstall jdk18_17
+) else if "%output%"=="6" (
+   call :DoInstall jdk21x64
+) else if "%output%"=="7" (
+   call :DoInstall jdk11x64
+) else if "%output%"=="0" (
+   goto :menu
+) else (
+   echo Please enter a number!
+   pause
+   goto UtilitiesMenu
+)
+
+:OtherMenu
+echo                                 XP-tool
+echo    Internet: %internet%
+
+echo.
+echo [1] Adobe Photoshop CC 2018
+echo [2] ShareX 15.0
+echo [3] Telegram Desktop
+echo.
+echo [0] Back to the main menu
+
+echo.
+
+set /p output="Input number: " 
+
+if "%output%"=="1" (
+   call :DoInstall photoshop2018
+) else if "%output%"=="2" (
+   call :DoInstall sharex
+) else if "%output%"=="3" (
+   call :DoInstall telegram
+) else if "%output%"=="0" (
+   goto :menu
+) else (
+   echo Please enter a number!
+   pause
+   goto OtherMenu
+)
+
+:OfficeMenu
+echo                                 XP-tool
+echo    Internet: %internet%
+
+echo.
+echo [1] FreeOffice
+echo [2] LibreOffice 6.0.0.3 Portable
+echo.
+echo [0] Back to the main menu
+
+echo.
+
+set /p output="Input number: " 
+
+if "%output%"=="1" (
+   call :DoInstall freeoffice
+) else if "%selected%"=="2" (
+   call :DoInstall libreoffice6003
+) else if "%output%"=="0" (
+   goto :menu
+) else (
+   echo Please enter a number!
+   pause
+   goto OfficeMenu
+)
+
+:Progrmenu
+echo                                 XP-tool
+echo    Internet: %internet%
+
+echo.
+echo [1] Python 3.9.13+
+echo [2] Visual Studio Code 1.70.3
+echo [3] Visual Studio Code 1.83.1
+echo [4] JetBrains PyCharm Community 2017.3.4 Portable
+echo [5] JetBrains PyCharm Community 2018.3.7
+echo [6] JetBrains CLion 2021.3.4
+echo [7] JetBrains CLion 2023.2.2
+echo [8] JetBrains PyCharm Community 2023.2.2 [x64 only]
+echo.
+echo [0] Back to the main menu
+
+
+echo.
+
+set /p output="Input number: " 
+
+if "%output%"=="1" (
+   call :DoInstall python39
+) else if "%output%"=="2" (
+   call :DoInstall vscode1_70
+) else if "%output%"=="3" (
+   call :DoInstall vscode1_83
+) else if "%output%"=="4" (
+   call :DoInstall pycharm2017
+) else if "%output%"=="5" (
+   call :DoInstall pycharm2018
+) else if "%output%"=="6" (
+   call :DoInstall clion_2021
+) else if "%output%"=="7" (
+   call :DoInstall clion_2023 
+) else if "%output%"=="8" (
+   call :DoInstall pycharm2023
+) else if "%output%"=="0" (
+   goto :menu
+) else (
+   echo Please enter a number!
+   pause
+   goto Progrmenu
+)
 
 :DoUpdate
 echo Updating XP-apps...
@@ -667,283 +944,4 @@ if "%selected%"=="1" (
     goto :menu
 ) else (
    goto :eof
-)
-
-
-:BrowserMenu
-echo                                 XP-tool
-echo    Internet: %internet%
-
-echo.
-echo [1] CatsXP (Chromium 117)
-echo [2] CatsXP (Chromium 118)
-echo [3] Brave 101
-echo [4] Microsoft Edge 109 (109.0.1518.140)
-echo [5] Internet Download Manager 6.40 build 11
-echo [6] Epic Privacy Browser version 91
-echo [7] Epic Privacy Browser version 104
-echo [8] Firefox 79
-echo [9] Chromium 121.0.6138.0 (latest dev) x64
-echo [10] Chromium 121.0.6138.0 (latest dev) x86
-echo.
-echo [0] Back to the main menu
-echo.
-
-set /p output="Input number: " 
-
-if "%output%"=="1" (
-   call :DoInstall catsxp117
-) else if "%output%"=="2" (
-   call :DoInstall catsxp118
-) else if "%output%"=="3" (
-   call :DoInstall brave101
-) else if "%output%"=="4" (
-   call :DoInstall msedge109
-) else if "%output%"=="5" (
-   call :DoInstall idm
-) else if "%output%"=="6" (
-   call :DoInstall epic91
-) else if "%output%"=="7" (
-   call :DoInstall epic104 
-) else if "%output%"=="8" (
-   call :DoInstall firefox79
-) else if "%output%"=="9" (
-   call :DoInstall chromium121_x64
-) else if "%output%"=="10" (
-   call :DoInstall chromium121_x86
-) else if "%output%"=="0" (
-   goto :menu
-) else (
-   echo Please enter a number!
-   pause
-   goto BrowserMenu
-)
-
-:VistaApps
-echo                                 XP-tool
-echo    Internet: %internet%
-
-echo.
-echo [1.] Microsoft Games from Windows Vista build 5259 and 5270
-echo [2.] Windows Movie Maker from Windows Vista build 5270
-echo [3.] Windows Sidebar from Windows Vista build 5744 and RTM
-echo.
-echo [0.] Back to the main menu
-
-echo.
-
-set /p output="Input number: " 
-
-if "%output%"=="1" (
-   call :DoInstall msgamesvista
-) else if "%output%"=="2" (
-   call :DoInstall msmoviemaker
-) else if "%output%"=="3" (
-   call :DoInstall mssidebar
-) else if "%output%"=="0" (
-   goto :menu
-) else (
-   echo Please enter a number!
-   pause
-   goto VistaApps
-)
-rem ) else if "%output%"=="4" (
-rem    call :DoInstall inkball
-rem ) else (
-
-:WinSevenApps
-echo                                 XP-tool
-echo    Internet: %internet%
-
-echo.
-echo [1] Windows 7 Games
-echo [2] Wordpad
-echo [3] Paint
-echo.
-echo [0] Back to the main menu
-echo.
-
-set /p output="Input number: " 
-
-if "%output%"=="1" (
-   call :DoInstall msgames7
-) else if "%output%"=="2" (
-   call :DoInstall wordpad
-) else if "%output%"=="3" (
-   call :Doinstall mspaint
-) else if "%output%"=="0" (
-   goto :menu
-) else (
-   echo Please enter a number!
-   pause
-   goto WinSevenApps
-)
-
-:CodecandAudioMenu
-echo                                 XP-tool
-echo    Internet: %internet%
-
-echo.
-echo [1] K-Lite Codec Pack 17.8.0 Full
-echo [2] AIMP 5.1.1.2436
-echo [3] FL Studio 20 (Windows XP x64 only)
-echo.
-echo [0] Back to the main menu
-echo.
-
-set /p output="Input number: " 
-
-if "%output%"=="1" (
-   call :DoInstall klite
-) else if "%output%"=="2" (
-   call :DoInstall aimp5
-) else if "%output%"=="3" (
-   call :DoInstall flstudio20  
-) else if "%output%"=="0" (
-   goto :menu
-) else (
-   echo Please enter a number!
-   pause
-   goto CodecandAudioMenu
-)
-
-:UtilitiesMenu
-echo                                 XP-tool
-echo    Internet: %internet%
-
-echo.
-echo [1] .NET Framework 4.7.2
-echo [2] .NET Framework 4.5.2
-echo [3] JDK 21/Java 21
-echo [4] JDK 11/Java 11
-echo [5] OpenJDK 1.8 and OpenJDK 17
-echo [6] JDK 21/Java 21 [x64]
-echo [7] JDK 11/Java 11 [x64]
-echo.
-echo [0] Back to the main menu
-
-echo.
-
-set /p output="Input number: " 
-
-if "%output%"=="1" (
-   call :DoInstall dotnet472
-) else if "%output%"=="2" (
-   call :DoInstall dotnet452
-) else if "%output%"=="3" (
-   call :DoInstall jdk21
-) else if "%output%"=="4" (
-   call :DoInstall jdk11
-) else if "%output%"=="5" (
-   call :DoInstall jdk18_17
-) else if "%output%"=="6" (
-   call :DoInstall jdk21x64
-) else if "%output%"=="7" (
-   call :DoInstall jdk11x64
-) else if "%output%"=="0" (
-   goto :menu
-) else (
-   echo Please enter a number!
-   pause
-   goto UtilitiesMenu
-)
-
-:OtherMenu
-echo                                 XP-tool
-echo    Internet: %internet%
-
-echo.
-echo [1] Adobe Photoshop CC 2018
-echo [2] ShareX 15.0
-echo [3] Telegram Desktop
-echo.
-echo [0] Back to the main menu
-
-echo.
-
-set /p output="Input number: " 
-
-if "%output%"=="1" (
-   call :DoInstall photoshop2018
-) else if "%output%"=="2" (
-   call :DoInstall sharex
-) else if "%output%"=="3" (
-   call :DoInstall telegram
-) else if "%output%"=="0" (
-   goto :menu
-) else (
-   echo Please enter a number!
-   pause
-   goto OtherMenu
-)
-
-:OfficeMenu
-echo                                 XP-tool
-echo    Internet: %internet%
-
-echo.
-echo [1] FreeOffice
-echo [2] LibreOffice 6.0.0.3 Portable
-echo.
-echo [0] Back to the main menu
-
-echo.
-
-set /p output="Input number: " 
-
-if "%output%"=="1" (
-   call :DoInstall freeoffice
-) else if "%selected%"=="2" (
-   call :DoInstall libreoffice6003
-) else if "%output%"=="0" (
-   goto :menu
-) else (
-   echo Please enter a number!
-   pause
-   goto OfficeMenu
-)
-
-:Progrmenu
-echo                                 XP-tool
-echo    Internet: %internet%
-
-echo.
-echo [1] Python 3.9.13+
-echo [2] Visual Studio Code 1.70.3
-echo [3] Visual Studio Code 1.83.1
-echo [4] JetBrains PyCharm Community 2017.3.4 Portable
-echo [5] JetBrains PyCharm Community 2018.3.7
-echo [6] JetBrains CLion 2021.3.4
-echo [7] JetBrains CLion 2023.2.2
-echo [8] JetBrains PyCharm Community 2023.2.2 [x64 only]
-echo.
-echo [0] Back to the main menu
-
-
-echo.
-
-set /p output="Input number: " 
-
-if "%output%"=="1" (
-   call :DoInstall python39
-) else if "%output%"=="2" (
-   call :DoInstall vscode1_70
-) else if "%output%"=="3" (
-   call :DoInstall vscode1_83
-) else if "%output%"=="4" (
-   call :DoInstall pycharm2017
-) else if "%output%"=="5" (
-   call :DoInstall pycharm2018
-) else if "%output%"=="6" (
-   call :DoInstall clion_2021
-) else if "%output%"=="7" (
-   call :DoInstall clion_2023 
-) else if "%output%"=="8" (
-   call :DoInstall pycharm2023
-) else if "%output%"=="0" (
-   goto :menu
-) else (
-   echo Please enter a number!
-   pause
-   goto Progrmenu
 )
