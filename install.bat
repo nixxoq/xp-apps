@@ -127,7 +127,7 @@ if "%option%"=="1" (
 ) else (
    if "%tool_to_update%"=="1" (
       cls
-      goto :DoUpdate
+      goto DoUpdate
    ) else (
       echo Not implemented. Check new updates...
       pause
@@ -139,9 +139,7 @@ if "%option%"=="1" (
 :DoUpdate
 echo Updating XP-apps...
 "%WGET_PATH%" -q --show-progress -O install.bat https://raw.githubusercontent.com/Snaky1a/xp-apps/debug/install.bat
-echo Done, please re-run this script.
-echo.
-pause
+call install.bat
 exit
 
 
