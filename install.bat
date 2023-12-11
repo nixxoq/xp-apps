@@ -160,23 +160,32 @@ set /p output="Input number: "
 
 if "%output%"=="1" (
    call :DoInstall catsxp117
-) else if "%output%"=="2" (
+)
+if "%output%"=="2" (
    call :DoInstall catsxp118
-) else if "%output%"=="3" (
+)
+if "%output%"=="3" (
    call :DoInstall brave101
-) else if "%output%"=="4" (
+)
+if "%output%"=="4" (
    call :DoInstall msedge109
-) else if "%output%"=="5" (
+)
+if "%output%"=="5" (
    call :DoInstall idm
-) else if "%output%"=="6" (
+)
+if "%output%"=="6" (
    call :DoInstall epic91
-) else if "%output%"=="7" (
+)
+if "%output%"=="7" (
    call :DoInstall epic104 
-) else if "%output%"=="8" (
+)
+if "%output%"=="8" (
    call :DoInstall firefox79
-) else if "%output%"=="9" (
+) 
+if "%output%"=="9" (
    call :DoInstall chromium121_x64
-) else if "%output%"=="10" (
+)
+if "%output%"=="10" (
    call :DoInstall chromium121_x86
 ) else if "%output%"=="0" (
    goto :menu
