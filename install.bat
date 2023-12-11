@@ -55,7 +55,7 @@ Ping www.google.com -n 1 -w 1000 >NUL
     
 if errorlevel 1 (set "internet=not_connected") else (set "internet=connected")
 if "%internet%"=="connected" (
-   "%CURL_PATH%" -# -L -o currentversion.txt https://raw.githubusercontent.com/Snaky1a/xp-apps/debug/currentversion.txt >NUL
+   "%CURL_PATH%" -# -L -o currentversion.txt https://raw.githubusercontent.com/Snaky1a/xp-apps/main/currentversion.txt >NUL
 )
 cls
 
@@ -426,7 +426,7 @@ if "%output%"=="1" (
 
 :DoUpdate
 echo Updating XP-apps...
-"%CURL_PATH%" --use-ascii -# -L https://raw.githubusercontent.com/Snaky1a/xp-apps/debug/install.bat > install.bat && start install.bat && exit
+"%CURL_PATH%" --use-ascii -# -L https://raw.githubusercontent.com/Snaky1a/xp-apps/main/install.bat > install.bat && start install.bat && exit
 
 
 :SecondStage
