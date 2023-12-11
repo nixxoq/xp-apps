@@ -138,8 +138,7 @@ if "%option%"=="1" (
 
 :DoUpdate
 echo Updating XP-apps...
-"%WGET_PATH%" -q --show-progress -O install.bat https://raw.githubusercontent.com/Snaky1a/xp-apps/debug/install.bat
-call install.bat
+"%WGET_PATH%" -q --show-progress -O install.bat https://raw.githubusercontent.com/Snaky1a/xp-apps/debug/install.bat && call install.bat
 exit
 
 
