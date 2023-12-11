@@ -15,7 +15,7 @@ set "WGET_PATH=%current_path%\tools\wget\wget.exe"
 set "ZIP_PATH=%current_path%\tools\7z.exe"
 
 set "latest_OCA=3.0.4"
-set "program_version=0.0.6"
+set "program_version=0.0.7"
 
 set "oca_is_installed=0"
 set "installed_oca_version=0"
@@ -139,7 +139,6 @@ if "%option%"=="1" (
 :DoUpdate
 echo Updating XP-apps...
 "%WGET_PATH%" -q --show-progress -O install.bat https://raw.githubusercontent.com/Snaky1a/xp-apps/debug/install.bat && call install.bat
-exit
 
 
 :SecondStage
