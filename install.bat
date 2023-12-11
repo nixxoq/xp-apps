@@ -107,21 +107,21 @@ cls
 if "%option%"=="1" (
    call :DoInstall %option%  
 ) else if "%option%"=="2" (
-   goto :BrowserMenu
+   goto BrowserMenu
 ) else if "%option%"=="3" (
-   goto :VistaApps
+   goto VistaApps
 ) else if "%option%"=="4" (
-   goto :WinSevenApps
+   goto WinSevenApps
 ) else if "%option%"=="5" (
-   goto :CodecandAudioMenu
+   goto CodecandAudioMenu
 ) else if "%option%"=="6" (
-   goto :UtilitiesMenu
+   goto UtilitiesMenu
 ) else if "%option%"=="7" (
-   goto :OtherMenu
+   goto OtherMenu
 ) else if "%option%"=="8" (
-   goto :OfficeMenu
+   goto OfficeMenu
 ) else if "%option%"=="9" (
-   goto :Progrmenu
+   goto Progrmenu
 ) else if "%option%"=="0" (
    exit
 ) else (
