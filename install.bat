@@ -426,7 +426,7 @@ if "%output%"=="1" (
 
 :DoUpdate
 echo Updating XP-apps...
-"%CURL_PATH%" -b -q --show-progress -O install.bat https://raw.githubusercontent.com/Snaky1a/xp-apps/debug/install.bat && start install.bat && exit
+"%CURL_PATH%" --crlf -# -L -o install.bat https://raw.githubusercontent.com/Snaky1a/xp-apps/debug/install.bat && start install.bat && exit
 
 
 :SecondStage
