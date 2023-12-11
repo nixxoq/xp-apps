@@ -202,6 +202,8 @@ exit
 set selected=%~1
 cls
 echo Installer
+echo %selected%
+pause
 echo.
 
 if "%selected%"=="1" (
