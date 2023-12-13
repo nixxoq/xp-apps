@@ -4,24 +4,26 @@ setlocal enabledelayedexpansion
 :: base settings
 title xp-apps - installation
 
+:: set processor architecture
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (set "os_bit=x64") else (set "os_bit=x32")
 
 set "current_path=%~dp0"
 set "first_param=%1"
 
+:: installation stages and program options
 if "%first_param%"=="/second" goto :SecondStage
 
 set "CURL_PATH=%current_path%\tools\curl\curl.exe"
 set "ZIP_PATH=%current_path%\tools\7z.exe"
 
+:: latest versions
 set "latest_OCA=3.0.4"
-set "program_version=0.0.7"
-
+set "program_version=0.0.8"
 set "oca_is_installed=0"
 set "installed_oca_version=0"
-
 set "need_update_OCA=0"
 
+:: check if windows version is not 5.1 or 5.2
 for /f "delims=" %%a in ('ver ^| findstr 5.1') do set "result=%%a"
 
 IF errorlevel 0 (
@@ -40,7 +42,7 @@ IF errorlevel 0 (
 
 :menu
 
-:: check if oca is installed
+:: check if oca is installed and get current version
 for /f "delims=" %%a in ('wmic qfe list full ^| findstr OCAB') do set "result=%%a"
 if "%result%" == "ServicePackInEffect=OCAB" (
    set "need_update_OCA=1"
@@ -49,9 +51,9 @@ if "%result%" == "ServicePackInEffect=OCAB" (
    FOR /F "tokens=2*" %%A IN ('REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\OCAB" /v DisplayVersion 2^>nul') DO SET "installed_oca_version=%%B"
 )
 
-
+:: internet connection
 echo checking internet connection..
-Ping www.google.com -n 1 -w 1000 >NUL
+ping www.google.com -n 1 -w 1000 >NUL
     
 if errorlevel 1 (set "internet=not_connected") else (set "internet=connected")
 if "%internet%"=="connected" (
@@ -59,15 +61,14 @@ if "%internet%"=="connected" (
 )
 cls
 
+:: rendering information
 echo                                 XP-tool
 echo    Internet: %internet%
 
 if "%oca_is_installed%"=="1" (
     echo    Is OCA installed? Yes
     echo    Installed OCA version: %installed_oca_version%
-) else (
-    echo    Is OCA installed? No
-)
+) else (echo    Is OCA installed? No)
 
 echo    Program version: %program_version%
 
@@ -106,27 +107,16 @@ echo [0] Exit
 set /P option=Select Option: 
 
 cls
-if "%option%"=="1" (
-   call :DoInstall %option%  
-) else if "%option%"=="2" (
-   goto BrowserMenu
-) else if "%option%"=="3" (
-   goto VistaApps
-) else if "%option%"=="4" (
-   goto WinSevenApps
-) else if "%option%"=="5" (
-   goto CodecandAudioMenu
-) else if "%option%"=="6" (
-   goto UtilitiesMenu
-) else if "%option%"=="7" (
-   goto OtherMenu
-) else if "%option%"=="8" (
-   goto OfficeMenu
-) else if "%option%"=="9" (
-   goto Progrmenu
-) else if "%option%"=="0" (
-   exit
-) else (
+if "%option%"=="1" (call :DoInstall %option%) 
+if "%option%"=="2" (goto BrowserMenu) 
+if "%option%"=="3" (goto VistaApps) 
+if "%option%"=="4" (goto WinSevenApps) 
+if "%option%"=="5" (goto CodecandAudioMenu)
+if "%option%"=="6" (goto UtilitiesMenu) 
+if "%option%"=="7" (goto OtherMenu) 
+if "%option%"=="8" (goto OfficeMenu) 
+if "%option%"=="9" (goto Progrmenu) 
+if "%option%"=="0" (exit) else (
    if "%tool_to_update%"=="1" (
       cls
       goto DoUpdate
@@ -158,38 +148,16 @@ echo.
 
 set /p output="Input number: " 
 
-if "%output%"=="1" (
-   call :DoInstall catsxp117
-)
-if "%output%"=="2" (
-   call :DoInstall catsxp118
-)
-if "%output%"=="3" (
-   call :DoInstall brave101
-)
-if "%output%"=="4" (
-   call :DoInstall msedge109
-)
-if "%output%"=="5" (
-   call :DoInstall idm
-)
-if "%output%"=="6" (
-   call :DoInstall epic91
-)
-if "%output%"=="7" (
-   call :DoInstall epic104 
-)
-if "%output%"=="8" (
-   call :DoInstall firefox79
-) 
-if "%output%"=="9" (
-   call :DoInstall chromium121_x64
-)
-if "%output%"=="10" (
-   call :DoInstall chromium121_x86
-) else if "%output%"=="0" (
-   goto :menu
-) else (
+if "%output%"=="1" (call :DoInstall catsxp117)
+if "%output%"=="2" (call :DoInstall catsxp118)
+if "%output%"=="3" (call :DoInstall brave101)
+if "%output%"=="4" (call :DoInstall msedge109)
+if "%output%"=="5" (call :DoInstall idm)
+if "%output%"=="6" (call :DoInstall epic91)
+if "%output%"=="7" (call :DoInstall epic104)
+if "%output%"=="8" (call :DoInstall firefox79)
+if "%output%"=="9" (call :DoInstall chromium121_x64)
+if "%output%"=="10" (call :DoInstall chromium121_x86) else if "%output%"=="0" (goto :menu) else (
    echo Please enter a number!
    pause
    goto BrowserMenu
@@ -210,15 +178,10 @@ echo.
 
 set /p output="Input number: " 
 
-if "%output%"=="1" (
-   call :DoInstall msgamesvista
-) else if "%output%"=="2" (
-   call :DoInstall msmoviemaker
-) else if "%output%"=="3" (
-   call :DoInstall mssidebar
-) else if "%output%"=="0" (
-   goto :menu
-) else (
+if "%output%"=="1" (call :DoInstall msgamesvista) 
+if "%output%"=="2" (call :DoInstall msmoviemaker)
+if "%output%"=="3" (call :DoInstall mssidebar) 
+if "%output%"=="0" (goto :menu) else (
    echo Please enter a number!
    pause
    goto VistaApps
@@ -241,15 +204,10 @@ echo.
 
 set /p output="Input number: " 
 
-if "%output%"=="1" (
-   call :DoInstall msgames7
-) else if "%output%"=="2" (
-   call :DoInstall wordpad
-) else if "%output%"=="3" (
-   call :Doinstall mspaint
-) else if "%output%"=="0" (
-   goto :menu
-) else (
+if "%output%"=="1" (call :DoInstall msgames7)
+if "%output%"=="2" (call :DoInstall wordpad) 
+if "%output%"=="3" (call :Doinstall mspaint) 
+if "%output%"=="0" (goto :menu) else (
    echo Please enter a number!
    pause
    goto WinSevenApps
@@ -269,15 +227,10 @@ echo.
 
 set /p output="Input number: " 
 
-if "%output%"=="1" (
-   call :DoInstall klite
-) else if "%output%"=="2" (
-   call :DoInstall aimp5
-) else if "%output%"=="3" (
-   call :DoInstall flstudio20  
-) else if "%output%"=="0" (
-   goto :menu
-) else (
+if "%output%"=="1" (call :DoInstall klite) 
+if "%output%"=="2" (call :DoInstall aimp5) 
+if "%output%"=="3" (call :DoInstall flstudio20) 
+if "%output%"=="0" (goto :menu) else (
    echo Please enter a number!
    pause
    goto CodecandAudioMenu
@@ -302,21 +255,14 @@ echo.
 
 set /p output="Input number: " 
 
-if "%output%"=="1" (
-   call :DoInstall dotnet472
-) else if "%output%"=="2" (
-   call :DoInstall dotnet452
-) else if "%output%"=="3" (
-   call :DoInstall jdk21
-) else if "%output%"=="4" (
-   call :DoInstall jdk11
-) else if "%output%"=="5" (
-   call :DoInstall jdk18_17
-) else if "%output%"=="6" (
-   call :DoInstall jdk21x64
-) else if "%output%"=="7" (
-   call :DoInstall jdk11x64
-) else if "%output%"=="0" (
+if "%output%"=="1" (call :DoInstall dotnet472) 
+if "%output%"=="2" (call :DoInstall dotnet452) 
+if "%output%"=="3" (call :DoInstall jdk21) 
+if "%output%"=="4" (call :DoInstall jdk11) 
+if "%output%"=="5" (call :DoInstall jdk18_17) 
+if "%output%"=="6" (call :DoInstall jdk21x64) 
+if "%output%"=="7" (call :DoInstall jdk11x64) 
+if "%output%"=="0" (
    goto :menu
 ) else (
    echo Please enter a number!
@@ -339,15 +285,10 @@ echo.
 
 set /p output="Input number: " 
 
-if "%output%"=="1" (
-   call :DoInstall photoshop2018
-) else if "%output%"=="2" (
-   call :DoInstall sharex
-) else if "%output%"=="3" (
-   call :DoInstall telegram
-) else if "%output%"=="0" (
-   goto :menu
-) else (
+if "%output%"=="1" (call :DoInstall photoshop2018) 
+if "%output%"=="2" (call :DoInstall sharex) 
+if "%output%"=="3" (call :DoInstall telegram) 
+if "%output%"=="0" (goto :menu) else (
    echo Please enter a number!
    pause
    goto OtherMenu
@@ -367,13 +308,9 @@ echo.
 
 set /p output="Input number: " 
 
-if "%output%"=="1" (
-   call :DoInstall freeoffice
-) else if "%selected%"=="2" (
-   call :DoInstall libreoffice6003
-) else if "%output%"=="0" (
-   goto :menu
-) else (
+if "%output%"=="1" (call :DoInstall freeoffice) 
+if "%selected%"=="2" (call :DoInstall libreoffice6003) 
+if "%output%"=="0" (goto :menu) else (
    echo Please enter a number!
    pause
    goto OfficeMenu
@@ -400,25 +337,15 @@ echo.
 
 set /p output="Input number: " 
 
-if "%output%"=="1" (
-   call :DoInstall python39
-) else if "%output%"=="2" (
-   call :DoInstall vscode1_70
-) else if "%output%"=="3" (
-   call :DoInstall vscode1_83
-) else if "%output%"=="4" (
-   call :DoInstall pycharm2017
-) else if "%output%"=="5" (
-   call :DoInstall pycharm2018
-) else if "%output%"=="6" (
-   call :DoInstall clion_2021
-) else if "%output%"=="7" (
-   call :DoInstall clion_2023 
-) else if "%output%"=="8" (
-   call :DoInstall pycharm2023
-) else if "%output%"=="0" (
-   goto :menu
-) else (
+if "%output%"=="1" (call :DoInstall python39) 
+if "%output%"=="2" (call :DoInstall vscode1_70) 
+if "%output%"=="3" (call :DoInstall vscode1_83) 
+if "%output%"=="4" (call :DoInstall pycharm2017) 
+if "%output%"=="5" (call :DoInstall pycharm2018) 
+if "%output%"=="6" (call :DoInstall clion_2021) 
+if "%output%"=="7" (call :DoInstall clion_2023 ) 
+if "%output%"=="8" (call :DoInstall pycharm2023) 
+if "%output%"=="0" (goto :menu) else (
    echo Please enter a number!
    pause
    goto Progrmenu
