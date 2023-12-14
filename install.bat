@@ -10,35 +10,55 @@ if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (set "os_bit=x64") else (set "os_bit=x32"
 set "current_path=%~dp0"
 set "first_param=%1"
 
-:: installation stages and program options
-if "%first_param%"=="/second" goto :SecondStage
-
+:: program options
 set "CURL_PATH=%current_path%\tools\curl\curl.exe"
 set "ZIP_PATH=%current_path%\tools\7z.exe"
 
 :: latest versions
 set "latest_OCA=3.0.4"
-set "program_version=0.0.8"
+set "program_version=0.0.9"
 set "oca_is_installed=0"
 set "installed_oca_version=0"
 set "need_update_OCA=0"
+
+set "dotnet10=0"
+set "dotnet20=0"
+set "dotnet35=0"
+set "dotnet40=0"
+
+:: getting installed .net frameworks
+for /f "delims=" %%a in (
+   'dir /b /ad "%windir%\microsoft.net\Framework\*" ^|sort /r ^|findstr /r [0-9]'
+) do (
+      echo %%a | findstr v1.0 >NUL
+      if errorlevel 1 (echo >NUL) else (set "dotnet10=1")
+      echo %%a | findstr v2.0 >NUL
+      if errorlevel 1 (echo >NUL) else (set "dotnet20=1")
+      echo %%a | findstr v3.5 >NUL
+      if errorlevel 1 (echo >NUL) else (set "dotnet35=1")
+      echo %%a | findstr v4.0 >NUL
+      if errorlevel 1 (echo >NUL) else (set "dotnet40=1")
+)
 
 :: check if windows version is not 5.1 or 5.2
 for /f "delims=" %%a in ('ver ^| findstr 5.1') do set "result=%%a"
 
 IF errorlevel 0 (
-    goto menu    
+    if "%first_param%"=="/first" (goto :FirstStage)
+    if "%first_param%"=="/second" (goto :SecondStage)
+    if "%first_param%"=="/third" (goto :ThirdStage) else (goto menu)
 ) ELSE IF errorlevel 1 (
     for /f "delims=" %%a in ('ver ^| findstr 5.2') do set "result=%%a"
     if errorlevel 1 (
-       goto menu 
+       if "%first_param%"=="/first" (goto :FirstStage)
+       if "%first_param%"=="/second" (goto :SecondStage)
+       if "%first_param%"=="/third" (goto :ThirdStage) else (goto menu)
     ) else (
        echo This program doesn't work on Windows 2000, Windows Vista and later
        pause
        goto :eof
     )
 )
-
 
 :menu
 
@@ -391,6 +411,18 @@ if "%os_bit%"=="x64" (
    echo Installing Visual C++ 2015-2019 x64
    start /wait "installing" "%current_path%Important\vcredist_x64_2015_2019.exe" /quiet /norestart
 )
+   
+REG DELETE HKCU\Software\Microsoft\Windows\CurrentVersion\Run /v "Xp-apps" /f
+REG ADD HKCU\Software\Microsoft\Windows\CurrentVersion\Run /v "Xp-apps" /t REG_SZ /d "\"%~dp0install.bat\" /third" /f
+shutdown /r /t 30 /c "Stage 2 of 3 completed, now restarting..."
+exit
+
+
+:ThirdStage
+echo ============
+echo THIRD  STAGE
+echo ============
+echo.
 
 call "%current_path%Important\Install dot net 4.8.bat"
 
@@ -400,10 +432,80 @@ echo - One-Core-API %latest_OCA% Was installed!
 echo - Your OS will be restarted in 30 seconds
 echo ========================================================
 echo.
-   
-   
+
 REG DELETE HKCU\Software\Microsoft\Windows\CurrentVersion\Run /v "Xp-apps" /f
 shutdown /r /t 30 /c "One-Core-API %latest_OCA% was installed! Your OS will be restarted in 30 seconds"
+exit
+
+:FirstStage
+if "%dotnet10%"=="1" (
+   echo .net framework 1.0 installed
+) else if "%dotnet10%"=="0" (
+   if "%os_bit%"=="x64" (
+      echo .NET Framework doesn't work on Windows XP x64 editions. Skipping...
+   ) else (
+      echo Downloading .NET Framework 1.0...
+      echo Downloading archive, please wait...
+      "%CURL_PATH%" -# -L -o dotnet1_0.zip https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/dotnet1_0.zip
+      
+      echo Extracting, please wait...
+      "%ZIP_PATH%" x dotnet1_0.zip -y -bsp2 -bso0
+
+      "%current_path%dotnet1_0\dotnetfx.exe" /Q
+   )
+)
+
+if "%dotnet35%"=="1" (
+   echo .net framework 3.5 installed
+
+) else (
+   echo Downloading .NET Framework 3.5...
+   echo Downloading archive, please wait...
+   "%CURL_PATH%" -# -L -o dotnet3_5.zip https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/dotnet3_5.zip
+   
+   echo Extracting, please wait...
+   "%ZIP_PATH%" x dotnet3_5.zip -y -bsp2 -bso0
+
+   "%current_path%dotnet3_5\dotnetfx35.exe" /qb /norestart
+
+   shutdown /r /t 10 /c ".NET Framework 3.5 installed, now rebooting..."
+   REG ADD HKCU\Software\Microsoft\Windows\CurrentVersion\Run /v "Xp-apps" /t REG_SZ /d "\"%~dp0install.bat\" /first" /f
+   exit
+)
+
+if "%dotnet40%"=="1" (
+   echo .net framework 4.0 installed
+) else (
+   echo Downloading .NET Framework 4.0...
+   echo Downloading archive, please wait...
+   "%CURL_PATH%" -# -L -o dotnet4_0.zip https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/dotnet4_0.zip
+   
+   echo Extracting, please wait...
+   "%ZIP_PATH%" x dotnet4_0.zip -y -bsp2 -bso0
+
+   "%current_path%dotnet4_0\dotNetFx40_Full_x86_x64.exe" /norestart /passive
+
+   REG ADD HKCU\Software\Microsoft\Windows\CurrentVersion\Run /v "Xp-apps" /t REG_SZ /d "\"%~dp0install.bat\" /first" /f
+   shutdown /r /t 10 /c ".NET Framework 4.0 installed, now rebooting..."
+   exit
+)
+
+echo Downloading archive, please wait...
+"%CURL_PATH%" -# -L -o Important.zip https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/Important.zip
+
+echo Extracting, please wait...
+"%ZIP_PATH%" x Important.zip -y -bsp2 -bso0
+
+echo Installing One-Core-API, please wait...
+call "%current_path%Important\Install One-Core-API.bat"
+
+shutdown /a
+
+REG ADD HKCU\Software\Microsoft\Windows\CurrentVersion\Run /v "Xp-apps" /t REG_SZ /d "\"%~dp0install.bat\" /second" /f
+
+shutdown /r /t 30 /c "First stage completed, now restarting..."
+shutdown /r /t 30 /c "First stage completed, now restarting..."
+
 exit
 
 
@@ -413,27 +515,10 @@ exit
 set selected=%~1
 cls
 echo Installer
-echo %selected%
-pause
 echo.
 
 if "%selected%"=="1" (
-   echo Downloading archive, please wait...
-   "%CURL_PATH%" -# -L -o Important.zip https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/Important.zip
-   
-   echo Extracting, please wait...
-   "%ZIP_PATH%" x Important.zip -y -bsp2 -bso0
-
-   echo Installing One-Core-API, please wait...
-   call "%current_path%Important\Install One-Core-API.bat"
-
-   shutdown /a
-
-   REG ADD HKCU\Software\Microsoft\Windows\CurrentVersion\Run /v "Xp-apps" /t REG_SZ /d "\"%~dp0install.bat\" /second" /f
-
-   shutdown /r /t 30 /c "First stage completed, now restarting..."
-   exit
-
+   goto FirstStage
 ) else if "%selected%"=="catsxp117" (
     echo Downloading archive, please wait...
     "%CURL_PATH%" -# -L -o CatsXP117.zip https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/catsxp.chrome.117.zip
