@@ -15,7 +15,7 @@ set "CURL_PATH=%current_path%\tools\curl\curl.exe"
 set "ZIP_PATH=%current_path%\tools\7z.exe"
 
 :: latest versions
-set "latest_OCA=3.0.4"
+set "latest_OCA=3.0.5-20231227-experimental"
 set "program_version=0.0.9"
 set "oca_is_installed=0"
 set "installed_oca_version=0"
