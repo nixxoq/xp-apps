@@ -16,7 +16,7 @@ set "ZIP_PATH=%current_path%\tools\7z.exe"
 
 :: latest versions
 set "latest_OCA=3.0.5-20231227-experimental"
-set "program_version=0.0.9"
+set "program_version=0.0.10"
 set "oca_is_installed=0"
 set "installed_oca_version=0"
 set "need_update_OCA=0"
