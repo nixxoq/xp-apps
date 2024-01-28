@@ -1,6 +1,8 @@
 # xp-apps
 A repository with applications that work with One-Core-API
 
+[![GitHub Releases](https://img.shields.io/github/downloads/Snaky1a/xp-apps/latest/total?label=Downloads%20(Applications%20list)&color=blue&style=flat)](https://github.com/Snaky1a/xp-apps/releases/latest)
+
 ### Note: This repository is regularly updating
 
 ## Download link
