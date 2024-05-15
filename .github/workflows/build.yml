@@ -114,7 +114,7 @@ jobs:
       uses: microsoft/setup-msbuild@v2
       with:
         msbuild-architecture: x64
-    
+        
     - name: Restore dependencies
       run: nuget restore
     
