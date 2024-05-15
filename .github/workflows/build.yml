@@ -7,17 +7,20 @@ on:
 
 jobs:
   build_debug_x86:
-    runs-on: windows-latest
+    runs-on: windows-2019
     
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
     
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: '4.x'
+    # - name: Setup .NET
+    #   uses: actions/setup-dotnet@v3
+    #   with:
+    #     dotnet-version: '4.x'
     
+    - name: setup-msbuild
+      uses: microsoft/setup-msbuild@v2
+
     - name: Restore dependencies
       run: nuget restore
     
@@ -34,16 +37,21 @@ jobs:
           bin\Debug\xp-apps.exe
     
   build_debug_x64:
-    runs-on: windows-latest
+    runs-on: windows-2019
     
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
     
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
+    # - name: Setup .NET
+    #   uses: actions/setup-dotnet@v3
+    #   with:
+    #     dotnet-version: '4.x'
+
+    - name: setup-msbuild
+      uses: microsoft/setup-msbuild@v2
       with:
-        dotnet-version: '4.x'
+        msbuild-architecture: x64
     
     - name: Restore dependencies
       run: nuget restore
@@ -61,17 +69,20 @@ jobs:
           bin\Debug\xp-apps.exe
 
   build_release_x86:
-    runs-on: windows-latest
+    runs-on: windows-2019
     
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
     
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: '4.x'
+    # - name: Setup .NET
+    #   uses: actions/setup-dotnet@v3
+    #   with:
+    #     dotnet-version: '4.x'
     
+    - name: setup-msbuild
+      uses: microsoft/setup-msbuild@v2
+
     - name: Restore dependencies
       run: nuget restore
     
@@ -88,16 +99,21 @@ jobs:
           bin\Release\xp-apps.exe
     
   build_release_x64:
-    runs-on: windows-latest
+    runs-on: windows-2019
     
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
     
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
+    # - name: Setup .NET
+    #   uses: actions/setup-dotnet@v3
+    #   with:
+    #     dotnet-version: '4.x'
+    
+    - name: setup-msbuild
+      uses: microsoft/setup-msbuild@v2
       with:
-        dotnet-version: '4.x'
+        msbuild-architecture: x64
     
     - name: Restore dependencies
       run: nuget restore
