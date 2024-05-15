@@ -32,9 +32,9 @@ jobs:
       with:
         name: Debug_x86
         path: |
-          bin\Debug\Newtonsoft.Json.dll
-          bin\Debug\Newtonsoft.Json.xml
-          bin\Debug\xp-apps.exe
+          bin\x86\Debug\Newtonsoft.Json.dll
+          bin\x86\Debug\Newtonsoft.Json.xml
+          bin\x86\Debug\xp-apps.exe
     
   build_debug_x64:
     runs-on: windows-2019
@@ -64,9 +64,9 @@ jobs:
       with:
         name: Debug_x64
         path: |
-          bin\Debug\Newtonsoft.Json.dll
-          bin\Debug\Newtonsoft.Json.xml
-          bin\Debug\xp-apps.exe
+          bin\x64\Debug\Newtonsoft.Json.dll
+          bin\x64\Debug\Newtonsoft.Json.xml
+          bin\x64\Debug\xp-apps.exe
 
   build_release_x86:
     runs-on: windows-2019
@@ -94,9 +94,9 @@ jobs:
       with:
         name: Release_x86
         path: |
-          bin\Release\Newtonsoft.Json.dll
-          bin\Release\Newtonsoft.Json.xml
-          bin\Release\xp-apps.exe
+          bin\x86\Release\Newtonsoft.Json.dll
+          bin\x86\Release\Newtonsoft.Json.xml
+          bin\x86\Release\xp-apps.exe
     
   build_release_x64:
     runs-on: windows-2019
@@ -114,7 +114,7 @@ jobs:
       uses: microsoft/setup-msbuild@v2
       with:
         msbuild-architecture: x64
-        
+
     - name: Restore dependencies
       run: nuget restore
     
@@ -126,6 +126,6 @@ jobs:
       with:
         name: Release_x64
         path: |
-          bin\Release\Newtonsoft.Json.dll
-          bin\Release\Newtonsoft.Json.xml
-          bin\Release\xp-apps.exe
+          bin\x64\Release\Newtonsoft.Json.dll
+          bin\x64\Release\Newtonsoft.Json.xml
+          bin\x64\Release\xp-apps.exe
