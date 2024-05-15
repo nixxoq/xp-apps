@@ -1,0 +1,115 @@
+name: Build on push to development
+
+on:
+  push:
+    branches:
+      - development
+
+jobs:
+  build_debug_x86:
+    runs-on: windows-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '4.x'
+    
+    - name: Restore dependencies
+      run: nuget restore
+    
+    - name: Build Debug x86
+      run: msbuild /t:Build /p:Configuration=Debug /p:Platform=x86
+    
+    - name: Publish Debug x86 artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: Debug_x86
+        path: |
+          bin\Debug\Newtonsoft.Json.dll
+          bin\Debug\Newtonsoft.Json.xml
+          bin\Debug\xp-apps.exe
+    
+  build_debug_x64:
+    runs-on: windows-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '4.x'
+    
+    - name: Restore dependencies
+      run: nuget restore
+    
+    - name: Build Debug x64
+      run: msbuild /t:Build /p:Configuration=Debug /p:Platform=x64
+    
+    - name: Publish Debug x64 artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: Debug_x64
+        path: |
+          bin\Debug\Newtonsoft.Json.dll
+          bin\Debug\Newtonsoft.Json.xml
+          bin\Debug\xp-apps.exe
+
+  build_release_x86:
+    runs-on: windows-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '4.x'
+    
+    - name: Restore dependencies
+      run: nuget restore
+    
+    - name: Build Release x86
+      run: msbuild /t:Build /p:Configuration=Release /p:Platform=x86
+    
+    - name: Publish Release x86 artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: Release_x86
+        path: |
+          bin\Release\Newtonsoft.Json.dll
+          bin\Release\Newtonsoft.Json.xml
+          bin\Release\xp-apps.exe
+    
+  build_release_x64:
+    runs-on: windows-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '4.x'
+    
+    - name: Restore dependencies
+      run: nuget restore
+    
+    - name: Build Release x64
+      run: msbuild /t:Build /p:Configuration=Release /p:Platform=x64
+    
+    - name: Publish Release x64 artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: Release_x64
+        path: |
+          bin\Release\Newtonsoft.Json.dll
+          bin\Release\Newtonsoft.Json.xml
+          bin\Release\xp-apps.exe
