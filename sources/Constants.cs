@@ -1,17 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Newtonsoft.Json;
-
-namespace xp_apps.sources
+﻿
+namespace xp_apps.sources.constants
 {
-    class Constants
+    public static class Constants
     {
+        public static string PROGRAM_VERSION = "0.1.0";
+        //public Constants()
+        //{
+        //        public static string PROGRAM_VERSION = "0.1.0";
+        //}
     }
+}
+
 
     //public class ApplicationResponse
     //{
     //    [JsonProperty("test")]
     //}
-}
