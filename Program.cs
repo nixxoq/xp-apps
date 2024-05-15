@@ -10,7 +10,7 @@ namespace xp_apps
         {
 
             ServicePointManager.Expect100Continue = true;
-            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072; //TLS 1.2
+            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
 
             try
             {
