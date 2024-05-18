@@ -1,8 +1,20 @@
 {
-    "test": {
-        "app": {
+    "category1": [
+        {
+            "app": {
+                "filename": "AIMP.zip",
+                "url": "https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/AIMP.zip"
+            },
+            "app2": {
+                "filename": "test.zip",
+                "url": "https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/AIMP.zip"
+            }
+        }
+    ],
+    "category2": [{
+        "app3": {
             "filename": "AIMP.zip",
             "url": "https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/AIMP.zip"
         }
-    }
+    }]
 }
