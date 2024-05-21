@@ -1,45 +1,63 @@
 ﻿using System;
 using System.Net;
+using System.Diagnostics;
+using System.Threading;
+
 using Microsoft.Win32;
 using Newtonsoft.Json;
-using xp_apps.sources.constants;
 
 namespace xp_apps.sources
 {
-    class Functions
-    {
-        private static string HELP = $"XP-Apps ver {Constants.PROGRAM_VERSION}" +
-                         $"\n\nList of available arguments:\n\n[Option]\t\t\t\t[Description]" +
-                         $"\n-h, --help\t\t\t\tDisplay this help message" +
-                         $"\n-i, --install\t\t\t\tInstall Application from XP-Apps repository" +
-                         $"\n-l, --list, --list-applications,\tList all available applications in the repository \n--list-apps or --apps" +
-                         $"\n\nExample:\n    xp-apps.exe -i PyCharm2023 or xp-apps.exe --install PyCharm2023";
+    static class Functions
+    { 
+        static readonly string Help = $"XP-Apps ver {Constants.ProgramVersion}" +
+                                     $"\n\nList of available arguments:\n\n[Option]\t\t\t\t[Description]" +
+                                     $"\n-h, --help\t\t\t\tDisplay this help message" +
+                                     $"\n-i, --install\t\t\t\tInstall Application from XP-Apps repository" +
+                                     $"\n-l, --list, --list-applications,\tList all available applications in the repository \n--list-apps or --apps" +
+                                     $"\n\nExample:\n    xp-apps.exe -i PyCharm2023 or xp-apps.exe --install PyCharm2023";
 
         /// <summary>
         /// Parse arguments from command line
         /// </summary>
         /// <param name="args">arguments from main function</param>
-        public static void parseArgs(string[] args)
+        public static void ParseArgs(string[] args)
         {
-            foreach (string arg in args)
+            for (int i = 0; i < args.Length; i++)
             {
-                if (arg.Equals("-i") || arg.Equals("--install"))
+                string arg = args[i];
+
+                switch (arg)
                 {
-                    Console.WriteLine("Unimplemented.");
-                    return;
-                }
-                else if (arg.Equals("-h") || arg.Equals("--help"))
-                {
-                    Console.WriteLine(HELP);
-                    return;
-                }
-                else if (arg.Equals("-l") || arg.Equals("--list") || arg.Equals("--list-applications") || arg.Equals("--list-apps") || arg.Equals("--apps"))
-                {
-                    getApplications(Constants.programs_list);
-                    return;
+                    case "-i":
+                    case "--install":
+                    {
+                        if (i + 1 < args.Length)
+                        {
+                            return;
+                            // string appName = args[i + 1];
+                            //InstallApplication(appName);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Error: Missing application name for install.");
+                        }
+                        return;
+                    }
+                    case "-h":
+                    case "--help":
+                        Console.WriteLine(Help);
+                        return;
+                    case "-l":
+                    case "--list":
+                    case "--list-applications":
+                    case "--list-apps":
+                    case "--apps":
+                        GetApplications(Constants.ProgramsList);
+                        return;
                 }
             }
-            Console.WriteLine(HELP);
+            Console.WriteLine(Help);
         }
 
         /// <summary>
@@ -47,7 +65,7 @@ namespace xp_apps.sources
         /// </summary>
         /// <param name="url">URL link</param>
         /// <returns>URL content</returns>
-        public static string getContent(string url)
+        static string GetContent(string url)
         {
             using (WebClient client = new WebClient())
             {
@@ -55,36 +73,127 @@ namespace xp_apps.sources
             }
         }
 
-        public static object getUpdates()
+        public static void DownloadFile(string url, string filename)
         {
-            // hardcode... yeah
-            // TODO: add UPDATE_JSON variable to Constants.cs
-            return parseJson(getContent("https://raw.githubusercontent.com/Snaky1a/xp-apps/development/upd.json"));
+
+            using (WebClient client = new WebClient())
+            {
+                char[] animationChars = new char[] { '/', '-', '\\', '|' };
+                int animationIndex = 0;
+                Stopwatch stopwatch = new Stopwatch();
+
+                client.DownloadProgressChanged += (sender, e) =>
+                {
+                    double speed = e.BytesReceived / 1024d / stopwatch.Elapsed.TotalSeconds;
+                    double remainingBytes = e.TotalBytesToReceive - e.BytesReceived;
+                    double remainingSeconds = remainingBytes / 1024d / speed;
+
+                    TimeSpan remainingTime = TimeSpan.FromSeconds(remainingSeconds);
+                    char animationChar = animationChars[animationIndex++ % animationChars.Length];
+
+                    Console.Write(
+                        $"\r{animationChar} " + string.Format(
+                            "Downloading {0} | {1}% completed | {2:0.00} MB/s | {3:hh\\:mm\\:ss} remaining",
+                            filename, e.ProgressPercentage, speed / 1024d,
+                            remainingTime
+                        )
+                    );
+                };
+
+                client.DownloadFileCompleted += (sender, e) =>
+                {
+                    Console.WriteLine(e.Error != null ? $"\nError: {e.Error.Message}" : $"\n{filename} download completed.");
+                };
+
+                stopwatch.Start();
+                client.DownloadFileAsync(new Uri(url), filename);
+
+                while (client.IsBusy)
+                    Thread.Sleep(100);
+
+                stopwatch.Stop();
+            }
+        }
+
+        //public static Category getUpdates()
+        //{
+        //    // Initializing Security Protocols for HTTPS requests
+        //    ServicePointManager.Expect100Continue = true;
+        //    ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+        //    // hardcode... yeah
+        //    // TODO: add UPDATE_JSON variable to Constants.cs
+        //    string content = JsonConvert.SerializeObject(getContent(Constants.UPDATE_JSON));
+        //    Category category = JsonConvert.DeserializeObject<Category>(content);
+        //    return category;
+        //}
+
+        public static Applications GetUpdates()
+        {
+            // Initializing Security Protocols for HTTPS requests
+            ServicePointManager.Expect100Continue = true;
+            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+
+            // Retrieve JSON content from the specified URL
+            string jsonContent = GetContent(Constants.UpdateJson);
+
+            // Log/print the JSON content for inspection
+            Console.WriteLine("Retrieved JSON content:");
+            Console.WriteLine(jsonContent);
+
+            Applications applications = JsonConvert.DeserializeObject<Applications>(jsonContent);
+            return applications;
         }
 
         /// <summary>
         /// Parse string to dynamic object
         /// </summary>
         /// <param name="content">String to parse</param>
-        public static object parseJson(string content)
+        public static object ParseJson(string content)
         {
-            object Jobj = JsonConvert.DeserializeObject(content);
-            //getApplications(Jobj);
-            //return Jobj.ToString();
-            return Jobj;
+            object jsonObj = JsonConvert.DeserializeObject(content);
+            return jsonObj;
         }
+
+        public static Application FindApplication(string appName)
+        {
+            dynamic apps = Constants.ProgramsList;
+            foreach (dynamic category in apps)
+            {
+                foreach (var app in category.Value)
+                {
+                    if (app.Name.Equals(appName))
+                    {
+                        string appValue = JsonConvert.SerializeObject(app.Value);
+                        Application application = JsonConvert.DeserializeObject<Application>(appValue);
+                        return application;
+                    }
+                }
+            }
+            return null;
+        }
+
+        //static void InstallApplication(string appName)
+        //{
+        //    Application application = FindApplication(appName);
+
+        //    if (application != null)
+        //    {
+        //        Console.WriteLine($"Found application {appName}\nDownloading file {application.FileName}...");
+        //        DownloadFile(application.url, application.FileName);
+        //    }
+        //}
 
         /// <summary>
         /// Get all applications available to install
         /// </summary>
         /// <param name="json">Applications list (json object)</param>
-        static void getApplications(dynamic json)
+        static void GetApplications(dynamic json)
         {
             Console.WriteLine($"List of available applications:\nFormat:\n[Category]      [Application Name]");
             foreach (dynamic category in json)
             {
                 string categoryName = category.Name;
-                foreach (var app in category.Value)
+                foreach (dynamic app in category.Value)
                     Console.WriteLine($"{categoryName}\t\t{app.Value["filename"]}");
             }
         }
@@ -92,58 +201,30 @@ namespace xp_apps.sources
         /// <summary>
         /// Checks if the current Windows version is Windows XP
         /// </summary>
-        public static bool isWindowsXP()
+        public static bool IsWindowsXp()
         {
             OperatingSystem os = Environment.OSVersion;
             Version osv = os.Version;
 
             if (os.Platform == PlatformID.Win32NT)
-            {
-                if (osv.Major == 5 && osv.Minor == 1)
+                if ((osv.Major == 5 && osv.Minor == 1) || (osv.Major == 5 && osv.Minor == 2))
                     return true;
-                if (osv.Major == 5 && osv.Minor == 5)
-                    return true;
-            }
+
             return false;
         }
 
 
 
         // https://learn.microsoft.com/en-us/dotnet/framework/migration-guide/how-to-determine-which-versions-are-installed#query-the-registry-using-code
-        public static bool IsDotNet45orNewer()
+        public static bool IsDotNet45OrNewer()
         {
-            var localkey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32).OpenSubKey(@"SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full\");
+            RegistryKey localkey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32).OpenSubKey(@"SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full\");
 
             if (localkey != null && localkey.GetValue("Release") != null)
                 if ((int)localkey.GetValue("Release") >= 378389)
-                    return false;
+                    return true;
 
-            return true;
-
-            //if (releaseKey >= 533320)
-            //    return "4.8.1 or later";
-            //if (releaseKey >= 528040)
-            //    return "4.8";
-            //if (releaseKey >= 461808)
-            //    return "4.7.2";
-            //if (releaseKey >= 461308)
-            //    return "4.7.1";
-            //if (releaseKey >= 460798)
-            //    return "4.7";
-            //if (releaseKey >= 394802)
-            //    return "4.6.2";
-            //if (releaseKey >= 394254)
-            //    return "4.6.1";
-            //if (releaseKey >= 393295)
-            //    return "4.6";
-            //if (releaseKey >= 379893)
-            //    return "4.5.2";
-            //if (releaseKey >= 378675)
-            //    return "4.5.1";
-            //if (releaseKey >= 378389)
-            //    return "4.5";
-
-            //return "No 4.5 or later version detected";
+            return false;
         }
     }
 }
