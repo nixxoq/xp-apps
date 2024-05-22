@@ -23,18 +23,10 @@ namespace xp_apps
                 Console.WriteLine("This program works only with installed .NET Framework 4.0 and 4.5+\nMake sure you have installed the One-Core-API before installing .NET Framework 4.5+!");
                 return;
             }
-
-            //Functions.DownloadFile("https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/LibreOfficePortable.zip", "Libreoffice.zip");
-            // Functions.FindApplication("app");
-
+            
             // Initializing Security Protocols for HTTPS requests
             ServicePointManager.Expect100Continue = true;
             ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
-
-            foreach (Category browser in Constants.ProgramsList.Browsers)
-            {
-                Console.WriteLine($"{browser.Name} | {browser.Filename}");
-            }
 
             Functions.ParseArgs(args);
         }

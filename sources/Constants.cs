@@ -38,7 +38,7 @@ namespace xp_apps.sources
     public class Applications
     {
         [JsonProperty("browsers")]
-        public List<Category> Browsers { get; set; }
+        public Dictionary<string, List<Category>> Browsers { get; set; }
 
         [JsonProperty("category2")]
         public List<Category> Category2 { get; set; }
