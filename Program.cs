@@ -28,6 +28,14 @@ namespace xp_apps
             ServicePointManager.Expect100Continue = true;
             ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
 
+            // foreach (var browserCategory in Constants.ProgramsList.Browsers)
+            // {
+            //     foreach (var variableBrowserCategoryProgram in browserCategory.Programs)
+            //     {
+            //         Console.WriteLine(variableBrowserCategoryProgram.Value);
+            //     }
+            // }
+            
             Functions.ParseArgs(args);
         }
 

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading;
 using Microsoft.Win32;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace xp_apps.sources
 {
@@ -39,9 +40,7 @@ namespace xp_apps.sources
                             InstallApplication(appName);
                         }
                         else
-                        {
                             Console.WriteLine("Error: Missing application name for install.");
-                        }
                         return;
                     }
                     case "-h":
@@ -134,22 +133,27 @@ namespace xp_apps.sources
             return jsonObj;
         }
 
-        static Category FindApplication(string appName)
+        static JObject FindApplication(string appName)
         {
             Applications apps = Constants.ProgramsList;
 
             // find in Browsers category
-            return apps.Browsers.SelectMany(category => category.Value).FirstOrDefault(app => app.Name.Equals(appName));
+            foreach ((string programName, JObject programDetails) in Constants.GetProgramDetails(apps.Browsers))
+                if (programName.Equals(appName))
+                    return programDetails;
+
+            return null;
+            // return apps.Browsers.SelectMany(category => category.Value).FirstOrDefault(app => app.Name.Equals(appName));
         }
 
         static void InstallApplication(string appName)
         {
-            Category application = FindApplication(appName);
+            JObject application = FindApplication(appName);
 
             if (application == null) return;
 
-            Console.WriteLine($"Found application {appName}\nDownloading file {application.Filename}...");
-            DownloadFile(application.Url, application.Filename);
+            Console.WriteLine($"Found application {appName}\nDownloading file {application.GetValue("filename")}...");
+            DownloadFile(application.GetValue("Url").ToString(), application.GetValue("filename").ToString());
         }
 
         /// <summary>
@@ -158,19 +162,23 @@ namespace xp_apps.sources
         /// <param name="json">Applications list (json object)</param>
         static void GetApplications(Applications json)
         {
-            Console.WriteLine($"List of available applications:\nFormat:\n[Category]\t\t[Application Name]");
+            Console.WriteLine($"List of available applications:\nFormat:\n[Category]\n[Application Name]");
 
             // Get all applications from Browsers category
-            foreach (var browser in json.Browsers)
+            // foreach (var browser in json.Browsers)
+            // {
+            //     string categoryName = browser.Key;
+            //     foreach (Category browserValue in browser.Value)
+            //         Console.WriteLine($"{categoryName}\t\t{browserValue.Name}");
+            // }
+            Console.WriteLine("Browsers:");
+            foreach ((string programName, JObject programDetails) in Constants.GetProgramDetails(json.Browsers))
             {
-                string categoryName = browser.Key;
-                foreach (Category browserValue in browser.Value)
-                    Console.WriteLine($"{categoryName}\t\t{browserValue.Name}");
+                Console.WriteLine($"  {programName}");
             }
-
             // Get all applications from test category
-            foreach (Category tool in json.Category2)
-                Console.WriteLine($"{tool.Name}");
+            // foreach (Category tool in json.Category2)
+            //     Console.WriteLine($"{tool.Name}");
         }
 
         /// <summary>
@@ -198,8 +206,9 @@ namespace xp_apps.sources
         public static bool IsDotNet45OrNewer()
         {
             RegistryKey dotNetKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32).OpenSubKey(@"SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full\");
-            
+
             if (dotNetKey?.GetValue("Release") == null) return false;
+
             return (int)dotNetKey.GetValue("Release") >= 378389;
         }
     }
