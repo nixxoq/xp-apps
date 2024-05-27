@@ -1,18 +1,16 @@
 {
-    "browsers": {
-        "browsers": [
-            {
+    "browsers": [
+        {
+            "aimp": {
                 "filename": "AIMP.zip",
-                "url": "https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/AIMP.zip",
-                "name": "app"
+                "url": "https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/AIMP.zip"
             },
-            {
+            "test": {
                 "filename": "test.zip",
-                "url": "https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/AIMP.zip",
-                "name": "app2"
+                "url": "https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/AIMP.zip"
             }
-        ]
-    },
+        }
+    ],
     "category2": [
         {
             "app3": {
