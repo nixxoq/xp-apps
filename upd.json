@@ -1,21 +1,33 @@
 {
-    "browsers": [
-        {
-            "aimp": {
-                "filename": "AIMP.zip",
-                "url": "https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/AIMP.zip"
+    "browsers": {
+        "browsers": [
+            {
+                "filename": "chromium121_x64.zip",
+                "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/chromium121_x64.zip",
+                "name": "Chromium",
+                "architecture": "x64"
             },
-            "test": {
-                "filename": "test.zip",
-                "url": "https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/AIMP.zip"
+            {
+                "filename": "chromium121_x86.zip",
+                "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/chromium121_x86.zip",
+                "name": "Chromium",
+                "architecture": "x86"
+            },
+            {
+                "filename": "AIMP.zip",
+                "url": "https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/AIMP.zip",
+                "name": "AIMP",
+                "architecture": "any"
             }
-        }
-    ],
+        ]
+    },
     "category2": [
         {
             "app3": {
                 "filename": "AIMP.zip",
-                "url": "https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/AIMP.zip"
+                "url": "https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/AIMP.zip",
+                "name": "AIMP",
+                "architecture": "any"
             }
         }
     ]
