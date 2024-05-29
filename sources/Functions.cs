@@ -1,6 +1,8 @@
 ﻿using System;
-using System.Net;
 using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Net;
 using System.Threading;
 using Microsoft.Win32;
 using Newtonsoft.Json;
@@ -11,18 +13,31 @@ namespace xp_apps.sources
     static class Functions
     {
         static readonly string Help = $"XP-Apps ver {Constants.ProgramVersion}" +
-                                      $"\n\nList of available arguments:\n\n[Option]\t\t\t\t[Description]" +
-                                      $"\n-h, --help\t\t\t\tDisplay this help message" +
-                                      $"\n-i, --install\t\t\t\tInstall Application from XP-Apps repository" +
-                                      $"\n-l, --list, --list-applications,\tList all available applications in the repository \n--list-apps or --apps" +
-                                      $"\n\nExample:\n    xp-apps.exe -i PyCharm2023 or xp-apps.exe --install PyCharm2023";
+                                      "\n\nList of available arguments:\n\n[Option]\t\t\t\t[Description]" +
+                                      "\n-h, --help\t\t\t\tDisplay this help message" +
+                                      "\n-i, --install\t\t\t\tInstall Application from XP-Apps repository" +
+                                      "\n-l, --list, --list-applications,\tList all available applications in the repository \n--list-apps or --apps" +
+                                      "\n\nExample:\n    xp-apps.exe -i PyCharm2023 or xp-apps.exe --install PyCharm2023";
+
+        static string[] GetCommandArgs()
+        {
+            string[] args = Environment.GetCommandLineArgs();
+            return args.Skip(1).ToArray();
+        }
 
         /// <summary>
-        /// Parse arguments from command line
+        ///     Parse arguments from command line
         /// </summary>
-        /// <param name="args">arguments from main function</param>
-        public static void ParseArgs(string[] args)
+        public static void ParseArgs()
         {
+            string[] args = GetCommandArgs();
+
+            if (args.Length == 0)
+            {
+                Console.WriteLine(Help);
+                return;
+            }
+
             for (int i = 0; i < args.Length; i++)
             {
                 string arg = args[i];
@@ -34,9 +49,9 @@ namespace xp_apps.sources
                     {
                         if (i + 1 < args.Length)
                         {
-                            // return;
                             string appName = args[i + 1];
-                            InstallApplication(appName);
+                            bool force = i + 2 < args.Length && args[i + 2].Equals("--force");
+                            InstallApplication(appName, force);
                         }
                         else
                             Console.WriteLine("Error: Missing application name for install.");
@@ -55,26 +70,34 @@ namespace xp_apps.sources
                         return;
                 }
             }
-            Console.WriteLine(Help);
         }
 
         /// <summary>
-        /// Get content from URL
+        ///     Get content from URL
         /// </summary>
         /// <param name="url">URL link</param>
         /// <returns>URL content</returns>
         static string GetContent(string url)
         {
-            using (WebClient client = new WebClient())
+            using (WebClient client = GetClient())
+            {
                 return client.DownloadString(url);
+            }
         }
+
+        static WebClient GetClient()
+        {
+            WebClient client = new WebClient();
+            return client;
+        }
+
 
         static void DownloadFile(string url, string filename)
         {
 
             using (WebClient client = new WebClient())
             {
-                char[] animationChars = new char[] { '/', '-', '\\', '|' };
+                char[] animationChars = { '/', '-', '\\', '|' };
                 int animationIndex = 0;
                 Stopwatch stopwatch = new Stopwatch();
 
@@ -89,7 +112,7 @@ namespace xp_apps.sources
 
                     Console.Write(
                         $"\r{animationChar} " + string.Format(
-                            "Downloading {0} | {1}% completed | {2:0.00} MB/s | {3:hh\\:mm\\:ss} remaining",
+                            @"Downloading {0} | {1}% completed | {2:0.00} MB/s | {3:hh\:mm\:ss} remaining",
                             filename, e.ProgressPercentage, speed / 1024d,
                             remainingTime
                         )
@@ -97,15 +120,12 @@ namespace xp_apps.sources
                 };
 
                 client.DownloadFileCompleted += (sender, e) =>
-                {
                     Console.WriteLine(e.Error != null ? $"\nError: {e.Error.Message}" : $"\n{filename} download completed.");
-                };
 
                 stopwatch.Start();
                 client.DownloadFileAsync(new Uri(url), filename);
 
-                while (client.IsBusy)
-                    Thread.Sleep(100);
+                while (client.IsBusy) Thread.Sleep(100);
 
                 stopwatch.Stop();
             }
@@ -118,18 +138,8 @@ namespace xp_apps.sources
 
             string jsonContent = GetContent(Constants.UpdateJson);
 
-            var applications = JsonConvert.DeserializeObject<Applications>(jsonContent);
+            Applications applications = JsonConvert.DeserializeObject<Applications>(jsonContent);
             return applications;
-        }
-
-        /// <summary>
-        /// Parse string to dynamic object
-        /// </summary>
-        /// <param name="content">String to parse</param>
-        public static object ParseJson(string content)
-        {
-            object jsonObj = JsonConvert.DeserializeObject(content);
-            return jsonObj;
         }
 
         static JObject FindApplication(string appName)
@@ -138,50 +148,64 @@ namespace xp_apps.sources
 
             // find in Browsers category
             foreach ((string programName, JObject programDetails) in Constants.GetProgramDetails(apps.Browsers))
-                if (programName.Equals(appName))
+            {
+                string architecture = programDetails.GetValue("architecture").ToString();
+                if (programName.Equals(appName) ||
+                    (architecture.Equals("any") || architecture.Equals(Constants.OsArchitecture)) && programName.StartsWith(appName))
+                {
                     return programDetails;
-
+                }
+            }
             return null;
-            // return apps.Browsers.SelectMany(category => category.Value).FirstOrDefault(app => app.Name.Equals(appName));
         }
 
-        static void InstallApplication(string appName)
+        static void InstallApplication(string appName, bool isForce)
         {
             JObject application = FindApplication(appName);
-
             if (application == null) return;
 
-            Console.WriteLine($"Found application {appName}\nDownloading file {application.GetValue("filename")}...");
-            DownloadFile(application.GetValue("Url").ToString(), application.GetValue("filename").ToString());
+            string filename = application.GetValue("filename").ToString();
+            string url = application.GetValue("url").ToString();
+
+            Console.WriteLine($"Found application {appName}");
+
+            WebClient client = GetClient();
+            client.OpenRead(url);
+            long filesize = Convert.ToInt64(client.ResponseHeaders.Get("Content-Length"));
+
+            if (File.Exists(filename))
+            {
+                if (isForce)
+                    File.Delete(filename);
+            }
+
+            // check if downloaded file is not corrupted
+            if (File.Exists(filename) && new FileInfo(filename).Length == filesize)
+            {
+                Console.WriteLine($"File already exists and is not corrupted. Skipping download.\nIf you want force download, use 'xp-apps.exe -i {appName} --force'");
+                return;
+            }
+
+            Console.WriteLine($"Downloading file {filename}...");
+            DownloadFile(url, filename);
         }
 
         /// <summary>
-        /// Get all applications available to install
+        ///     Get all applications available to install
         /// </summary>
         /// <param name="json">Applications list (json object)</param>
         static void GetApplications(Applications json)
         {
-            Console.WriteLine($"List of available applications:\nFormat:\n[Category]\n[Application Name]");
+            Console.WriteLine("List of available applications:\nFormat:\n[Category]\n  [Application Name]\n");
 
             // Get all applications from Browsers category
-            // foreach (var browser in json.Browsers)
-            // {
-            //     string categoryName = browser.Key;
-            //     foreach (Category browserValue in browser.Value)
-            //         Console.WriteLine($"{categoryName}\t\t{browserValue.Name}");
-            // }
             Console.WriteLine("Browsers:");
             foreach ((string programName, JObject programDetails) in Constants.GetProgramDetails(json.Browsers))
-            {
-                Console.WriteLine($"  {programName}");
-            }
-            // Get all applications from test category
-            // foreach (Category tool in json.Category2)
-            //     Console.WriteLine($"{tool.Name}");
+                Console.WriteLine($"  {programName} | aliases: {string.Join(", ", programDetails.GetValue("aliases").ToObject<string[]>())}");
         }
 
         /// <summary>
-        /// Checks if the current Windows version is Windows XP
+        ///     Checks if the current Windows version is Windows XP
         /// </summary>
         public static bool IsWindowsXp()
         {
