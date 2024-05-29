@@ -1,7 +1,7 @@
 {
     "browsers": [
         {
-            "chromium121": {
+            "chromium121x64": {
                 "filename": "chromium121_x64.zip",
                 "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/chromium121_x64.zip",
                 "name": "Chromium",
