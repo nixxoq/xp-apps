@@ -161,26 +161,35 @@ namespace xp_apps.sources
             Applications apps = Constants.ProgramsList;
 
             // find in Browsers category
+#if DEBUG
+            Console.WriteLine($"[DEBUG] Searching {appName} in Browsers category...");
+#endif
+
             foreach ((string programName, JObject programDetails) in Constants.GetProgramDetails(apps.Browsers))
             {
                 string architecture = programDetails.GetValue("architecture").ToString();
 
-                if (programName.Equals(appName) && architecture.Equals("any") || architecture.Equals(Constants.OsArchitecture))
+#if DEBUG
+                Console.WriteLine($"programName: {programName}, architecture: {architecture}, appName: {appName}");
+#endif
+
+                if (programName.Equals(appName) && (architecture.Equals("any") || architecture.Equals(Constants.OsArchitecture)))
                     return programDetails;
 
                 // search by aliases
-                if (!programDetails.GetValue("aliases")
-                        .ToObject<string[]>()
-                        .Any(
-                            alias =>
-                                alias.Equals(appName) &&
-                                architecture.Equals("any") || architecture.Equals(Constants.OsArchitecture)
-                        ))
-                    continue;
-
-                return programDetails;
+                if (programDetails.GetValue("aliases")
+                    .ToObject<string[]>()
+                    .Any(
+                        alias =>
+                            alias.Equals(appName) &&
+                            (architecture.Equals("any") || architecture.Equals(Constants.OsArchitecture))
+                    ))
+                    return programDetails;
             }
 
+#if DEBUG
+            Console.WriteLine($"[DEBUG] Searching {appName} in vista_apps category...");
+#endif
             // find in Vista native applications category
             foreach ((string programName, JObject programDetails) in Constants.GetProgramDetails(apps.VistaApplications))
             {
@@ -190,16 +199,20 @@ namespace xp_apps.sources
                     return programDetails;
 
                 // search by aliases
-                if (!programDetails.GetValue("aliases")
-                        .ToObject<string[]>()
-                        .Any(
-                            alias =>
-                                alias.Equals(appName) &&
-                                architecture.Equals("any") || architecture.Equals(Constants.OsArchitecture)
-                        ))
-                    continue;
+                if (programDetails.GetValue("aliases")
+                    .ToObject<string[]>()
+                    .Any(
+                        alias =>
+                            alias.Equals(appName) &&
+                            architecture.Equals("any") || architecture.Equals(Constants.OsArchitecture)
+                    ))
+                {
+#if DEBUG
+                    Console.WriteLine($"[DEBUG] Found application {appName} by aliases | program details: {programDetails}");
+#endif
+                    return programDetails;
 
-                return programDetails;
+                }
             }
             return null;
         }
