@@ -6,7 +6,7 @@ namespace xp_apps
 {
     static class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             // Checks if current operating system is Windows XP (NT 5.1 & NT 5.2)
             // However, I am thinking about adding support for Windows Vista when the One-Core-API 4.1.0 will be released 👀

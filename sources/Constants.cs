@@ -9,9 +9,9 @@ namespace xp_apps.sources
     public static class Constants
     {
         // Major.Minor.Patch.Revision
-        public const string ProgramVersion = "0.1.1.0";
+        public const string ProgramVersion = "0.1.2.0";
 
-        public const string UpdateJson = "https://raw.githubusercontent.com/Snaky1a/xp-apps/development/upd.json";
+        public const string ApplicationsList = "https://raw.githubusercontent.com/Snaky1a/xp-apps/development/upd.json";
 
         public static readonly Applications ProgramsList = Functions.GetUpdates();
 
@@ -32,8 +32,8 @@ namespace xp_apps.sources
         [JsonProperty("browsers")]
         public List<ProgramContainer> Browsers { get; set; }
 
-        [JsonProperty("text")]
-        public List<ProgramContainer> Text { get; set; }
+        [JsonProperty("vista_apps")]
+        public List<ProgramContainer> VistaApplications { get; set; }
     }
 
     public abstract class BaseProgramContainer

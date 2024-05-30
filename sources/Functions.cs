@@ -91,7 +91,12 @@ namespace xp_apps.sources
             return client;
         }
 
-
+        /// <summary>
+        /// Downloads a file from the specified URL and saves it with the given filename.
+        /// Displays a progress animation in the console while downloading.
+        /// </summary>
+        /// <param name="url">The URL of the file to download.</param>
+        /// <param name="filename">The name of the file to save the downloaded content to.</param>
         static void DownloadFile(string url, string filename)
         {
 
@@ -131,17 +136,26 @@ namespace xp_apps.sources
             }
         }
 
+        /// <summary>
+        /// Retrieves the updates from the server and deserializes them into an Applications object.
+        /// </summary>
+        /// <returns>The deserialized Applications object containing the updates.</returns>
         public static Applications GetUpdates()
         {
             ServicePointManager.Expect100Continue = true;
             ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
 
-            string jsonContent = GetContent(Constants.UpdateJson);
+            string jsonContent = GetContent(Constants.ApplicationsList);
 
             Applications applications = JsonConvert.DeserializeObject<Applications>(jsonContent);
             return applications;
         }
 
+        /// <summary>
+        /// Finds the application details based on the provided application name.
+        /// </summary>
+        /// <param name="appName">The name of the application to find.</param>
+        /// <returns>The details of the application if found, otherwise null.</returns>
         static JObject FindApplication(string appName)
         {
             Applications apps = Constants.ProgramsList;
@@ -150,15 +164,52 @@ namespace xp_apps.sources
             foreach ((string programName, JObject programDetails) in Constants.GetProgramDetails(apps.Browsers))
             {
                 string architecture = programDetails.GetValue("architecture").ToString();
-                if (programName.Equals(appName) ||
-                    (architecture.Equals("any") || architecture.Equals(Constants.OsArchitecture)) && programName.StartsWith(appName))
-                {
+
+                if (programName.Equals(appName) && architecture.Equals("any") || architecture.Equals(Constants.OsArchitecture))
                     return programDetails;
-                }
+
+                // search by aliases
+                if (!programDetails.GetValue("aliases")
+                        .ToObject<string[]>()
+                        .Any(
+                            alias =>
+                                alias.Equals(appName) &&
+                                architecture.Equals("any") || architecture.Equals(Constants.OsArchitecture)
+                        ))
+                    continue;
+
+                return programDetails;
+            }
+
+            // find in Vista native applications category
+            foreach ((string programName, JObject programDetails) in Constants.GetProgramDetails(apps.VistaApplications))
+            {
+                string architecture = programDetails.GetValue("architecture").ToString();
+
+                if (programName.Equals(appName) && architecture.Equals("any") || architecture.Equals(Constants.OsArchitecture))
+                    return programDetails;
+
+                // search by aliases
+                if (!programDetails.GetValue("aliases")
+                        .ToObject<string[]>()
+                        .Any(
+                            alias =>
+                                alias.Equals(appName) &&
+                                architecture.Equals("any") || architecture.Equals(Constants.OsArchitecture)
+                        ))
+                    continue;
+
+                return programDetails;
             }
             return null;
         }
 
+        /// <summary>
+        /// Downloads a file from the specified URL and saves it with the given filename.
+        /// Displays a progress animation in the console while downloading.
+        /// </summary>
+        /// <param name="appName">Application name to install</param>
+        /// <param name="isForce">Force download if file already exists</param>
         static void InstallApplication(string appName, bool isForce)
         {
             JObject application = FindApplication(appName);
@@ -201,6 +252,11 @@ namespace xp_apps.sources
             // Get all applications from Browsers category
             Console.WriteLine("Browsers:");
             foreach ((string programName, JObject programDetails) in Constants.GetProgramDetails(json.Browsers))
+                Console.WriteLine($"  {programName} | aliases: {string.Join(", ", programDetails.GetValue("aliases").ToObject<string[]>())}");
+
+            // Get all applications from Vista native applications category
+            Console.WriteLine("Vista native applications:");
+            foreach ((string programName, JObject programDetails) in Constants.GetProgramDetails(json.VistaApplications))
                 Console.WriteLine($"  {programName} | aliases: {string.Join(", ", programDetails.GetValue("aliases").ToObject<string[]>())}");
         }
 
