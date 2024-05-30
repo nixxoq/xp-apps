@@ -9,7 +9,7 @@ namespace xp_apps.sources
     public static class Constants
     {
         // Major.Minor.Patch.Revision
-        public const string ProgramVersion = "0.1.2.0";
+        public const string ProgramVersion = "0.1.2.1";
 
         public const string ApplicationsList = "https://raw.githubusercontent.com/Snaky1a/xp-apps/development/upd.json";
 
