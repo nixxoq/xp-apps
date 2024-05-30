@@ -17,12 +17,20 @@
             }
         }
     ],
-    "category2": [
+    "vista_apps": [
         {
-            "app3": {
-                "filename": "AIMP.zip",
-                "url": "https://github.com/Snaky1a/xp-apps/releases/download/2023_10_11_17_52/AIMP.zip",
-                "name": "AIMP",
+            "games": {
+                "aliases": ["vista games", "windows vista games", "ms games"],
+                "filename": "Microsoft.Games.Windows.Vista.zip",
+                "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/Microsoft.Games.Windows.Vista.zip",
+                "name": "Games from Windows Vista (from 5259 and 5270 builds)",
+                "architecture": "any"
+            },
+            "moviemaker": {
+                "aliases": ["vista moviemaker", "windows vista moviemaker"],
+                "filename": "Windows.MovieMaker.Vista.zip",
+                "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/Windows.MovieMaker.zip",
+                "name": "Movie Maker from Windows Vista (from beta 5270)",
                 "architecture": "any"
             }
         }
