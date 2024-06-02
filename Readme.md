@@ -2,7 +2,7 @@
 
 > [!IMPORTANT]  
 > This is the development build of xp-apps. 
-> If you want to download the development build, go to the [actions](https://github.com/nixxoq/xp-apps/actions/runs)
+> If you want to download the development build, go to the [actions](https://github.com/nixxoq/xp-apps/actions)
 >
 > Otherwise, go to [main](https://github.com/nixxoq/xp-apps/tree/main) branch to view the old README and other files
 
