@@ -20,14 +20,14 @@
                 "filename": "catsxp.chrome.117.zip",
                 "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/catsxp.chrome.117.zip",
                 "name": "CatsXP (117)",
-                "architecture": "x86"
+                "architecture": "any"
             },
             "catsxp.118": {
                 "aliases": ["catsxp118", "catsxp.v118", "catsxp_v118"],
                 "filename": "catsxp.chrome.117.zip",
                 "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/catsxp.chrome.117.zip",
                 "name": "CatsXP (118)",
-                "architecture": "x86"
+                "architecture": "any"
             },
             "brave": {
                 "aliases": ["brave.101", "bravebrowser"],

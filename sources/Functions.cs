@@ -164,7 +164,7 @@ namespace xp_apps.sources
             foreach ((string programName, JObject programDetails) in Constants.GetProgramDetails(apps.Browsers))
             {
                 string architecture = programDetails.GetValue("architecture").ToString();
-
+                
                 if (programName.Equals(appName, StringComparison.OrdinalIgnoreCase) &&
                     (architecture.Equals("any", StringComparison.OrdinalIgnoreCase) ||
                      architecture.Equals(Constants.OsArchitecture, StringComparison.OrdinalIgnoreCase))
