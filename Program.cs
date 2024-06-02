@@ -11,7 +11,6 @@ namespace xp_apps
 #if DEBUG
             Console.WriteLine($"[DEBUG] Current architecture: {Constants.OsArchitecture} | Current OS: {Environment.OSVersion}");
 #endif
-
             // Checks if current operating system is Windows XP (NT 5.1 & NT 5.2)
             // However, I am thinking about adding support for Windows Vista when the One-Core-API 4.1.0 will be released 👀
             // if (!Functions.IsWindowsXp())

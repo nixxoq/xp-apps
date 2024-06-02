@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Threading;
 using Microsoft.Win32;
 using Newtonsoft.Json;
@@ -73,32 +74,19 @@ namespace xp_apps.sources
             }
         }
 
-        /// <summary>
-        ///     Get content from URL
-        /// </summary>
-        /// <param name="url">URL link</param>
-        /// <returns>URL content</returns>
-        static string GetContent(string url)
-        {
-            using (WebClient client = GetClient())
-            {
-                return client.DownloadString(url);
-            }
-        }
-
-        static WebClient GetClient()
+        public static WebClient GetClient()
         {
             WebClient client = new WebClient();
             return client;
         }
 
         /// <summary>
-        /// Downloads a file from the specified URL and saves it with the given filename.
-        /// Displays a progress animation in the console while downloading.
+        ///     Downloads a file from the specified URL and saves it with the given filename.
+        ///     Displays a progress animation in the console while downloading.
         /// </summary>
         /// <param name="url">The URL of the file to download.</param>
         /// <param name="filename">The name of the file to save the downloaded content to.</param>
-        static void DownloadFile(string url, string filename)
+        public static void DownloadFile(string url, string filename)
         {
 
             using (WebClient client = new WebClient())
@@ -126,8 +114,11 @@ namespace xp_apps.sources
                 };
 
                 client.DownloadFileCompleted += (sender, e) =>
-                    Console.WriteLine(e.Error != null ? $"\nError: {e.Error.Message}" : $"\n{filename} download completed.");
+                {
+                    Thread.Sleep(1000);
+                    Console.WriteLine(e.Error != null ? $"\nError: {e.Error.Message}" : $"\n{filename} download completed.\n");
 
+                };
                 stopwatch.Start();
                 client.DownloadFileAsync(new Uri(url), filename);
 
@@ -138,22 +129,38 @@ namespace xp_apps.sources
         }
 
         /// <summary>
-        /// Retrieves the updates from the server and deserializes them into an Applications object.
+        ///     Retrieves the updates from the server and deserializes them into an Applications object.
         /// </summary>
         /// <returns>The deserialized Applications object containing the updates.</returns>
         public static Applications GetUpdates()
         {
+            Ping ping = new Ping();
+            PingReply reply = ping.Send("www.google.com", 5000);
+
+            if (reply == null || reply.Status != IPStatus.Success)
+            {
+                if (!Cache.IsAppsListExist())
+                {
+                    Console.WriteLine("No internet connection. Please check your internet connection and try again.");
+                    Environment.Exit(0);
+                }
+                else
+                {
+                    Console.WriteLine("No internet connection. Using cached application list.");
+                    return JsonConvert.DeserializeObject<Applications>(File.ReadAllText(Cache.ApplicationsListPath));
+                }
+            }
+
             ServicePointManager.Expect100Continue = true;
             ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
 
-            string jsonContent = GetContent(Constants.ApplicationsList);
-
-            Applications applications = JsonConvert.DeserializeObject<Applications>(jsonContent);
-            return applications;
+            string jsonContent = Cache.IsNeedUpdate() ? Cache.UpdateApplicationList(true) : File.ReadAllText(Cache.ApplicationsListPath);
+            return JsonConvert.DeserializeObject<Applications>(jsonContent);
         }
 
+
         /// <summary>
-        /// Finds the application details based on the provided application name.
+        ///     Finds the application details based on the provided application name.
         /// </summary>
         /// <param name="appName">The name of the application to find.</param>
         /// <returns>The details of the application if found, otherwise null.</returns>
@@ -161,10 +168,14 @@ namespace xp_apps.sources
         {
             Applications apps = Constants.ProgramsList;
 
+#if DEBUG
+            Console.WriteLine($"[DEBUG] Searching {appName} in Browsers category...");
+#endif
+
             foreach ((string programName, JObject programDetails) in Constants.GetProgramDetails(apps.Browsers))
             {
                 string architecture = programDetails.GetValue("architecture").ToString();
-                
+
                 if (programName.Equals(appName, StringComparison.OrdinalIgnoreCase) &&
                     (architecture.Equals("any", StringComparison.OrdinalIgnoreCase) ||
                      architecture.Equals(Constants.OsArchitecture, StringComparison.OrdinalIgnoreCase))
@@ -183,6 +194,10 @@ namespace xp_apps.sources
                     ))
                     return programDetails;
             }
+
+#if DEBUG
+            Console.WriteLine($"[DEBUG] Searching {appName} in Vista native applications category...");
+#endif
 
             foreach ((string programName, JObject programDetails) in Constants.GetProgramDetails(apps.VistaApplications))
             {
@@ -204,8 +219,8 @@ namespace xp_apps.sources
         }
 
         /// <summary>
-        /// Downloads a file from the specified URL and saves it with the given filename.
-        /// Displays a progress animation in the console while downloading.
+        ///     Downloads a file from the specified URL and saves it with the given filename.
+        ///     Displays a progress animation in the console while downloading.
         /// </summary>
         /// <param name="appName">Application name to install</param>
         /// <param name="isForce">Force download if file already exists</param>
@@ -250,7 +265,7 @@ namespace xp_apps.sources
         }
 
         /// <summary>
-        /// Finds the similar applications based on the provided application name.
+        ///     Finds the similar applications based on the provided application name.
         /// </summary>
         /// <param name="appName">The name of the application to find.</param>
         /// <returns>The list of similar applications if found, otherwise null.</returns>
@@ -290,14 +305,14 @@ namespace xp_apps.sources
         }
 
         /// <summary>
-        /// Calculates the Levenshtein distance between two strings.
+        ///     Calculates the Levenshtein distance between two strings.
         /// </summary>
         static int LevenshteinDistance(string s, string t)
         {
             // If one of the strings is empty or null, return the length of the other string as Levenshtein distance.
             if (string.IsNullOrEmpty(s)) return t?.Length ?? 0;
             if (string.IsNullOrEmpty(t)) return s.Length;
-            
+
             int n = s.Length, m = t.Length;
 
             // Create a two-dimensional array d with size (n+1) x (m+1), where d[i, j] represents the Levenshtein distance between
@@ -315,7 +330,7 @@ namespace xp_apps.sources
                     Math.Min(d[i - 1, j] + 1, d[i, j - 1] + 1),
                     d[i - 1, j - 1] + (s[i - 1] == t[j - 1] ? 0 : 1)
                 );
-            
+
             return d[n, m];
         }
 
