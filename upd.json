@@ -1,19 +1,75 @@
 {
     "browsers": [
         {
-            "chromium121x64": {
+            "chromium121.x64": {
                 "aliases": ["chromium121", "chromium"],
                 "filename": "chromium121_x64.zip",
                 "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/chromium121_x64.zip",
                 "name": "Chromium",
                 "architecture": "x64"
             },
-            "chromium121x86": {
+            "chromium121.x86": {
                 "aliases": ["chromium121", "chromium"],
                 "filename": "chromium121_x86.zip",
                 "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/chromium121_x86.zip",
                 "name": "Chromium",
                 "architecture": "x86"
+            },
+            "catsxp.117": {
+                "aliases": ["catsxp117", "catsxp.v117", "catsxp_v117"],
+                "filename": "catsxp.chrome.117.zip",
+                "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/catsxp.chrome.117.zip",
+                "name": "CatsXP (117)",
+                "architecture": "x86"
+            },
+            "catsxp.118": {
+                "aliases": ["catsxp118", "catsxp.v118", "catsxp_v118"],
+                "filename": "catsxp.chrome.117.zip",
+                "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/catsxp.chrome.117.zip",
+                "name": "CatsXP (118)",
+                "architecture": "x86"
+            },
+            "brave": {
+                "aliases": ["brave.101", "bravebrowser"],
+                "filename": "brave.zip",
+                "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/brave.101.zip",
+                "name": "Brave (101)",
+                "architecture": "any"
+            },
+            "microsoft.edge": {
+                "aliases": ["microsoft edge", "msedge", "edge", "microsoftedge"],
+                "filename": "Microsoft.Edge.109.zip",
+                "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/Microsoft.Edge.109.zip",
+                "name": "Microsoft Edge (109)",
+                "architecture": "any"
+            },
+            "opera": {
+                "aliases": ["opera", "opera.95", "opera95", "opera 95"],
+                "filename": "Opera95.zip",
+                "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/Opera95.zip",
+                "name": "Opera (95)",
+                "architecture": "any"
+            },
+            "epic.privacy.browser": {
+                "aliases": ["epic privacy browser", "epic privacy browser 104"],
+                "filename": "Epic.Browser.104.zip",
+                "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/Epic.Browser.104.zip",
+                "name": "Epic Privacy Browser (104)",
+                "architecture": "any"
+            },
+            "firefox": {
+                "aliases": ["firefox", "firefox.79", "firefox79", "mozilla.firefox"],
+                "filename": "Firefox.79.zip",
+                "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/Firefox.79.zip",
+                "name": "Firefox (79)",
+                "architecture": "any"
+            },
+            "internet.download.manager": {
+                "aliases": ["internet download manager", "idm", "internetdownloadmanager"],
+                "filename": "Internet.Download.Manager.6.40.build.11.zip",
+                "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/Internet.Download.Manager.6.40.build.11.zip",
+                "name": "Internet Download Manager (6.40 build 11)",
+                "architecture": "any"
             }
         }
     ],
@@ -29,7 +85,7 @@
             "moviemaker": {
                 "aliases": ["vista_moviemaker", "windows_vista_moviemaker", "vista moviemaker", "windows vista moviemaker"],
                 "filename": "Windows.MovieMaker.Vista.zip",
-                "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/Windows.MovieMaker.zip",
+                "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/Windows.Movie.Maker.zip",
                 "name": "Movie Maker from Windows Vista (from beta 5270)",
                 "architecture": "any"
             }

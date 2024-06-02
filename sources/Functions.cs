@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -160,59 +161,44 @@ namespace xp_apps.sources
         {
             Applications apps = Constants.ProgramsList;
 
-            // find in Browsers category
-#if DEBUG
-            Console.WriteLine($"[DEBUG] Searching {appName} in Browsers category...");
-#endif
-
             foreach ((string programName, JObject programDetails) in Constants.GetProgramDetails(apps.Browsers))
             {
                 string architecture = programDetails.GetValue("architecture").ToString();
 
-#if DEBUG
-                Console.WriteLine($"programName: {programName}, architecture: {architecture}, appName: {appName}");
-#endif
-
-                if (programName.Equals(appName) && (architecture.Equals("any") || architecture.Equals(Constants.OsArchitecture)))
+                if (programName.Equals(appName, StringComparison.OrdinalIgnoreCase) &&
+                    (architecture.Equals("any", StringComparison.OrdinalIgnoreCase) ||
+                     architecture.Equals(Constants.OsArchitecture, StringComparison.OrdinalIgnoreCase))
+                   )
                     return programDetails;
 
-                // search by aliases
                 if (programDetails.GetValue("aliases")
                     .ToObject<string[]>()
                     .Any(
                         alias =>
-                            alias.Equals(appName) &&
-                            (architecture.Equals("any") || architecture.Equals(Constants.OsArchitecture))
+                            alias.Equals(appName, StringComparison.OrdinalIgnoreCase)
+                            && (architecture.Equals(
+                                    "any", StringComparison.OrdinalIgnoreCase
+                                ) ||
+                                architecture.Equals(Constants.OsArchitecture, StringComparison.OrdinalIgnoreCase))
                     ))
                     return programDetails;
             }
 
-#if DEBUG
-            Console.WriteLine($"[DEBUG] Searching {appName} in vista_apps category...");
-#endif
-            // find in Vista native applications category
             foreach ((string programName, JObject programDetails) in Constants.GetProgramDetails(apps.VistaApplications))
             {
                 string architecture = programDetails.GetValue("architecture").ToString();
 
-                if (programName.Equals(appName) && architecture.Equals("any") || architecture.Equals(Constants.OsArchitecture))
+                if (programName.Equals(appName, StringComparison.OrdinalIgnoreCase) &&
+                    (architecture.Equals("any", StringComparison.OrdinalIgnoreCase) ||
+                     architecture.Equals(Constants.OsArchitecture, StringComparison.OrdinalIgnoreCase)))
                     return programDetails;
 
-                // search by aliases
-                if (programDetails.GetValue("aliases")
-                    .ToObject<string[]>()
-                    .Any(
-                        alias =>
-                            alias.Equals(appName) &&
-                            architecture.Equals("any") || architecture.Equals(Constants.OsArchitecture)
+                if (programDetails.GetValue("aliases").ToObject<string[]>().Any(
+                        alias => alias.Equals(appName, StringComparison.OrdinalIgnoreCase) &&
+                                 (architecture.Equals("any", StringComparison.OrdinalIgnoreCase) ||
+                                  architecture.Equals(Constants.OsArchitecture, StringComparison.OrdinalIgnoreCase))
                     ))
-                {
-#if DEBUG
-                    Console.WriteLine($"[DEBUG] Found application {appName} by aliases | program details: {programDetails}");
-#endif
                     return programDetails;
-
-                }
             }
             return null;
         }
@@ -226,7 +212,16 @@ namespace xp_apps.sources
         static void InstallApplication(string appName, bool isForce)
         {
             JObject application = FindApplication(appName);
-            if (application == null) return;
+            if (application == null)
+            {
+                Console.Write($"Could not find application {appName}.");
+
+                // check if similar applications exist
+                var similarApps = FindSimilarApplications(appName);
+                if (similarApps.Any()) Console.WriteLine($" Did you mean: {string.Join(", ", similarApps.Distinct())}?");
+
+                return;
+            }
 
             string filename = application.GetValue("filename").ToString();
             string url = application.GetValue("url").ToString();
@@ -237,21 +232,91 @@ namespace xp_apps.sources
             client.OpenRead(url);
             long filesize = Convert.ToInt64(client.ResponseHeaders.Get("Content-Length"));
 
-            if (File.Exists(filename))
-            {
-                if (isForce)
-                    File.Delete(filename);
-            }
+            if (File.Exists(filename) && isForce) File.Delete(filename);
+
 
             // check if downloaded file is not corrupted
             if (File.Exists(filename) && new FileInfo(filename).Length == filesize)
             {
-                Console.WriteLine($"File already exists and is not corrupted. Skipping download.\nIf you want force download, use 'xp-apps.exe -i {appName} --force'");
+                Console.WriteLine(
+                    "File already exists and is not corrupted. Skipping download." +
+                    $"\nIf you want force download, use 'xp-apps.exe -i {appName} --force'"
+                );
                 return;
             }
 
             Console.WriteLine($"Downloading file {filename}...");
             DownloadFile(url, filename);
+        }
+
+        /// <summary>
+        /// Finds the similar applications based on the provided application name.
+        /// </summary>
+        /// <param name="appName">The name of the application to find.</param>
+        /// <returns>The list of similar applications if found, otherwise null.</returns>
+        static List<string> FindSimilarApplications(string appName)
+        {
+            Applications apps = Constants.ProgramsList;
+            var allApps = new List<string>();
+
+            foreach ((string programName, JObject programDetails) in Constants.GetProgramDetails(apps.Browsers))
+            {
+                allApps.Add(programName);
+                allApps.AddRange(programDetails.GetValue("aliases").ToObject<string[]>());
+            }
+
+            foreach ((string programName, JObject programDetails) in Constants.GetProgramDetails(apps.VistaApplications))
+            {
+                allApps.Add(programName);
+                allApps.AddRange(programDetails.GetValue("aliases").ToObject<string[]>());
+            }
+
+            int threshold = Math.Max(appName.Length / 2, 2);
+
+            var potentialMatches =
+            (
+                from name in allApps
+                let distance = LevenshteinDistance(appName, name)
+                where distance <= threshold || name.IndexOf(appName, StringComparison.OrdinalIgnoreCase) >= 0
+                select name
+            ).ToList();
+
+            return potentialMatches
+                .Distinct()
+                .OrderBy(x => LevenshteinDistance(appName, x))
+                .ThenBy(x => x)
+                .Take(5)
+                .ToList();
+        }
+
+        /// <summary>
+        /// Calculates the Levenshtein distance between two strings.
+        /// </summary>
+        static int LevenshteinDistance(string s, string t)
+        {
+            // If one of the strings is empty or null, return the length of the other string as Levenshtein distance.
+            if (string.IsNullOrEmpty(s)) return t?.Length ?? 0;
+            if (string.IsNullOrEmpty(t)) return s.Length;
+            
+            int n = s.Length, m = t.Length;
+
+            // Create a two-dimensional array d with size (n+1) x (m+1), where d[i, j] represents the Levenshtein distance between
+            // the first i characters of string s and the first j characters of string t.
+            int[,] d = new int[n + 1, m + 1];
+
+            // Fill the first row and the first column of the array d with values from 0 to the lengths of strings s and t respectively.
+            for (int i = 0; i <= n; i++) d[i, 0] = i;
+            for (int j = 0; j <= m; j++) d[0, j] = j;
+
+            // Iterate through the remaining elements of array d and compute the Levenshtein distance between all prefixes of strings s and t.
+            for (int i = 1; i <= n; i++)
+            for (int j = 1; j <= m; j++)
+                d[i, j] = Math.Min(
+                    Math.Min(d[i - 1, j] + 1, d[i, j - 1] + 1),
+                    d[i - 1, j - 1] + (s[i - 1] == t[j - 1] ? 0 : 1)
+                );
+            
+            return d[n, m];
         }
 
         /// <summary>
