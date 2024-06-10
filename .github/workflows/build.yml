@@ -96,7 +96,7 @@ jobs:
       run: nuget restore
     
     - name: Build Release (any cpu)
-      run: msbuild /t:Build /p:Configuration=Release /p:Platform=AnyCPU
+      run: msbuild /t:Build /p:Configuration=Release /p:Platform="Any CPU"
     
     - name: Publish Release any cpu artifacts
       uses: actions/upload-artifact@v4
