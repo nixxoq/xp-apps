@@ -9,9 +9,20 @@ namespace xp_apps.sources
     public static class Constants
     {
         // Major.Minor.Patch.Revision
-        public const string ProgramVersion = "0.1.3.5";
+        public const string ProgramVersion = "0.1.4.0";
 
-        public const string ApplicationsList = "https://raw.githubusercontent.com/Snaky1a/xp-apps/development/upd.json";
+        public const string ApplicationsList = "https://raw.githubusercontent.com/nixxoq/xp-apps/development/upd.json";
+
+        public const string LatestReleaseVersion = "https://raw.githubusercontent.com/nixxoq/xp-apps/LATEST_RELEASE";
+
+        public const string LatestReleaseZip = "https://github.com/nixxoq/xp-apps/releases/latest/download/xp-apps.zip";
+
+        // Cache & Settings
+        public const string ApplicationsListName = "upd.json";
+
+        public const string SettingsFileName = "settings.json";
+
+        public const string CacheFolder = "cache";
 
         public static readonly Applications ProgramsList = Functions.GetUpdates();
 

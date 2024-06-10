@@ -1,36 +1,37 @@
 ﻿using System;
 using System.IO;
 using System.Net;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace xp_apps.sources
 {
-    public class Cache
+    public abstract class Cache
     {
-        const string ApplicationsListName = "upd.json";
 
-        const string CacheFolder = "cache";
+        static readonly bool IsSettingsExist = File.Exists(SettingsPath);
 
-        public static string ApplicationsListPath => Path.Combine(CacheFolder, ApplicationsListName);
+        public static string ApplicationsListPath => Path.Combine(Constants.CacheFolder, Constants.ApplicationsListName);
 
-        static bool CreateApplicationFolder(string folderPath = CacheFolder)
+        // Settings
+        static string SettingsPath => Path.Combine(Constants.CacheFolder, Constants.SettingsFileName);
+
+        static void CreateApplicationFolder(string folderPath = Constants.CacheFolder)
         {
             if (Directory.Exists(folderPath))
-                return true;
+                return;
 
             try
             {
                 Directory.CreateDirectory(folderPath);
-                return true;
             }
             catch (UnauthorizedAccessException)
             {
                 Console.WriteLine($"Access denied to creating folder {folderPath}");
-                throw;
             }
             catch (PathTooLongException)
             {
                 Console.WriteLine($"Path too long to create folder {folderPath}. Place xp-apps in a different folder with a shorter path.");
-                throw;
             }
         }
 
@@ -71,6 +72,32 @@ namespace xp_apps.sources
             );
 #endif
             return false;
+        }
+
+        static void CreateSettings()
+        {
+            string json = JsonConvert.SerializeObject(new { version = Constants.ProgramVersion }, Formatting.Indented);
+
+            File.WriteAllText(SettingsPath, json);
+
+            Console.WriteLine(File.ReadAllText(SettingsPath));
+        }
+
+        public static void UpdateSettings(string version = "")
+        {
+            if (!IsSettingsExist)
+            {
+                CreateSettings();
+                return;
+            }
+
+            string jsonContent = File.ReadAllText(SettingsPath);
+            JObject settingsFile = JObject.Parse(jsonContent);
+
+            if (version != "")
+                settingsFile["version"] = version;
+
+            File.WriteAllText(SettingsPath, settingsFile.ToString());
         }
     }
 }

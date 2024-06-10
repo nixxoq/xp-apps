@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using System.Threading;
 using xp_apps.sources;
 
 namespace xp_apps
@@ -11,6 +12,13 @@ namespace xp_apps
 #if DEBUG
             Console.WriteLine($"[DEBUG] Current architecture: {Constants.OsArchitecture} | Current OS: {Environment.OSVersion}");
 #endif
+
+            if (Convert.ToBoolean(Updater.CheckForUpdates()))
+            {
+                Console.WriteLine("A new version of the program is available.\nIf you want to update, please run \"xp-apps --self-update\".");
+                Thread.Sleep(2000);
+            }
+            // Cache.FetchLatestVersion();
             // Checks if current operating system is Windows XP (NT 5.1 & NT 5.2)
             // However, I am thinking about adding support for Windows Vista when the One-Core-API 4.1.0 will be released 👀
             // if (!Functions.IsWindowsXp())

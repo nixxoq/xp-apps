@@ -70,6 +70,9 @@ namespace xp_apps.sources
                     case "--apps":
                         GetApplications(Constants.ProgramsList);
                         return;
+                    case "--self-update":
+                        Updater.Update();
+                        return;
                 }
             }
         }
@@ -128,16 +131,21 @@ namespace xp_apps.sources
             }
         }
 
-        /// <summary>
-        ///     Retrieves the updates from the server and deserializes them into an Applications object.
-        /// </summary>
-        /// <returns>The deserialized Applications object containing the updates.</returns>
-        public static Applications GetUpdates()
+        public static bool IsNetworkAvailable()
         {
             Ping ping = new Ping();
             PingReply reply = ping.Send("www.google.com", 5000);
 
-            if (reply == null || reply.Status != IPStatus.Success)
+            return reply != null && reply.Status == IPStatus.Success;
+        }
+
+        /// <summary>
+        ///     Retrieves the applications list updates from the server and deserializes them into an Applications object.
+        /// </summary>
+        /// <returns>The deserialized Applications object containing the updates.</returns>
+        public static Applications GetUpdates()
+        {
+            if (!IsNetworkAvailable())
             {
                 if (!Cache.IsAppsListExist())
                 {
