@@ -53,10 +53,7 @@ jobs:
         name: Debug
         path: |
           bin\Debug\DotNetZip.dll
-#          bin\Debug\DotNetZip.xml
-#          bin\Debug\DotNetZip.pdb
           bin\Debug\Newtonsoft.Json.dll
-#          bin\Debug\Newtonsoft.Json.xml
           bin\Debug\xp-apps.exe
           bin\Debug\Updater.exe
 
@@ -107,9 +104,6 @@ jobs:
         name: Release
         path: |
           bin\Release\DotNetZip.dll
-#          bin\Release\DotNetZip.xml
-#          bin\Release\DotNetZip.pdb
           bin\Release\Newtonsoft.Json.dll
-#          bin\Release\Newtonsoft.Json.xml
           bin\Release\xp-apps.exe
           bin\Release\Updater.exe
