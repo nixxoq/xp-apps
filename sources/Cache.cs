@@ -8,18 +8,21 @@ namespace xp_apps.sources
 {
     public abstract class Cache
     {
-
         static readonly bool IsSettingsExist = File.Exists(SettingsPath);
 
-        public static string ApplicationsListPath => Path.Combine(Constants.CacheFolder, Constants.ApplicationsListName);
+        public static string ApplicationsListPath => Path.Combine(GetExecutableDirectory(), Constants.CacheFolder, Constants.ApplicationsListName);
 
         // Settings
-        static string SettingsPath => Path.Combine(Constants.CacheFolder, Constants.SettingsFileName);
+        static string SettingsPath => Path.Combine(GetExecutableDirectory(), Constants.CacheFolder, Constants.SettingsFileName);
 
-        static void CreateApplicationFolder(string folderPath = Constants.CacheFolder)
+        static string GetExecutableDirectory() => Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+
+
+        static void CreateApplicationFolder(string folderPath = null)
         {
-            if (Directory.Exists(folderPath))
-                return;
+            if (folderPath == null) folderPath = Path.Combine(GetExecutableDirectory(), Constants.CacheFolder);
+
+            if (Directory.Exists(folderPath)) return;
 
             try
             {
@@ -50,14 +53,11 @@ namespace xp_apps.sources
             return File.ReadAllText(ApplicationsListPath);
         }
 
-        public static bool IsAppsListExist()
-        {
-            return File.Exists(ApplicationsListPath);
-        }
+        public static bool IsAppsListExist() => File.Exists(ApplicationsListPath);
 
         public static bool IsNeedUpdate()
         {
-            // true - need update; false - up-to-date or not exist
+            // true - need update; false - up to date or not exist
 
             WebClient client = Functions.GetClient();
             client.OpenRead(Constants.ApplicationsList);

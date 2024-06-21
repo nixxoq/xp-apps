@@ -17,8 +17,10 @@ namespace xp_apps.Updater
             client.DownloadFile(Constants.LatestReleaseZip, "xp-apps.zip");
 
             using (ZipFile zipFile = new ZipFile("xp-apps.zip"))
+            {
                 foreach (ZipEntry file in zipFile)
                     file.Extract(".", ExtractExistingFileAction.OverwriteSilently);
+            }
 
             File.Delete("xp-apps.zip");
 

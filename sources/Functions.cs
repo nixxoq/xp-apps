@@ -174,40 +174,29 @@ namespace xp_apps.sources
         /// <returns>The details of the application if found, otherwise null.</returns>
         static JObject FindApplication(string appName)
         {
-            Applications apps = Constants.ProgramsList;
+            return Constants.Categories
+                .Select(
+                    category =>
+                        FindApplicationInCategory(appName, category.Value, category.Key)
+                )
+                .FirstOrDefault(result => result != null);
 
+        }
+
+        /// <summary>
+        ///     Finds the application details in a specific category.
+        /// </summary>
+        /// <param name="appName">The name of the application to find.</param>
+        /// <param name="category">The category to search in.</param>
+        /// <param name="categoryName">The name of the category for debug output.</param>
+        /// <returns>The details of the application if found, otherwise null.</returns>
+        static JObject FindApplicationInCategory(string appName, List<ProgramContainer> category, string categoryName)
+        {
 #if DEBUG
-            Console.WriteLine($"[DEBUG] Searching {appName} in Browsers category...");
+            Console.WriteLine($"[DEBUG] Searching {appName} in {categoryName} category...");
 #endif
 
-            foreach ((string programName, JObject programDetails) in Constants.GetProgramDetails(apps.Browsers))
-            {
-                string architecture = programDetails.GetValue("architecture").ToString();
-
-                if (programName.Equals(appName, StringComparison.OrdinalIgnoreCase) &&
-                    (architecture.Equals("any", StringComparison.OrdinalIgnoreCase) ||
-                     architecture.Equals(Constants.OsArchitecture, StringComparison.OrdinalIgnoreCase))
-                   )
-                    return programDetails;
-
-                if (programDetails.GetValue("aliases")
-                    .ToObject<string[]>()
-                    .Any(
-                        alias =>
-                            alias.Equals(appName, StringComparison.OrdinalIgnoreCase)
-                            && (architecture.Equals(
-                                    "any", StringComparison.OrdinalIgnoreCase
-                                ) ||
-                                architecture.Equals(Constants.OsArchitecture, StringComparison.OrdinalIgnoreCase))
-                    ))
-                    return programDetails;
-            }
-
-#if DEBUG
-            Console.WriteLine($"[DEBUG] Searching {appName} in Vista native applications category...");
-#endif
-
-            foreach ((string programName, JObject programDetails) in Constants.GetProgramDetails(apps.VistaApplications))
+            foreach ((string programName, JObject programDetails) in Constants.GetProgramDetails(category))
             {
                 string architecture = programDetails.GetValue("architecture").ToString();
 
@@ -273,41 +262,27 @@ namespace xp_apps.sources
         }
 
         /// <summary>
-        ///     Finds the similar applications based on the provided application name.
+        ///     Finds similar applications based on the provided application name.
         /// </summary>
         /// <param name="appName">The name of the application to find.</param>
         /// <returns>The list of similar applications if found, otherwise null.</returns>
         static List<string> FindSimilarApplications(string appName)
         {
-            Applications apps = Constants.ProgramsList;
-            var allApps = new List<string>();
-
-            foreach ((string programName, JObject programDetails) in Constants.GetProgramDetails(apps.Browsers))
-            {
-                allApps.Add(programName);
-                allApps.AddRange(programDetails.GetValue("aliases").ToObject<string[]>());
-            }
-
-            foreach ((string programName, JObject programDetails) in Constants.GetProgramDetails(apps.VistaApplications))
-            {
-                allApps.Add(programName);
-                allApps.AddRange(programDetails.GetValue("aliases").ToObject<string[]>());
-            }
+            var allApps = Constants.Categories
+                .SelectMany(c => Constants.GetProgramDetails(c.Value))
+                .SelectMany(p => new[] { p.ProgramName }.Concat(p.ProgramDetails["aliases"].ToObject<string[]>()))
+                .ToList();
 
             int threshold = Math.Max(appName.Length / 2, 2);
 
-            var potentialMatches =
-            (
-                from name in allApps
-                let distance = LevenshteinDistance(appName, name)
-                where distance <= threshold || name.IndexOf(appName, StringComparison.OrdinalIgnoreCase) >= 0
-                select name
-            ).ToList();
-
-            return potentialMatches
+            return allApps
+                .Where(
+                    name => LevenshteinDistance(appName, name) <= threshold ||
+                            name.IndexOf(appName, StringComparison.OrdinalIgnoreCase) >= 0
+                )
                 .Distinct()
-                .OrderBy(x => LevenshteinDistance(appName, x))
-                .ThenBy(x => x)
+                .OrderBy(name => LevenshteinDistance(appName, name))
+                .ThenBy(name => name)
                 .Take(5)
                 .ToList();
         }
@@ -323,7 +298,7 @@ namespace xp_apps.sources
 
             int n = s.Length, m = t.Length;
 
-            // Create a two-dimensional array d with size (n+1) x (m+1), where d[i, j] represents the Levenshtein distance between
+            // Create a two- dimensional array d with size (n+1) x (m+1), where d[i, j] represents the Levenshtein distance between
             // the first i characters of string s and the first j characters of string t.
             int[,] d = new int[n + 1, m + 1];
 

@@ -12,7 +12,6 @@ namespace xp_apps
 #if DEBUG
             Console.WriteLine($"[DEBUG] Current architecture: {Constants.OsArchitecture} | Current OS: {Environment.OSVersion}");
 #endif
-
             if (Convert.ToBoolean(Updater.CheckForUpdates()))
             {
                 Console.WriteLine("A new version of the program is available.\nIf you want to update, please run \"xp-apps --self-update\".");

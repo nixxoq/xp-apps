@@ -9,7 +9,7 @@ namespace xp_apps.sources
     public static class Constants
     {
         // Major.Minor.Patch.Revision
-        public const string ProgramVersion = "0.1.4.0";
+        public const string ProgramVersion = "0.1.4.2";
 
         public const string ApplicationsList = "https://raw.githubusercontent.com/nixxoq/xp-apps/development/upd.json";
 
@@ -27,6 +27,12 @@ namespace xp_apps.sources
         public static readonly Applications ProgramsList = Functions.GetUpdates();
 
         public static readonly string OsArchitecture = Environment.Is64BitOperatingSystem ? "x64" : "x86";
+
+        public static readonly Dictionary<string, List<ProgramContainer>> Categories = new Dictionary<string, List<ProgramContainer>>
+        {
+            { "Browsers", ProgramsList.Browsers },
+            { "Vista native applications", ProgramsList.VistaApplications }
+        };
 
         public static IEnumerable<(string ProgramName, JObject ProgramDetails)> GetProgramDetails(IEnumerable<BaseProgramContainer> programContainers)
         {
