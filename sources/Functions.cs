@@ -12,19 +12,18 @@ using Newtonsoft.Json.Linq;
 
 namespace xp_apps.sources
 {
-    static class Functions
+    internal static class Functions
     {
-        static readonly string Help = $"XP-Apps ver {Constants.ProgramVersion}" +
-                                      "\n\nList of available arguments:\n\n[Option]\t\t\t\t[Description]" +
-                                      "\n-h, --help\t\t\t\tDisplay this help message" +
-                                      "\n-i, --install\t\t\t\tInstall Application from XP-Apps repository" +
-                                      "\n-l, --list, --list-applications,\tList all available applications in the repository \n--list-apps or --apps" +
-                                      "\n\nExample:\n    xp-apps.exe -i PyCharm2023 or xp-apps.exe --install PyCharm2023";
+        private static readonly string Help = $"xp-apps ver {Constants.ProgramVersion}" +
+                                              "\n\nList of available arguments:\n\n[Option]\t\t\t\t[Description]" +
+                                              "\n-h, --help\t\t\t\tDisplay this help message" +
+                                              "\n-i, --install\t\t\t\tInstall Application from XP-Apps repository" +
+                                              "\n-l, --list, --list-applications,\tList all available applications in the repository \n--list-apps or --apps" +
+                                              "\n\nExample:\n    xp-apps.exe -i PyCharm2023 or xp-apps.exe --install PyCharm2023";
 
-        static string[] GetCommandArgs()
+        public static string[] GetCommandArgs()
         {
-            string[] args = Environment.GetCommandLineArgs();
-            return args.Skip(1).ToArray();
+            return Environment.GetCommandLineArgs().Skip(1).ToArray();
         }
 
         /// <summary>
@@ -32,7 +31,7 @@ namespace xp_apps.sources
         /// </summary>
         public static void ParseArgs()
         {
-            string[] args = GetCommandArgs();
+            var args = GetCommandArgs();
 
             if (args.Length == 0)
             {
@@ -40,9 +39,9 @@ namespace xp_apps.sources
                 return;
             }
 
-            for (int i = 0; i < args.Length; i++)
+            for (var i = 0; i < args.Length; i++)
             {
-                string arg = args[i];
+                var arg = args[i];
 
                 switch (arg)
                 {
@@ -51,12 +50,15 @@ namespace xp_apps.sources
                     {
                         if (i + 1 < args.Length)
                         {
-                            string appName = args[i + 1];
-                            bool force = i + 2 < args.Length && args[i + 2].Equals("--force");
+                            var appName = args[i + 1];
+                            var force = i + 2 < args.Length && args[i + 2].Equals("--force");
                             InstallApplication(appName, force);
                         }
                         else
+                        {
                             Console.WriteLine("Error: Missing application name for install.");
+                        }
+
                         return;
                     }
                     case "-h":
@@ -79,7 +81,7 @@ namespace xp_apps.sources
 
         public static WebClient GetClient()
         {
-            WebClient client = new WebClient();
+            var client = new WebClient();
             return client;
         }
 
@@ -91,36 +93,33 @@ namespace xp_apps.sources
         /// <param name="filename">The name of the file to save the downloaded content to.</param>
         public static void DownloadFile(string url, string filename)
         {
-
-            using (WebClient client = new WebClient())
+            using (var client = new WebClient())
             {
                 char[] animationChars = { '/', '-', '\\', '|' };
-                int animationIndex = 0;
-                Stopwatch stopwatch = new Stopwatch();
+                var animationIndex = 0;
+                var stopwatch = new Stopwatch();
 
                 client.DownloadProgressChanged += (sender, e) =>
                 {
-                    double speed = e.BytesReceived / 1024d / stopwatch.Elapsed.TotalSeconds;
-                    double remainingBytes = e.TotalBytesToReceive - e.BytesReceived;
-                    double remainingSeconds = remainingBytes / 1024d / speed;
+                    var speed = e.BytesReceived / 1024d / stopwatch.Elapsed.TotalSeconds;
+                    var remainingBytes = e.TotalBytesToReceive - e.BytesReceived;
+                    var remainingSeconds = remainingBytes / 1024d / speed;
 
-                    TimeSpan remainingTime = TimeSpan.FromSeconds(remainingSeconds);
-                    char animationChar = animationChars[animationIndex++ % animationChars.Length];
+                    var remainingTime = TimeSpan.FromSeconds(remainingSeconds);
+                    var animationChar = animationChars[animationIndex++ % animationChars.Length];
 
                     Console.Write(
-                        $"\r{animationChar} " + string.Format(
-                            @"Downloading {0} | {1}% completed | {2:0.00} MB/s | {3:hh\:mm\:ss} remaining",
-                            filename, e.ProgressPercentage, speed / 1024d,
-                            remainingTime
-                        )
+                        $"\r{animationChar} " +
+                        $@"Downloading {filename} | {e.ProgressPercentage}% completed | {speed / 1024d:0.00} MB/s | {remainingTime:hh\:mm\:ss} remaining"
                     );
                 };
 
                 client.DownloadFileCompleted += (sender, e) =>
                 {
                     Thread.Sleep(1000);
-                    Console.WriteLine(e.Error != null ? $"\nError: {e.Error.Message}" : $"\n{filename} download completed.\n");
-
+                    Console.WriteLine(e.Error != null
+                        ? $"\nError: {e.Error.Message}"
+                        : $"\n{filename} download completed.\n");
                 };
                 stopwatch.Start();
                 client.DownloadFileAsync(new Uri(url), filename);
@@ -133,8 +132,8 @@ namespace xp_apps.sources
 
         public static bool IsNetworkAvailable()
         {
-            Ping ping = new Ping();
-            PingReply reply = ping.Send("www.google.com", 5000);
+            var ping = new Ping();
+            var reply = ping.Send("www.google.com", 5000);
 
             return reply != null && reply.Status == IPStatus.Success;
         }
@@ -162,7 +161,9 @@ namespace xp_apps.sources
             ServicePointManager.Expect100Continue = true;
             ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
 
-            string jsonContent = Cache.IsNeedUpdate() ? Cache.UpdateApplicationList(true) : File.ReadAllText(Cache.ApplicationsListPath);
+            var jsonContent = Cache.IsNeedUpdate()
+                ? Cache.UpdateApplicationList(true)
+                : File.ReadAllText(Cache.ApplicationsListPath);
             return JsonConvert.DeserializeObject<Applications>(jsonContent);
         }
 
@@ -172,7 +173,7 @@ namespace xp_apps.sources
         /// </summary>
         /// <param name="appName">The name of the application to find.</param>
         /// <returns>The details of the application if found, otherwise null.</returns>
-        static JObject FindApplication(string appName)
+        private static JObject FindApplication(string appName)
         {
             return Constants.Categories
                 .Select(
@@ -180,7 +181,6 @@ namespace xp_apps.sources
                         FindApplicationInCategory(appName, category.Value, category.Key)
                 )
                 .FirstOrDefault(result => result != null);
-
         }
 
         /// <summary>
@@ -190,21 +190,25 @@ namespace xp_apps.sources
         /// <param name="category">The category to search in.</param>
         /// <param name="categoryName">The name of the category for debug output.</param>
         /// <returns>The details of the application if found, otherwise null.</returns>
-        static JObject FindApplicationInCategory(string appName, List<ProgramContainer> category, string categoryName)
+        private static JObject FindApplicationInCategory(string appName, List<ProgramContainer> category,
+            string categoryName)
         {
 #if DEBUG
-            Console.WriteLine($"[DEBUG] Searching {appName} in {categoryName} category...");
+            SimpleLogger.Logger.Debug($"Searching {appName} in {categoryName} category...");
+            // Console.WriteLine($"[DEBUG] Searching {appName} in {categoryName} category...");
 #endif
 
-            foreach ((string programName, JObject programDetails) in Constants.GetProgramDetails(category))
+            foreach (var (programName, programDetails) in Constants.GetProgramDetails(category))
             {
-                string architecture = programDetails.GetValue("architecture").ToString();
+                // ReSharper disable once PossibleNullReferenceException
+                var architecture = programDetails.GetValue("architecture").ToString();
 
                 if (programName.Equals(appName, StringComparison.OrdinalIgnoreCase) &&
                     (architecture.Equals("any", StringComparison.OrdinalIgnoreCase) ||
                      architecture.Equals(Constants.OsArchitecture, StringComparison.OrdinalIgnoreCase)))
                     return programDetails;
 
+                // ReSharper disable once PossibleNullReferenceException
                 if (programDetails.GetValue("aliases").ToObject<string[]>().Any(
                         alias => alias.Equals(appName, StringComparison.OrdinalIgnoreCase) &&
                                  (architecture.Equals("any", StringComparison.OrdinalIgnoreCase) ||
@@ -212,6 +216,7 @@ namespace xp_apps.sources
                     ))
                     return programDetails;
             }
+
             return null;
         }
 
@@ -221,34 +226,37 @@ namespace xp_apps.sources
         /// </summary>
         /// <param name="appName">Application name to install</param>
         /// <param name="isForce">Force download if file already exists</param>
-        static void InstallApplication(string appName, bool isForce)
+        private static void InstallApplication(string appName, bool isForce)
         {
-            JObject application = FindApplication(appName);
+            var application = FindApplication(appName);
             if (application == null)
             {
                 Console.Write($"Could not find application {appName}.");
 
                 // check if similar applications exist
                 var similarApps = FindSimilarApplications(appName);
-                if (similarApps.Any()) Console.WriteLine($" Did you mean: {string.Join(", ", similarApps.Distinct())}?");
+                if (similarApps.Any())
+                    Console.WriteLine($" Did you mean: {string.Join(", ", similarApps.Distinct())}?");
 
                 return;
             }
 
-            string filename = application.GetValue("filename").ToString();
-            string url = application.GetValue("url").ToString();
+            var filename = application.GetValue("filename")?.ToString();
+            var url = application.GetValue("url")?.ToString();
 
             Console.WriteLine($"Found application {appName}");
 
-            WebClient client = GetClient();
-            client.OpenRead(url);
-            long filesize = Convert.ToInt64(client.ResponseHeaders.Get("Content-Length"));
+            var client = GetClient();
+            client.OpenRead(url ?? string.Empty);
+            var filesize = Convert.ToInt64(client.ResponseHeaders.Get("Content-Length"));
 
-            if (File.Exists(filename) && isForce) File.Delete(filename);
+            if (File.Exists(filename) && isForce)
+                if (filename != null)
+                    File.Delete(filename);
 
 
             // check if downloaded file is not corrupted
-            if (File.Exists(filename) && new FileInfo(filename).Length == filesize)
+            if (filename != null && File.Exists(filename) && new FileInfo(filename).Length == filesize)
             {
                 Console.WriteLine(
                     "File already exists and is not corrupted. Skipping download." +
@@ -266,14 +274,14 @@ namespace xp_apps.sources
         /// </summary>
         /// <param name="appName">The name of the application to find.</param>
         /// <returns>The list of similar applications if found, otherwise null.</returns>
-        static List<string> FindSimilarApplications(string appName)
+        private static List<string> FindSimilarApplications(string appName)
         {
             var allApps = Constants.Categories
                 .SelectMany(c => Constants.GetProgramDetails(c.Value))
                 .SelectMany(p => new[] { p.ProgramName }.Concat(p.ProgramDetails["aliases"].ToObject<string[]>()))
                 .ToList();
 
-            int threshold = Math.Max(appName.Length / 2, 2);
+            var threshold = Math.Max(appName.Length / 2, 2);
 
             return allApps
                 .Where(
@@ -290,7 +298,7 @@ namespace xp_apps.sources
         /// <summary>
         ///     Calculates the Levenshtein distance between two strings.
         /// </summary>
-        static int LevenshteinDistance(string s, string t)
+        private static int LevenshteinDistance(string s, string t)
         {
             // If one of the strings is empty or null, return the length of the other string as Levenshtein distance.
             if (string.IsNullOrEmpty(s)) return t?.Length ?? 0;
@@ -300,15 +308,15 @@ namespace xp_apps.sources
 
             // Create a two- dimensional array d with size (n+1) x (m+1), where d[i, j] represents the Levenshtein distance between
             // the first i characters of string s and the first j characters of string t.
-            int[,] d = new int[n + 1, m + 1];
+            var d = new int[n + 1, m + 1];
 
             // Fill the first row and the first column of the array d with values from 0 to the lengths of strings s and t respectively.
-            for (int i = 0; i <= n; i++) d[i, 0] = i;
-            for (int j = 0; j <= m; j++) d[0, j] = j;
+            for (var i = 0; i <= n; i++) d[i, 0] = i;
+            for (var j = 0; j <= m; j++) d[0, j] = j;
 
             // Iterate through the remaining elements of array d and compute the Levenshtein distance between all prefixes of strings s and t.
-            for (int i = 1; i <= n; i++)
-            for (int j = 1; j <= m; j++)
+            for (var i = 1; i <= n; i++)
+            for (var j = 1; j <= m; j++)
                 d[i, j] = Math.Min(
                     Math.Min(d[i - 1, j] + 1, d[i, j - 1] + 1),
                     d[i - 1, j - 1] + (s[i - 1] == t[j - 1] ? 0 : 1)
@@ -321,19 +329,41 @@ namespace xp_apps.sources
         ///     Get all applications available to install
         /// </summary>
         /// <param name="json">Applications list (json object)</param>
-        static void GetApplications(Applications json)
+        private static void GetApplications(Applications json)
         {
             Console.WriteLine("List of available applications:\nFormat:\n[Category]\n  [Application Name]\n");
 
             // Get all applications from Browsers category
             Console.WriteLine("Browsers:");
-            foreach ((string programName, JObject programDetails) in Constants.GetProgramDetails(json.Browsers))
-                Console.WriteLine($"  {programName} | aliases: {string.Join(", ", programDetails.GetValue("aliases").ToObject<string[]>())}");
+            foreach (var (programName, programDetails) in Constants.GetProgramDetails(json.Browsers))
+                if (!Convert.ToBoolean(programDetails.GetValue("aliases")))
+                {
+                    Console.WriteLine($"  {programName}");
+                }
+                else
+                {
+                    var aliases = programDetails.GetValue("aliases");
+                    if (aliases != null)
+                        Console.WriteLine(
+                            $"  {programName} | aliases: " +
+                            $"{string.Join(", ", aliases.ToObject<string[]>())}");
+                }
 
             // Get all applications from Vista native applications category
             Console.WriteLine("Vista native applications:");
-            foreach ((string programName, JObject programDetails) in Constants.GetProgramDetails(json.VistaApplications))
-                Console.WriteLine($"  {programName} | aliases: {string.Join(", ", programDetails.GetValue("aliases").ToObject<string[]>())}");
+            foreach (var (programName, programDetails) in Constants.GetProgramDetails(json.VistaApplications))
+                if (!Convert.ToBoolean(programDetails.GetValue("aliases")))
+                {
+                    Console.WriteLine($"  {programName}");
+                }
+                else
+                {
+                    var aliases = programDetails.GetValue("aliases");
+                    if (aliases != null)
+                        Console.WriteLine(
+                            $"  {programName} | aliases: " +
+                            $"{string.Join(", ", aliases.ToObject<string[]>())}");
+                }
         }
 
         /// <summary>
@@ -341,8 +371,8 @@ namespace xp_apps.sources
         /// </summary>
         public static bool IsWindowsXp()
         {
-            OperatingSystem os = Environment.OSVersion;
-            Version osv = os.Version;
+            var os = Environment.OSVersion;
+            var osv = os.Version;
 
             if (os.Platform != PlatformID.Win32NT) return false;
 
@@ -360,11 +390,13 @@ namespace xp_apps.sources
         // https://learn.microsoft.com/en-us/dotnet/framework/migration-guide/how-to-determine-which-versions-are-installed#query-the-registry-using-code
         public static bool IsDotNet45OrNewer()
         {
-            RegistryKey dotNetKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32).OpenSubKey(@"SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full\");
+            using (var dotNetKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32)
+                       .OpenSubKey(@"SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full\"))
+            {
+                if (dotNetKey?.GetValue("Release") == null) return false;
 
-            if (dotNetKey?.GetValue("Release") == null) return false;
-
-            return (int)dotNetKey.GetValue("Release") >= 378389;
+                return (int)dotNetKey.GetValue("Release") >= 378389;
+            }
         }
     }
 }

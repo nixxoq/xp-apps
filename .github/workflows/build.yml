@@ -6,32 +6,7 @@ on:
       - development
 
 jobs:
-#  build_debug_x86:
-#    runs-on: windows-2019
-#    
-#    steps:
-#    - name: Checkout code
-#      uses: actions/checkout@v4
-#    
-#    - name: setup-msbuild
-#      uses: microsoft/setup-msbuild@v2
-#
-#    - name: Restore dependencies
-#      run: nuget restore
-#    
-#    - name: Build Debug x86
-#      run: msbuild /t:Build /p:Configuration=Debug /p:Platform=x86
-#    
-#    - name: Publish Debug x86 artifacts
-#      uses: actions/upload-artifact@v4
-#      with:
-#        name: Debug_x86
-#        path: |
-#          bin\x86\Debug\Newtonsoft.Json.dll
-#          bin\x86\Debug\Newtonsoft.Json.xml
-#          bin\x86\Debug\xp-apps.exe
-    
-  build_debug_x64:
+  build_debug:
     runs-on: windows-2019
     
     steps:
@@ -56,33 +31,9 @@ jobs:
           bin\Debug\Newtonsoft.Json.dll
           bin\Debug\xp-apps.exe
           bin\Debug\Updater.exe
-
-#  build_release_x86:
-#    runs-on: windows-2019
-#    
-#    steps:
-#    - name: Checkout code
-#      uses: actions/checkout@v4
-#    
-#    - name: setup-msbuild
-#      uses: microsoft/setup-msbuild@v2
-#
-#    - name: Restore dependencies
-#      run: nuget restore
-#    
-#    - name: Build Release x86
-#      run: msbuild /t:Build /p:Configuration=Release /p:Platform=x86
-#    
-#    - name: Publish Release x86 artifacts
-#      uses: actions/upload-artifact@v4
-#      with:
-#        name: Release_x86
-#        path: |
-#          bin\x86\Release\Newtonsoft.Json.dll
-#          bin\x86\Release\Newtonsoft.Json.xml
-#          bin\x86\Release\xp-apps.exe
+          bin\Debug\NLog.dll
     
-  build_release_x64:
+  build_release:
     runs-on: windows-2019
     
     steps:
@@ -107,3 +58,4 @@ jobs:
           bin\Release\Newtonsoft.Json.dll
           bin\Release\xp-apps.exe
           bin\Release\Updater.exe
+          bin\Release\NLog.dll

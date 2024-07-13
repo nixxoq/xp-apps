@@ -89,10 +89,14 @@
         <Reference Include="DotNetZip, Version=1.16.0.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
             <HintPath>packages\DotNetZip.1.16.0\lib\net40\DotNetZip.dll</HintPath>
         </Reference>
-        <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-            <HintPath>packages\Newtonsoft.Json.9.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
+        <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+            <HintPath>packages\Newtonsoft.Json.13.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
+        </Reference>
+        <Reference Include="NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+            <HintPath>packages\NLog.5.3.2\lib\net35\NLog.dll</HintPath>
         </Reference>
         <Reference Include="System"/>
+        <Reference Include="System.Configuration"/>
         <Reference Include="System.Core"/>
         <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
             <HintPath>packages\System.ValueTuple.4.5.0\lib\portable-net40+sl4+win8+wp8\System.ValueTuple.dll</HintPath>
@@ -109,7 +113,9 @@
         <Compile Include="Properties\AssemblyInfo.cs"/>
         <Compile Include="sources\Cache.cs"/>
         <Compile Include="sources\Constants.cs"/>
+<!--        <Compile Include="sources\extensions.cs"/>-->
         <Compile Include="sources\Functions.cs"/>
+        <Compile Include="sources\Logger.cs" />
         <Compile Include="sources\Updater.cs"/>
     </ItemGroup>
     <ItemGroup>

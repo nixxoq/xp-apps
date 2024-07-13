@@ -9,7 +9,7 @@ namespace xp_apps.sources
     public static class Constants
     {
         // Major.Minor.Patch.Revision
-        public const string ProgramVersion = "0.1.4.2";
+        public const string ProgramVersion = "0.2.0-dev1";
 
         public const string ApplicationsList = "https://raw.githubusercontent.com/nixxoq/xp-apps/development/upd.json";
 
@@ -28,13 +28,15 @@ namespace xp_apps.sources
 
         public static readonly string OsArchitecture = Environment.Is64BitOperatingSystem ? "x64" : "x86";
 
-        public static readonly Dictionary<string, List<ProgramContainer>> Categories = new Dictionary<string, List<ProgramContainer>>
-        {
-            { "Browsers", ProgramsList.Browsers },
-            { "Vista native applications", ProgramsList.VistaApplications }
-        };
+        public static readonly Dictionary<string, List<ProgramContainer>> Categories =
+            new Dictionary<string, List<ProgramContainer>>
+            {
+                { "Browsers", ProgramsList.Browsers },
+                { "Vista native applications", ProgramsList.VistaApplications }
+            };
 
-        public static IEnumerable<(string ProgramName, JObject ProgramDetails)> GetProgramDetails(IEnumerable<BaseProgramContainer> programContainers)
+        public static IEnumerable<(string ProgramName, JObject ProgramDetails)> GetProgramDetails(
+            IEnumerable<BaseProgramContainer> programContainers)
         {
             return from programContainer in programContainers
                 from program in programContainer.Applications
@@ -46,11 +48,9 @@ namespace xp_apps.sources
 
     public class Applications
     {
-        [JsonProperty("browsers")]
-        public List<ProgramContainer> Browsers { get; set; }
+        [JsonProperty("browsers")] public List<ProgramContainer> Browsers { get; set; }
 
-        [JsonProperty("vista_apps")]
-        public List<ProgramContainer> VistaApplications { get; set; }
+        [JsonProperty("vista_apps")] public List<ProgramContainer> VistaApplications { get; set; }
     }
 
     public abstract class BaseProgramContainer

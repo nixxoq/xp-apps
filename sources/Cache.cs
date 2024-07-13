@@ -1,6 +1,6 @@
 ﻿using System;
 using System.IO;
-using System.Net;
+using System.Reflection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -8,17 +8,22 @@ namespace xp_apps.sources
 {
     public abstract class Cache
     {
-        static readonly bool IsSettingsExist = File.Exists(SettingsPath);
+        private static readonly bool IsSettingsExist = File.Exists(SettingsPath);
 
-        public static string ApplicationsListPath => Path.Combine(GetExecutableDirectory(), Constants.CacheFolder, Constants.ApplicationsListName);
+        public static string ApplicationsListPath => Path.Combine(GetExecutableDirectory(), Constants.CacheFolder,
+            Constants.ApplicationsListName);
 
         // Settings
-        static string SettingsPath => Path.Combine(GetExecutableDirectory(), Constants.CacheFolder, Constants.SettingsFileName);
+        private static string SettingsPath =>
+            Path.Combine(GetExecutableDirectory(), Constants.CacheFolder, Constants.SettingsFileName);
 
-        static string GetExecutableDirectory() => Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+        private static string GetExecutableDirectory()
+        {
+            return Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+        }
 
 
-        static void CreateApplicationFolder(string folderPath = null)
+        private static void CreateApplicationFolder(string folderPath = null)
         {
             if (folderPath == null) folderPath = Path.Combine(GetExecutableDirectory(), Constants.CacheFolder);
 
@@ -34,7 +39,8 @@ namespace xp_apps.sources
             }
             catch (PathTooLongException)
             {
-                Console.WriteLine($"Path too long to create folder {folderPath}. Place xp-apps in a different folder with a shorter path.");
+                Console.WriteLine(
+                    $"Path too long to create folder {folderPath}. Place xp-apps in a different folder with a shorter path.");
             }
         }
 
@@ -53,30 +59,31 @@ namespace xp_apps.sources
             return File.ReadAllText(ApplicationsListPath);
         }
 
-        public static bool IsAppsListExist() => File.Exists(ApplicationsListPath);
+        public static bool IsAppsListExist()
+        {
+            return File.Exists(ApplicationsListPath);
+        }
 
         public static bool IsNeedUpdate()
         {
             // true - need update; false - up to date or not exist
 
-            WebClient client = Functions.GetClient();
+            var client = Functions.GetClient();
             client.OpenRead(Constants.ApplicationsList);
-            long filesize = Convert.ToInt64(client.ResponseHeaders.Get("Content-Length"));
+            var filesize = Convert.ToInt64(client.ResponseHeaders.Get("Content-Length"));
 
             if (!File.Exists(ApplicationsListPath) || new FileInfo(ApplicationsListPath).Length != filesize)
                 return true;
 
 #if DEBUG
-            Console.WriteLine(
-                "[DEBUG] main application list is up-to-date."
-            );
+            SimpleLogger.Logger.Debug("main application list is up-to-date.");
 #endif
             return false;
         }
 
-        static void CreateSettings()
+        private static void CreateSettings()
         {
-            string json = JsonConvert.SerializeObject(new { version = Constants.ProgramVersion }, Formatting.Indented);
+            var json = JsonConvert.SerializeObject(new { version = Constants.ProgramVersion }, Formatting.Indented);
 
             File.WriteAllText(SettingsPath, json);
 
@@ -91,8 +98,8 @@ namespace xp_apps.sources
                 return;
             }
 
-            string jsonContent = File.ReadAllText(SettingsPath);
-            JObject settingsFile = JObject.Parse(jsonContent);
+            var jsonContent = File.ReadAllText(SettingsPath);
+            var settingsFile = JObject.Parse(jsonContent);
 
             if (version != "")
                 settingsFile["version"] = version;

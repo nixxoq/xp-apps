@@ -5,16 +5,24 @@ using xp_apps.sources;
 
 namespace xp_apps
 {
-    static class Program
+    internal static class Program
     {
-        static void Main()
+        private static void Main()
         {
+            SimpleLogger.SetupLog();
+
 #if DEBUG
-            Console.WriteLine($"[DEBUG] Current architecture: {Constants.OsArchitecture} | Current OS: {Environment.OSVersion}");
+            SimpleLogger.Logger.Debug(
+                $"Current architecture: {Constants.OsArchitecture} | Current OS: {Environment.OSVersion}");
+            var args = Functions.GetCommandArgs()?.Length > 0
+                ? string.Join(" ", Functions.GetCommandArgs())
+                : "No additional arguments";
+            SimpleLogger.Logger.Debug($"Used command-line arguments: {args}");
 #endif
             if (Convert.ToBoolean(Updater.CheckForUpdates()))
             {
-                Console.WriteLine("A new version of the program is available.\nIf you want to update, please run \"xp-apps --self-update\".");
+                Console.WriteLine(
+                    "A new version of the program is available.\nIf you want to update, please run \"xp-apps --self-update\".");
                 Thread.Sleep(2000);
             }
             // Cache.FetchLatestVersion();
@@ -32,7 +40,8 @@ namespace xp_apps
             // Its need for TLS 1.2 protocol
             if (!Functions.IsDotNet45OrNewer())
             {
-                Console.WriteLine("This program works only with installed .NET Framework 4.0 and 4.5+\nMake sure you have installed the One-Core-API before installing .NET Framework 4.5+!");
+                Console.WriteLine(
+                    "This program works only with installed .NET Framework 4.0 and 4.5+\nMake sure you have installed the One-Core-API before installing .NET Framework 4.5+!");
                 Console.WriteLine("Press any key to exit...");
                 Console.ReadLine();
                 return;

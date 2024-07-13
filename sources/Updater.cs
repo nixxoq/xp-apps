@@ -8,7 +8,7 @@ namespace xp_apps.sources
     public abstract class Updater
     {
         // application version
-        static string FetchLatestVersion()
+        private static string FetchLatestVersion()
         {
             if (!Functions.IsNetworkAvailable())
             {
@@ -16,21 +16,22 @@ namespace xp_apps.sources
                 return null;
             }
 
-            WebClient client = Functions.GetClient();
-
-            try
+            using (var client = Functions.GetClient())
             {
-                Stream stream = client.OpenRead(Constants.LatestReleaseVersion);
-                if (stream != null)
+                try
                 {
-                    string content = new StreamReader(stream).ReadToEnd();
-                    return content;
+                    var stream = client.OpenRead(Constants.LatestReleaseVersion);
+                    if (stream != null)
+                    {
+                        var content = new StreamReader(stream).ReadToEnd();
+                        return content;
+                    }
                 }
-            }
-            catch (WebException e)
-            {
-                Console.WriteLine($"Failed to fetch latest version. {e.Message}");
-                return null;
+                catch (WebException e)
+                {
+                    Console.WriteLine($"Failed to fetch latest version. {e.Message}");
+                    return null;
+                }
             }
 
             return null;
@@ -38,10 +39,9 @@ namespace xp_apps.sources
 
         public static bool? CheckForUpdates()
         {
-            string content = FetchLatestVersion();
+            var content = FetchLatestVersion();
 
             return !content?.Equals(Constants.ProgramVersion);
-
         }
 
         public static void Update()
@@ -54,11 +54,12 @@ namespace xp_apps.sources
 
             if (!Convert.ToBoolean(CheckForUpdates()))
             {
-                bool internetAvailable = Functions.IsNetworkAvailable();
-                Console.WriteLine(!internetAvailable ? "Failed to fetch latest update. No internet connection." : "Application is already up-to-date.");
+                var internetAvailable = Functions.IsNetworkAvailable();
+                Console.WriteLine(!internetAvailable
+                    ? "Failed to fetch latest update. No internet connection."
+                    : "Application is already up-to-date.");
                 return;
             }
-
 
             Process.Start("Updater.exe");
             Environment.Exit(0);

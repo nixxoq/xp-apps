@@ -7,19 +7,20 @@ using xp_apps.sources;
 
 namespace xp_apps.Updater
 {
-    abstract class Updater
+    internal abstract class Updater
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             Thread.Sleep(2000);
 
-            WebClient client = new WebClient();
-            client.DownloadFile(Constants.LatestReleaseZip, "xp-apps.zip");
-
-            using (ZipFile zipFile = new ZipFile("xp-apps.zip"))
+            using (var client = new WebClient())
             {
-                foreach (ZipEntry file in zipFile)
-                    file.Extract(".", ExtractExistingFileAction.OverwriteSilently);
+                client.DownloadFile(Constants.LatestReleaseZip, "xp-apps.zip");
+            }
+
+            using (var zipFile = new ZipFile("xp-apps.zip"))
+            {
+                foreach (var file in zipFile) file.Extract(".", ExtractExistingFileAction.OverwriteSilently);
             }
 
             File.Delete("xp-apps.zip");
