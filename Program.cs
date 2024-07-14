@@ -5,20 +5,24 @@ using xp_apps.sources;
 
 namespace xp_apps
 {
-    internal static class Program
+    public static class Program
     {
-        private static void Main()
+        public static void Main()
         {
             SimpleLogger.SetupLog();
 
 #if DEBUG
             SimpleLogger.Logger.Debug(
-                $"Current architecture: {Constants.OsArchitecture} | Current OS: {Environment.OSVersion}");
-            var args = Functions.GetCommandArgs()?.Length > 0
-                ? string.Join(" ", Functions.GetCommandArgs())
+                $"Current architecture: {Helper.OsArchitecture} | Current OS: {Environment.OSVersion}");
+            var args = MainScreen.GetCommandArgs()?.Length > 0
+                ? string.Join(" ", MainScreen.GetCommandArgs())
                 : "No additional arguments";
             SimpleLogger.Logger.Debug($"Used command-line arguments: {args}");
 #endif
+            
+            ServicePointManager.Expect100Continue = true;
+            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+            
             if (Convert.ToBoolean(Updater.CheckForUpdates()))
             {
                 Console.WriteLine(
@@ -38,7 +42,7 @@ namespace xp_apps
 
             // Checks if .NET Framework 4.5 or newer is installed
             // Its need for TLS 1.2 protocol
-            if (!Functions.IsDotNet45OrNewer())
+            if (!MainScreen.IsDotNet45OrNewer())
             {
                 Console.WriteLine(
                     "This program works only with installed .NET Framework 4.0 and 4.5+\nMake sure you have installed the One-Core-API before installing .NET Framework 4.5+!");
@@ -47,11 +51,7 @@ namespace xp_apps
                 return;
             }
 
-            // Initializing Security Protocols for HTTPS requests
-            ServicePointManager.Expect100Continue = true;
-            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
-
-            Functions.ParseArgs();
+            MainScreen.ParseArgs();       
         }
     }
 }

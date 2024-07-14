@@ -3,7 +3,6 @@ using System.IO;
 using System.Net;
 using System.Threading;
 using Ionic.Zip;
-using xp_apps.sources;
 
 namespace xp_apps.Updater
 {
@@ -15,7 +14,7 @@ namespace xp_apps.Updater
 
             using (var client = new WebClient())
             {
-                client.DownloadFile(Constants.LatestReleaseZip, "xp-apps.zip");
+                client.DownloadFile(sources.Updater.LatestReleaseZip, "xp-apps.zip");
             }
 
             using (var zipFile = new ZipFile("xp-apps.zip"))

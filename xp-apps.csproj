@@ -111,12 +111,15 @@
     <ItemGroup>
         <Compile Include="Program.cs"/>
         <Compile Include="Properties\AssemblyInfo.cs"/>
-        <Compile Include="sources\Cache.cs"/>
-        <Compile Include="sources\Constants.cs"/>
+        <Compile Include="sources\Applications.cs" />
 <!--        <Compile Include="sources\extensions.cs"/>-->
-        <Compile Include="sources\Functions.cs"/>
+        <Compile Include="sources\MainScreen.cs" />
         <Compile Include="sources\Logger.cs" />
+        <Compile Include="sources\Settings.cs" />
+        <Compile Include="sources\Structures\Applications.cs" />
+        <Compile Include="sources\Structures\Updater.cs" />
         <Compile Include="sources\Updater.cs"/>
+        <Compile Include="sources\Helper.cs" />
     </ItemGroup>
     <ItemGroup>
         <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
