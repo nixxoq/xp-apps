@@ -91,4 +91,22 @@
             }
         }
     ]
+    "testing":  [
+        {
+            "test1": {
+                "aliases": ["vista_games", "windows_vista_games", "ms_games", "vista games", "windows vista games", "ms games"],
+                "filename": "Microsoft.Games.Windows.Vista.zip",
+                "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/Microsoft.Games.Windows.Vista.zip",
+                "name": "Games from Windows Vista (from 5259 and 5270 builds)",
+                "architecture": "any"
+            },
+            "test2": {
+                "aliases": ["vista_moviemaker", "windows_vista_moviemaker", "vista moviemaker", "windows vista moviemaker"],
+                "filename": "Windows.MovieMaker.Vista.zip",
+                "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/Windows.Movie.Maker.zip",
+                "name": "Movie Maker from Windows Vista (from beta 5270)",
+                "architecture": "any"
+            }
+        }
+    ]
 }
