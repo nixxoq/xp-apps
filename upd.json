@@ -90,7 +90,7 @@
                 "architecture": "any"
             }
         }
-    ]
+    ],
     "testing":  [
         {
             "test1": {
