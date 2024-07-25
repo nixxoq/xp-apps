@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -13,6 +14,15 @@ namespace CurlWrapper
         private static int _animationIndex;
         private static int _progressTopPosition;
         private const string ProgramVersion = "1.0.0.0";
+
+        private static readonly Dictionary<string, string> ErrorMessages = new Dictionary<string, string>
+        {
+            {
+                "Could not resolve host",
+                "An error occurred while executing curl: Unable to resolve host.\nAre you sure you entered the correct URL?"
+            },
+            { "timeout", "An error occurred while executing curl: Request timed out.\nIs the website alive?" }
+        };
 
         public static void Main()
         {
@@ -119,27 +129,26 @@ namespace CurlWrapper
 
                 string lastProgress = null;
 
-                while (!process.HasExited)
+                string outputLine;
+                while ((outputLine = outputReader.ReadLine()) != null)
                 {
-                    var line = errorReader.ReadLine();
-                    if (line == null) continue;
-
-                    var progress = ParseProgress(line);
-                    if (!(progress >= 0) || lastProgress == line) continue;
-
-                    lastProgress = line;
+                    var progress = ParseProgress(outputLine);
+                    if (!(progress >= 0) || lastProgress == outputLine) continue;
+                    lastProgress = outputLine;
                     DisplayProgress(filename, progress, stopwatch);
                 }
 
+                var errorOutput = errorReader.ReadToEnd();
+
+                process.WaitForExit();
                 stopwatch.Stop();
                 Thread.Sleep(1000);
 
-                var completionLine = outputReader.ReadToEnd();
-                Console.WriteLine(string.IsNullOrEmpty(completionLine)
-                    ? $"\n{filename} download completed.\n"
-                    : $"\nError: {completionLine}\n");
+                Console.WriteLine(ErrorMessages.FirstOrDefault(pair => errorOutput.Contains(pair.Key)).Value ??
+                                  "Download completed successfully");
             }
         }
+
 
         private static float ParseProgress(string line)
         {
