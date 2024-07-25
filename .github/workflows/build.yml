@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - development
+      - https-issue
 
 jobs:
   build_debug:
