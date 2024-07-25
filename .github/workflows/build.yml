@@ -13,6 +13,8 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
+      with:
+        ref: 'https-issue'
 
     - name: setup-msbuild
       uses: microsoft/setup-msbuild@v2
@@ -41,6 +43,8 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
+      with:
+        ref: 'https-issue'
     
     - name: setup-msbuild
       uses: microsoft/setup-msbuild@v2
