@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Reflection;
@@ -16,6 +17,7 @@ namespace xp_apps.sources
         public static readonly string OsArchitecture = Environment.Is64BitOperatingSystem ? "x64" : "x86";
 
         public static readonly string WorkDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+        public static readonly string CurrentFile = Assembly.GetExecutingAssembly().GetName().Name;
 
         public static string ExtractFileNameFromUrl(string url) =>
             url.Substring(url.LastIndexOf('/') + 1);
@@ -103,6 +105,11 @@ namespace xp_apps.sources
 
                 stopwatch.Stop();
             }
+        }
+
+        public static string[] GetCommandArgs()
+        {
+            return Environment.GetCommandLineArgs().Skip(1).ToArray();
         }
     }
 }

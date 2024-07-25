@@ -9,19 +9,19 @@ namespace xp_apps
     {
         public static void Main()
         {
-            SimpleLogger.SetupLog();
+            SimpleLogger.SetupLog("xp-apps");
 
 #if DEBUG
             SimpleLogger.Logger.Debug(
                 $"Current architecture: {Helper.OsArchitecture} | Current OS: {Environment.OSVersion}");
-            var args = MainScreen.GetCommandArgs()?.Length > 0
-                ? string.Join(" ", MainScreen.GetCommandArgs())
+            var args = Helper.GetCommandArgs()?.Length > 0
+                ? string.Join(" ", Helper.GetCommandArgs())
                 : "No additional arguments";
             SimpleLogger.Logger.Debug($"Used command-line arguments: {args}");
 #endif
             
-            ServicePointManager.Expect100Continue = true;
-            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+            // ServicePointManager.Expect100Continue = true;
+            // ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
             
             if (Convert.ToBoolean(Updater.CheckForUpdates()))
             {
@@ -42,14 +42,14 @@ namespace xp_apps
 
             // Checks if .NET Framework 4.5 or newer is installed
             // Its need for TLS 1.2 protocol
-            if (!MainScreen.IsDotNet45OrNewer())
-            {
-                Console.WriteLine(
-                    "This program works only with installed .NET Framework 4.0 and 4.5+\nMake sure you have installed the One-Core-API before installing .NET Framework 4.5+!");
-                Console.WriteLine("Press any key to exit...");
-                Console.ReadLine();
-                return;
-            }
+            // if (!MainScreen.IsDotNet45OrNewer())
+            // {
+            //     Console.WriteLine(
+            //         "This program works only with installed .NET Framework 4.0 and 4.5+\nMake sure you have installed the One-Core-API before installing .NET Framework 4.5+!");
+            //     Console.WriteLine("Press any key to exit...");
+            //     Console.ReadLine();
+            //     return;
+            // }
 
             MainScreen.ParseArgs();       
         }

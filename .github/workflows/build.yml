@@ -1,4 +1,4 @@
-name: Build on push to development
+name: Build xp-apps and components
 
 on:
   push:
@@ -32,6 +32,7 @@ jobs:
           bin\Debug\xp-apps.exe
           bin\Debug\Updater.exe
           bin\Debug\NLog.dll
+          bin\Debug\CurlWrapper.exe
     
   build_release:
     runs-on: windows-2019
@@ -59,3 +60,4 @@ jobs:
           bin\Release\xp-apps.exe
           bin\Release\Updater.exe
           bin\Release\NLog.dll
+          bin\Release\CurlWrapper.exe

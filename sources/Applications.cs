@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net;
 using Newtonsoft.Json;
 using xp_apps.sources.Structures;
 using static xp_apps.sources.Structures.ApplicationStructure;
@@ -11,7 +10,7 @@ namespace xp_apps.sources
 {
     public abstract class Applications
     {
-        private const string ApplicationDb = "https://raw.githubusercontent.com/nixxoq/xp-apps/development/upd.json";
+        private const string ApplicationDb = "http://data.nixxoq.xyz/xp-apps/applications.json";
         private static string ApplicationsListName => Helper.ExtractFileNameFromUrl(ApplicationDb);
 
         private static string ApplicationsListPath => Path.Combine(
@@ -246,8 +245,8 @@ namespace xp_apps.sources
                 }
             }
 
-            ServicePointManager.Expect100Continue = true;
-            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+            // ServicePointManager.Expect100Continue = true;
+            // ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
 
             var jsonContent = IsNeedUpdate()
                 ? UpdateApplicationList(true)
