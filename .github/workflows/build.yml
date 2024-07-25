@@ -33,9 +33,10 @@ jobs:
           bin\Debug\DotNetZip.dll
           bin\Debug\Newtonsoft.Json.dll
           bin\Debug\xp-apps.exe
-          bin\Debug\Updater.exe
-          bin\Debug\NLog.dll
-          bin\Debug\CurlWrapper.exe
+          Updater\bin\Debug\Updater.exe
+          Updater\bin\Debug\System.ValueTuple.dll
+          Updater\bin\Debug\NLog.dll
+          CurlWrapper\bin\Debug\CurlWrapper.exe
     
   build_release:
     runs-on: windows-2019
@@ -63,6 +64,7 @@ jobs:
           bin\Release\DotNetZip.dll
           bin\Release\Newtonsoft.Json.dll
           bin\Release\xp-apps.exe
-          bin\Release\Updater.exe
-          bin\Release\NLog.dll
-          bin\Release\CurlWrapper.exe
+          Updater\bin\Release\Updater.exe
+          Updater\bin\Release\System.ValueTuple.dll
+          Updater\bin\Release\NLog.dll
+          CurlWrapper\bin\Release\CurlWrapper.exe
