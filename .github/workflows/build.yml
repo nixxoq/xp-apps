@@ -11,60 +11,68 @@ jobs:
     runs-on: windows-2019
     
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-      with:
-        ref: 'https-issue'
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: 'https-issue'
 
-    - name: setup-msbuild
-      uses: microsoft/setup-msbuild@v2
-    
-    - name: Restore dependencies
-      run: nuget restore
-    
-    - name: Build Debug (any cpu)
-      run: msbuild /t:Build /p:Configuration=Debug /p:Platform="Any CPU"
-    
-    - name: Publish Debug any cpu artifacts
-      uses: actions/upload-artifact@v4
-      with:
-        name: Debug
-        path: |
-          bin\Debug\DotNetZip.dll
-          bin\Debug\Newtonsoft.Json.dll
-          bin\Debug\xp-apps.exe
-          Updater\bin\Debug\Updater.exe
-          Updater\bin\Debug\System.ValueTuple.dll
-          Updater\bin\Debug\NLog.dll
-          CurlWrapper\bin\Debug\CurlWrapper.exe
-    
+      - name: setup-msbuild
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Restore dependencies
+        run: nuget restore
+
+      - name: Build Debug (any cpu)
+        run: msbuild /t:Build /p:Configuration=Debug /p:Platform="Any CPU"
+
+      - name: Create output directory
+        run: mkdir xp-apps\Debug
+
+      - name: Copy Debug artifacts
+        run: |
+          xcopy bin\Debug\*.dll xp-apps\Debug /Y
+          xcopy bin\Debug\xp-apps.exe xp-apps\Debug /Y
+          xcopy Updater\bin\Debug\*.dll xp-apps\Debug /Y
+          xcopy Updater\bin\Debug\Updater.exe xp-apps\Debug /Y
+          xcopy CurlWrapper\bin\Debug\CurlWrapper.exe xp-apps\Debug /Y
+
+      - name: Publish Debug any cpu artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: Debug
+          path: xp-apps\Debug
+  
   build_release:
     runs-on: windows-2019
     
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-      with:
-        ref: 'https-issue'
-    
-    - name: setup-msbuild
-      uses: microsoft/setup-msbuild@v2
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: 'https-issue'
 
-    - name: Restore dependencies
-      run: nuget restore
-    
-    - name: Build Release (any cpu)
-      run: msbuild /t:Build /p:Configuration=Release /p:Platform="Any CPU"
-    
-    - name: Publish Release any cpu artifacts
-      uses: actions/upload-artifact@v4
-      with:
-        name: Release
-        path: |
-          bin\Release\DotNetZip.dll
-          bin\Release\Newtonsoft.Json.dll
-          bin\Release\xp-apps.exe
-          Updater\bin\Release\Updater.exe
-          Updater\bin\Release\System.ValueTuple.dll
-          Updater\bin\Release\NLog.dll
-          CurlWrapper\bin\Release\CurlWrapper.exe
+      - name: setup-msbuild
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Restore dependencies
+        run: nuget restore
+
+      - name: Build Release (any cpu)
+        run: msbuild /t:Build /p:Configuration=Release /p:Platform="Any CPU"
+
+      - name: Create output directory
+        run: mkdir xp-apps\Release
+
+      - name: Copy Release artifacts
+        run: |
+          xcopy bin\Release\*.dll xp-apps\Release /Y
+          xcopy bin\Release\xp-apps.exe xp-apps\Release /Y
+          xcopy Updater\bin\Release\*.dll xp-apps\Release /Y
+          xcopy Updater\bin\Release\Updater.exe xp-apps\Release /Y
+          xcopy CurlWrapper\bin\Release\CurlWrapper.exe xp-apps\Release /Y
+
+      - name: Publish Release any cpu artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: Release
+          path: xp-apps\Release
