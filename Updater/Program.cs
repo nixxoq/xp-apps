@@ -12,6 +12,7 @@ namespace xp_apps.Updater
         {
             Thread.Sleep(2000);
 
+#warning TODO: Reimplement using http or CurlWrapper (if data.nixxoq.xyz is not available)
             using (var client = new WebClient())
             {
                 client.DownloadFile(sources.Updater.LatestReleaseZip, "xp-apps.zip");
@@ -22,6 +23,7 @@ namespace xp_apps.Updater
                 foreach (var file in zipFile) file.Extract(".", ExtractExistingFileAction.OverwriteSilently);
             }
 
+#warning TODO: Rename original exe file if user changed (why not?)
             File.Delete("xp-apps.zip");
 
             Console.WriteLine("Application has been updated successfully. Press any key to exit...");

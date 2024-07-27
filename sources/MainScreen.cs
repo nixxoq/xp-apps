@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using Microsoft.Win32;
 using static xp_apps.sources.Structures.ApplicationStructure;
 
@@ -12,19 +11,15 @@ namespace xp_apps.sources
                                               "\n-h, --help\t\t\t\tDisplay this help message" +
                                               "\n-i, --install\t\t\t\tInstall Application from XP-Apps repository" +
                                               "\n-l, --list, --list-applications,\tList all available applications in the repository \n--list-apps or --apps" +
-                                              "\n\nExample:\n    xp-apps.exe -i PyCharm2023 or xp-apps.exe --install PyCharm2023";
-
-        public static string[] GetCommandArgs()
-        {
-            return Environment.GetCommandLineArgs().Skip(1).ToArray();
-        }
+                                              $"\n\nExample:\n    {Helper.CurrentFile} -i PyCharm2023" +
+                                              $"\n    {Helper.CurrentFile} --install PyCharm2023";
 
         /// <summary>
         ///     Parse arguments from command line
         /// </summary>
         public static void ParseArgs()
         {
-            var args = GetCommandArgs();
+            var args = Helper.GetCommandArgs();
 
             if (args.Length == 0)
             {

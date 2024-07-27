@@ -117,6 +117,7 @@
         <Compile Include="sources\Logger.cs" />
         <Compile Include="sources\Settings.cs" />
         <Compile Include="sources\Structures\Applications.cs" />
+        <Compile Include="sources\Structures\Settings.cs" />
         <Compile Include="sources\Structures\Updater.cs" />
         <Compile Include="sources\Updater.cs"/>
         <Compile Include="sources\Helper.cs" />

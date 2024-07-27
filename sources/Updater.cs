@@ -9,7 +9,7 @@ namespace xp_apps.sources
 {
     public abstract class Updater
     {
-        public const string ProgramVersion = "0.2.0-dev2";
+        public const string ProgramVersion = "0.4.0-dev1";
 
         private const string LatestReleaseVersion = "http://data.nixxoq.xyz/xp-apps/data.json";
         public const string LatestReleaseZip = "https://github.com/nixxoq/xp-apps/releases/latest/download/xp-apps.zip";
@@ -23,6 +23,7 @@ namespace xp_apps.sources
                 return null;
             }
 
+#warning TODO: Reimplement using CurlWrapper ?
             using (var client = Helper.GetClient())
             {
                 try

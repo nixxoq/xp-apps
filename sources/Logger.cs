@@ -9,7 +9,7 @@ namespace xp_apps.sources
     {
         public static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-        public static void SetupLog()
+        public static void SetupLog(string appName)
         {
             var unixStart = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
             var timestamp = (long)(DateTime.Now.ToUniversalTime() - unixStart).TotalSeconds;
@@ -19,17 +19,17 @@ namespace xp_apps.sources
             var consoleTarget = new ConsoleTarget
             {
                 Name = "console",
-                Layout = "[${date}] [${level:uppercase=true}]\n  -> ${message}"
+                Layout = $"[{appName}] [${{date}}] [${{level:uppercase=true}}]\n  -> ${{message}}"
             };
 
             var fileTarget = new FileTarget
             {
                 Name = "File",
-                FileName = $"debug-{timestamp}.log",
+                FileName = $"debug-{appName}-{timestamp}.log",
                 Layout = "[${date}] [${level:uppercase=true}]\n  -> ${message}"
             };
-            config.AddRule(LogLevel.Debug, LogLevel.Fatal, consoleTarget);
-            config.AddRule(LogLevel.Debug, LogLevel.Debug, fileTarget);
+            config.AddRule(LogLevel.Debug, LogLevel.Debug, consoleTarget);
+            config.AddRule(LogLevel.Debug, LogLevel.Info, fileTarget);
             LogManager.Configuration = config;
         }
     }

@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using SettingsOperation = xp_apps.sources.Structures.Settings.SettingsOperation;
 
 namespace xp_apps.sources
 {
@@ -24,7 +25,7 @@ namespace xp_apps.sources
 #endif
         }
 
-        public static void UpdateSettings(string version = "")
+        public static void UpdateSettings(SettingsOperation operation, string version = "")
         {
             if (!IsSettingsExist)
             {
