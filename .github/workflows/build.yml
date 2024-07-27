@@ -36,12 +36,13 @@ jobs:
 
       - name: Download and unpack curl
         run: |
-          curl -L -o curl.7z https://winampplugins.co.uk/curl/curl_7_46_0_openssl_nghttp2_x86.7z
+          Invoke-WebRequest -Uri "https://winampplugins.co.uk/curl/curl_7_46_0_openssl_nghttp2_x86.7z" -OutFile "curl.7z"
           7z x curl.7z -o curl_temp
           mkdir xp-apps\Debug\curl
           move curl_temp\curl.exe xp-apps\Debug\curl\
           move curl_temp\ca-bundle.crt xp-apps\Debug\curl\
           rmdir /s /q curl_temp
+
 
       - name: Copy Debug artifacts
         run: |
@@ -84,12 +85,13 @@ jobs:
 
       - name: Download and unpack curl
         run: |
-          curl -L -o curl.7z https://winampplugins.co.uk/curl/curl_7_46_0_openssl_nghttp2_x86.7z
+          Invoke-WebRequest -Uri "https://winampplugins.co.uk/curl/curl_7_46_0_openssl_nghttp2_x86.7z" -OutFile "curl.7z"
           7z x curl.7z -o curl_temp
           mkdir xp-apps\Release\curl
           move curl_temp\curl.exe xp-apps\Release\curl\
           move curl_temp\ca-bundle.crt xp-apps\Release\curl\
           rmdir /s /q curl_temp
+
 
       - name: Copy Release artifacts
         run: |
