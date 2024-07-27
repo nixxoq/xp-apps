@@ -41,7 +41,7 @@ jobs:
           mkdir xp-apps\Debug\curl
           move curl_temp\curl.exe xp-apps\Debug\curl\
           move curl_temp\ca-bundle.crt xp-apps\Debug\curl\
-          rmdir /s /q curl_temp
+          Remove-Item -Recurse -Force curl_temp
 
 
       - name: Copy Debug artifacts
@@ -90,7 +90,7 @@ jobs:
           mkdir xp-apps\Release\curl
           move curl_temp\curl.exe xp-apps\Release\curl\
           move curl_temp\ca-bundle.crt xp-apps\Release\curl\
-          rmdir /s /q curl_temp
+          Remove-Item -Recurse -Force curl_temp
 
 
       - name: Copy Release artifacts
