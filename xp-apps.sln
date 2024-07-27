@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xp-apps", "xp-apps.csproj",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Updater", "Updater\Updater.csproj", "{63EF0073-1CB9-4C8F-9479-D47503E54442}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurlWrapper", "CurlWrapper\CurlWrapper.csproj", "{B9721E83-A339-45F2-AAAD-820076EBD73B}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,18 +41,6 @@ Global
 		{63EF0073-1CB9-4C8F-9479-D47503E54442}.Release|x64.Build.0 = Release|Any CPU
 		{63EF0073-1CB9-4C8F-9479-D47503E54442}.Release|x86.ActiveCfg = Release|Any CPU
 		{63EF0073-1CB9-4C8F-9479-D47503E54442}.Release|x86.Build.0 = Release|Any CPU
-		{B9721E83-A339-45F2-AAAD-820076EBD73B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B9721E83-A339-45F2-AAAD-820076EBD73B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B9721E83-A339-45F2-AAAD-820076EBD73B}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{B9721E83-A339-45F2-AAAD-820076EBD73B}.Debug|x64.Build.0 = Debug|Any CPU
-		{B9721E83-A339-45F2-AAAD-820076EBD73B}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{B9721E83-A339-45F2-AAAD-820076EBD73B}.Debug|x86.Build.0 = Debug|Any CPU
-		{B9721E83-A339-45F2-AAAD-820076EBD73B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B9721E83-A339-45F2-AAAD-820076EBD73B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B9721E83-A339-45F2-AAAD-820076EBD73B}.Release|x64.ActiveCfg = Release|Any CPU
-		{B9721E83-A339-45F2-AAAD-820076EBD73B}.Release|x64.Build.0 = Release|Any CPU
-		{B9721E83-A339-45F2-AAAD-820076EBD73B}.Release|x86.ActiveCfg = Release|Any CPU
-		{B9721E83-A339-45F2-AAAD-820076EBD73B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

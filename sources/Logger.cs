@@ -28,8 +28,8 @@ namespace xp_apps.sources
                 FileName = $"debug-{appName}-{timestamp}.log",
                 Layout = "[${date}] [${level:uppercase=true}]\n  -> ${message}"
             };
-            config.AddRule(LogLevel.Debug, LogLevel.Fatal, consoleTarget);
-            config.AddRule(LogLevel.Debug, LogLevel.Debug, fileTarget);
+            config.AddRule(LogLevel.Debug, LogLevel.Debug, consoleTarget);
+            config.AddRule(LogLevel.Debug, LogLevel.Info, fileTarget);
             LogManager.Configuration = config;
         }
     }

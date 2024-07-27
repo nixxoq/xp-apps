@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Net;
+using System.Diagnostics;
 using System.Threading;
 using xp_apps.sources;
 
@@ -19,16 +19,15 @@ namespace xp_apps
                 : "No additional arguments";
             SimpleLogger.Logger.Debug($"Used command-line arguments: {args}");
 #endif
-            
-            // ServicePointManager.Expect100Continue = true;
-            // ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
-            
+            Console.CancelKeyPress += OnExit;
+
             if (Convert.ToBoolean(Updater.CheckForUpdates()))
             {
                 Console.WriteLine(
                     "A new version of the program is available.\nIf you want to update, please run \"xp-apps --self-update\".");
                 Thread.Sleep(2000);
             }
+            
             // Cache.FetchLatestVersion();
             // Checks if current operating system is Windows XP (NT 5.1 & NT 5.2)
             // However, I am thinking about adding support for Windows Vista when the One-Core-API 4.1.0 will be released 👀
@@ -51,7 +50,22 @@ namespace xp_apps
             //     return;
             // }
 
-            MainScreen.ParseArgs();       
+            MainScreen.ParseArgs();
+        }
+
+        private static void OnExit(object sender, ConsoleCancelEventArgs e)
+        {
+            Console.WriteLine("\nctrl + c key detected, exiting...");
+        
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = "taskkill",
+                Arguments = "/f /im curl.exe",
+                CreateNoWindow = true,
+                UseShellExecute = false
+            });
+        
+            Environment.Exit(0);
         }
     }
 }

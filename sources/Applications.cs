@@ -10,7 +10,7 @@ namespace xp_apps.sources
 {
     public abstract class Applications
     {
-        private const string ApplicationDb = "http://data.nixxoq.xyz/xp-apps/applications.json";
+        private const string ApplicationDb = "https://raw.githubusercontent.com/nixxoq/xp-apps/https-issue/upd.json";
         private static string ApplicationsListName => Helper.ExtractFileNameFromUrl(ApplicationDb);
 
         private static string ApplicationsListPath => Path.Combine(
@@ -32,18 +32,16 @@ namespace xp_apps.sources
                 return File.ReadAllText(ApplicationsListPath);
 
             Helper.DownloadFile(ApplicationDb, ApplicationsListPath);
-            Console.Clear();
 
             return File.ReadAllText(ApplicationsListPath);
         }
-
+        
         private static bool IsNeedUpdate()
         {
             // true - need update; false - up to date or not exist
-
-            var client = Helper.GetClient();
-            client.OpenRead(ApplicationDb);
-            var filesize = Convert.ToInt64(client.ResponseHeaders.Get("Content-Length"));
+            
+            var res = CurlWrapper.GetFileContent(ApplicationDb);
+            var filesize = long.Parse(res);
 
             if (!File.Exists(ApplicationsListPath) || new FileInfo(ApplicationsListPath).Length != filesize)
                 return true;
@@ -53,6 +51,7 @@ namespace xp_apps.sources
 #endif
             return false;
         }
+
 
         /// <summary>
         ///     Get all applications available to install
@@ -130,6 +129,8 @@ namespace xp_apps.sources
         /// <param name="isForce">Force download if file already exists</param>
         public static void InstallApplication(string appName, bool isForce)
         {
+            Console.Clear();
+            
             var applicationDetails = FindApplication(appName);
             if (applicationDetails == null)
             {
@@ -148,10 +149,7 @@ namespace xp_apps.sources
 
             Console.WriteLine($"Found application {appName}");
 
-            var client = Helper.GetClient();
-            client.OpenRead(url ?? string.Empty);
-            var filesize = Convert.ToInt64(client.ResponseHeaders.Get("Content-Length"));
-
+            var filesize = Convert.ToInt64(CurlWrapper.GetFileContent(url));
             var downloadedIn = Path.Combine(Helper.WorkDir, filename);
             Console.WriteLine(
                 $"Application name: {applicationDetails.Name}\nSize (in MB): {filesize / (1024 * 1024)}" +
@@ -224,10 +222,6 @@ namespace xp_apps.sources
             return d[n, m];
         }
 
-        /// <summary>
-        ///     Retrieves the applications list updates from the server and deserializes them into an Applications object.
-        /// </summary>
-        /// <returns>The deserialized Applications object containing the updates.</returns>
         private static ApplicationStructure.Applications GetUpdates()
         {
             if (!Helper.IsNetworkAvailable())
@@ -244,9 +238,6 @@ namespace xp_apps.sources
                         File.ReadAllText(ApplicationsListPath));
                 }
             }
-
-            // ServicePointManager.Expect100Continue = true;
-            // ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
 
             var jsonContent = IsNeedUpdate()
                 ? UpdateApplicationList(true)
