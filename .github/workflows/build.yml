@@ -81,6 +81,7 @@ jobs:
       - name: Install 7-Zip
         run: |
           choco install 7zip -y
+          Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
           RefreshEnv
 
       - name: Download and unpack curl
