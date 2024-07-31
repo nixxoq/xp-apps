@@ -35,11 +35,11 @@ namespace xp_apps.sources
 
             return File.ReadAllText(ApplicationsListPath);
         }
-        
+
         private static bool IsNeedUpdate()
         {
             // true - need update; false - up to date or not exist
-            
+
             var res = CurlWrapper.GetFileContent(ApplicationDb);
             var filesize = long.Parse(res);
 
@@ -130,7 +130,7 @@ namespace xp_apps.sources
         public static void InstallApplication(string appName, bool isForce)
         {
             Console.Clear();
-            
+
             var applicationDetails = FindApplication(appName);
             if (applicationDetails == null)
             {

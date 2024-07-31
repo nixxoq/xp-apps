@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -122,8 +123,7 @@ namespace xp_apps.sources
 
     public abstract class CurlWrapper
     {
-        private static readonly char[] AnimationChars = { '|', '/', '-', '\\' };
-        private static int _animationIndex;
+        private const int ProgressBarWidth = 30;
         private static readonly string Curl = GetCurl(Helper.GetCommandArgs());
 
         private static string GetArgValue(string[] args, string key)
@@ -248,7 +248,7 @@ namespace xp_apps.sources
                     if (progress >= 0 && lastProgress != line)
                     {
                         lastProgress = line;
-                        DisplayProgress(filename, progress, stopwatch);
+                        DisplayProgress(progress, stopwatch);
                     }
                     else if (line.Contains("Could not resolve host"))
                     {
@@ -289,13 +289,15 @@ namespace xp_apps.sources
 
         private static float ParseProgress(string line)
         {
-            var match = Regex.Match(line, @"(\d+\.\d+)%");
-            if (match.Success && float.TryParse(match.Groups[1].Value, out var progress)) return progress;
+            var match = Regex.Match(line, @"(\d+[\.,]?\d*)%\s*");
+
+            if (match.Success && float.TryParse(match.Groups[1].Value.Replace(",", "."), NumberStyles.Float,
+                    CultureInfo.InvariantCulture, out var progress)) return progress;
 
             return -1;
         }
 
-        private static void DisplayProgress(string filename, float progress, Stopwatch stopwatch)
+        private static void DisplayProgress(float progress, Stopwatch stopwatch)
         {
             if (progress <= 0 || stopwatch.Elapsed.TotalSeconds <= 0) return;
 
@@ -306,17 +308,18 @@ namespace xp_apps.sources
                 ? TimeSpan.FromSeconds(remainingSeconds)
                 : TimeSpan.MaxValue;
 
-            var animationChar = AnimationChars[_animationIndex++ % AnimationChars.Length];
 
-            var originalCursorTop = Console.CursorTop;
-            var originalCursorLeft = Console.CursorLeft;
-            
-            Console.SetCursorPosition(0, originalCursorTop);
-            Console.Write(
-                $@"{animationChar} Downloading {filename}
-{progress:0.00}% completed | {remainingTime:hh\:mm\:ss} remaining");
+            var progressChars = (int)(ProgressBarWidth * (progress / 100.0));
+            var progressBar = new string('#', progressChars) + new string('-', ProgressBarWidth - progressChars);
 
-            Console.SetCursorPosition(originalCursorLeft, originalCursorTop);
+            var progressText =
+                $"\r[{progressBar}] {progress:0.00}% | {speed:0.00} MB/s | {remainingTime:hh\\:mm\\:ss} remaining";
+
+            Console.Write(progressText);
+            // if (!string.IsNullOrEmpty(filename))
+            // {
+            //     Console.WriteLine($" | {filename}");
+            // }
         }
     }
 }
