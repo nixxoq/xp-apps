@@ -155,12 +155,14 @@ namespace xp_apps.sources
             }
 
             // method 3 - search in curl/curl.exe folder
-            var curlFolderPath = Path.Combine(Helper.WorkDir, "curl", "curl.exe");
-
-            if (File.Exists(curlFolderPath))
+            if (Directory.Exists(Helper.WorkDir + "\\curl"))
             {
-                SimpleLogger.Logger.Info("Picked up curl from the curl folder");
-                return curlFolderPath;
+                var curlFolderPath = Path.Combine(Helper.WorkDir, "curl", "curl.exe");
+
+                if (File.Exists(curlFolderPath))
+                {
+                    return curlFolderPath;
+                }
             }
 
             Console.WriteLine("Could not find curl. Exiting");
@@ -170,8 +172,47 @@ namespace xp_apps.sources
             return null;
         }
 
-
         public static string GetFileContent(string url)
+        {
+            var startInfo = new ProcessStartInfo
+            {
+                FileName = Curl,
+                Arguments = $"-s \"{url}\"",
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                UseShellExecute = false,
+                CreateNoWindow = true
+            };
+
+            using (var process = new Process())
+            {
+                process.StartInfo = startInfo;
+                process.Start();
+
+                string content = null;
+                string error = null;
+
+                try
+                {
+                    content = process.StandardOutput.ReadToEnd();
+                    error = process.StandardError.ReadToEnd();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error reading process output: {ex.Message}");
+                }
+
+                process.WaitForExit();
+
+                if (process.ExitCode == 0) return content;
+                
+                Console.WriteLine($"Error: {error}");
+                return null;
+
+            }
+        }
+
+        public static string GetFileSize(string url)
         {
             var startInfo = new ProcessStartInfo
             {

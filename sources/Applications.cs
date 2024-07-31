@@ -40,7 +40,7 @@ namespace xp_apps.sources
         {
             // true - need update; false - up to date or not exist
 
-            var res = CurlWrapper.GetFileContent(ApplicationDb);
+            var res = CurlWrapper.GetFileSize(ApplicationDb);
             var filesize = long.Parse(res);
 
             if (!File.Exists(ApplicationsListPath) || new FileInfo(ApplicationsListPath).Length != filesize)
@@ -149,7 +149,7 @@ namespace xp_apps.sources
 
             Console.WriteLine($"Found application {appName}");
 
-            var filesize = Convert.ToInt64(CurlWrapper.GetFileContent(url));
+            var filesize = Convert.ToInt64(CurlWrapper.GetFileSize(url));
             var downloadedIn = Path.Combine(Helper.WorkDir, filename);
             Console.WriteLine(
                 $"Application name: {applicationDetails.Name}\nSize (in MB): {filesize / (1024 * 1024)}" +
