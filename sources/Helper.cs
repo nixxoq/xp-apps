@@ -71,7 +71,9 @@ namespace xp_apps.sources
         /// <param name="filename">The name of the file to save the downloaded content to.</param>
         public static void DownloadFile(string url, string filename)
         {
-            if (url.StartsWith("https", StringComparison.OrdinalIgnoreCase))
+            // .NET 4.5 supports TLS 1.2
+            // I tested on Windows XP and Windows Server 2003, not sure about Windows Vista and Later
+            if (url.StartsWith("https", StringComparison.OrdinalIgnoreCase) && !MainScreen.IsDotnet45)
             {
                 CurlWrapper.DownloadFile(url, filename);
                 return;
@@ -155,12 +157,11 @@ namespace xp_apps.sources
             }
 
             // method 3 - search in curl/curl.exe folder
-            var curlFolderPath = Path.Combine(Helper.WorkDir, "curl", "curl.exe");
-
-            if (File.Exists(curlFolderPath))
+            if (Directory.Exists(Helper.WorkDir + "/curl"))
             {
-                SimpleLogger.Logger.Info("Picked up curl from the curl folder");
-                return curlFolderPath;
+                var curlFolderPath = Path.Combine(Helper.WorkDir, "curl", "curl.exe");
+
+                if (File.Exists(curlFolderPath)) return curlFolderPath;
             }
 
             Console.WriteLine("Could not find curl. Exiting");
@@ -170,13 +171,12 @@ namespace xp_apps.sources
             return null;
         }
 
-
         public static string GetFileContent(string url)
         {
             var startInfo = new ProcessStartInfo
             {
                 FileName = Curl,
-                Arguments = $"-I \"{url}\" --silent",
+                Arguments = $"-s \"{url}\"",
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
                 UseShellExecute = false,
@@ -203,15 +203,63 @@ namespace xp_apps.sources
 
                 process.WaitForExit();
 
-                if (process.ExitCode != 0) Console.WriteLine($"Error: {error}");
+                if (process.ExitCode == 0) return content;
 
-                var contentLengthLine = content?.Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries)
+                Console.WriteLine($"Error: {error}");
+                return null;
+            }
+        }
+
+        public static string GetFileSize(string url)
+        {
+            var startInfo = new ProcessStartInfo
+            {
+                FileName = Curl,
+                Arguments = $"-IL \"{url}\" --silent",
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                UseShellExecute = false,
+                CreateNoWindow = true
+            };
+
+            using (var process = new Process())
+            {
+                process.StartInfo = startInfo;
+                process.Start();
+
+                string content = null;
+                string error = null;
+
+                try
+                {
+                    content = process.StandardOutput.ReadToEnd();
+                    error = process.StandardError.ReadToEnd();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error reading process output: {ex.Message}");
+                }
+
+                process.WaitForExit();
+
+                if (process.ExitCode != 0)
+                {
+                    Console.WriteLine($"Error: {error}");
+                    return null;
+                }
+
+                var responses = content?.Split(new[] { "\r\n\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+
+                var lastResponse = responses?.LastOrDefault();
+
+                var contentLengthLine = lastResponse?.Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries)
                     .FirstOrDefault(line => line.StartsWith("Content-Length:", StringComparison.OrdinalIgnoreCase));
 
                 var contentLength = contentLengthLine?.Split(':')[1].Trim();
                 return contentLength;
             }
         }
+
 
         public static void DownloadFile(string url, string filename)
         {

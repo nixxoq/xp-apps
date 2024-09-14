@@ -24,20 +24,22 @@ namespace xp_apps
             if (Convert.ToBoolean(Updater.CheckForUpdates()))
             {
                 Console.WriteLine(
-                    "A new version of the program is available.\nIf you want to update, please run \"xp-apps --self-update\".");
+                    "[Update]: A new version of the program is available.\n[Tip]: If you want to update, please run \"xp-apps --self-update\".");
                 Thread.Sleep(2000);
             }
-            
+
             // Cache.FetchLatestVersion();
             // Checks if current operating system is Windows XP (NT 5.1 & NT 5.2)
             // However, I am thinking about adding support for Windows Vista when the One-Core-API 4.1.0 will be released 👀
-            // if (!Functions.IsWindowsXp())
-            // {
-            //     Console.WriteLine("This program works only on Windows XP.");
-            //     Console.WriteLine("Press any key to exit...");
-            //     Console.ReadLine();
-            //     return;
-            // }
+
+            // Funny moment: this program works on Linux too
+            if (MainScreen.IsWindowsNt5)
+            {
+                Console.WriteLine("This program works only on Windows XP.");
+                Console.WriteLine("Press any key to exit...");
+                Console.ReadLine();
+                return;
+            }
 
             // Checks if .NET Framework 4.5 or newer is installed
             // Its need for TLS 1.2 protocol
@@ -56,7 +58,7 @@ namespace xp_apps
         private static void OnExit(object sender, ConsoleCancelEventArgs e)
         {
             Console.WriteLine("\nctrl + c key detected, exiting...");
-        
+
             Process.Start(new ProcessStartInfo
             {
                 FileName = "taskkill",
@@ -64,7 +66,7 @@ namespace xp_apps
                 CreateNoWindow = true,
                 UseShellExecute = false
             });
-        
+
             Environment.Exit(0);
         }
     }

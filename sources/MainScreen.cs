@@ -6,6 +6,9 @@ namespace xp_apps.sources
 {
     internal static class MainScreen
     {
+        public static readonly bool IsDotnet45 = IsDotNet45OrNewer();
+        public static readonly bool IsWindowsNt5 = IsWindowsXp();
+
         private static readonly string Help = $"xp-apps ver {Updater.ProgramVersion}" +
                                               "\n\nList of available arguments:\n\n[Option]\t\t\t\t[Description]" +
                                               "\n-h, --help\t\t\t\tDisplay this help message" +
@@ -88,8 +91,7 @@ namespace xp_apps.sources
         }
 
         // https://learn.microsoft.com/en-us/dotnet/framework/migration-guide/how-to-determine-which-versions-are-installed#query-the-registry-using-code
-#warning this function will be removed soon
-        public static bool IsDotNet45OrNewer()
+        private static bool IsDotNet45OrNewer()
         {
             using (var dotNetKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32)
                        .OpenSubKey(@"SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full\"))
