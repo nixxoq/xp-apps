@@ -7,7 +7,7 @@ namespace xp_apps.sources
 {
     public abstract class Updater
     {
-        public const string ProgramVersion = "0.4.0-dev3";
+        public const string ProgramVersion = "0.4.0-dev4";
 
         // todo: search another ways to check for latest release version
         // P.S. I know only one - upload data.json on every release

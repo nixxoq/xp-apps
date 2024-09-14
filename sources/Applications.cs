@@ -10,7 +10,7 @@ namespace xp_apps.sources
 {
     public abstract class Applications
     {
-        private const string ApplicationDb = "https://raw.githubusercontent.com/nixxoq/xp-apps/https-issue/upd.json";
+        private const string ApplicationDb = "https://raw.githubusercontent.com/nixxoq/xp-apps/development/upd.json";
         private static string ApplicationsListName => Helper.ExtractFileNameFromUrl(ApplicationDb);
 
         private static string ApplicationsListPath => Path.Combine(
@@ -152,8 +152,8 @@ namespace xp_apps.sources
             var filesize = Convert.ToInt64(CurlWrapper.GetFileSize(url));
             var downloadedIn = Path.Combine(Helper.WorkDir, filename);
             Console.WriteLine(
-                $"Application name: {applicationDetails.Name}\nSize (in MB): {filesize / (1024 * 1024)}" +
-                $"Filename: {applicationDetails.Filename}\nWill be downloaded in {downloadedIn}");
+                $"Application name: {applicationDetails.Name}\nSize: {filesize / (1024 * 1024)} MB" +
+                $"\nFilename: {applicationDetails.Filename}\nWill be downloaded in {downloadedIn}");
 
             if (File.Exists(filename) && isForce)
                 File.Delete(filename);
