@@ -1,112 +1,513 @@
 {
-    "browsers": [
-        {
-            "chromium121.x64": {
-                "aliases": ["chromium121", "chromium"],
-                "filename": "chromium121_x64.zip",
-                "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/chromium121_x64.zip",
-                "name": "Chromium",
-                "architecture": "x64"
-            },
-            "chromium121.x86": {
-                "aliases": ["chromium121", "chromium"],
-                "filename": "chromium121_x86.zip",
-                "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/chromium121_x86.zip",
-                "name": "Chromium",
-                "architecture": "x86"
-            },
-            "catsxp.117": {
-                "aliases": ["catsxp117", "catsxp.v117", "catsxp_v117"],
-                "filename": "catsxp.chrome.117.zip",
-                "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/catsxp.chrome.117.zip",
-                "name": "CatsXP (117)",
-                "architecture": "any"
-            },
-            "catsxp.118": {
-                "aliases": ["catsxp118", "catsxp.v118", "catsxp_v118"],
-                "filename": "catsxp.chrome.118.zip",
-                "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/catsxp.chrome.118.zip",
-                "name": "CatsXP (118)",
-                "architecture": "any"
-            },
-            "brave": {
-                "aliases": ["brave.101", "bravebrowser"],
-                "filename": "brave.zip",
-                "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/brave.101.zip",
-                "name": "Brave (101)",
-                "architecture": "any"
-            },
-            "microsoft.edge": {
-                "aliases": ["microsoft edge", "msedge", "edge", "microsoftedge"],
-                "filename": "Microsoft.Edge.109.zip",
-                "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/Microsoft.Edge.109.zip",
-                "name": "Microsoft Edge (109)",
-                "architecture": "any"
-            },
-            "opera": {
-                "aliases": ["opera", "opera.95", "opera95", "opera 95"],
-                "filename": "Opera95.zip",
-                "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/Opera95.zip",
-                "name": "Opera (95)",
-                "architecture": "any"
-            },
-            "epic.privacy.browser": {
-                "aliases": ["epic privacy browser", "epic privacy browser 104"],
-                "filename": "Epic.Browser.104.zip",
-                "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/Epic.Browser.104.zip",
-                "name": "Epic Privacy Browser (104)",
-                "architecture": "any"
-            },
-            "firefox": {
-                "aliases": ["firefox", "firefox.79", "firefox79", "mozilla.firefox"],
-                "filename": "Firefox.79.zip",
-                "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/Firefox.79.zip",
-                "name": "Firefox (79)",
-                "architecture": "any"
-            },
-            "internet.download.manager": {
-                "aliases": ["internet download manager", "idm", "internetdownloadmanager"],
-                "filename": "Internet.Download.Manager.6.40.build.11.zip",
-                "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/Internet.Download.Manager.6.40.build.11.zip",
-                "name": "Internet Download Manager (6.40 build 11)",
-                "architecture": "any"
-            }
-        }
-    ],
-    "vista_apps": [
-        {
-            "games": {
-                "aliases": ["vista_games", "windows_vista_games", "ms_games", "vista games", "windows vista games", "ms games"],
-                "filename": "Microsoft.Games.Windows.Vista.zip",
-                "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/Microsoft.Games.Windows.Vista.zip",
-                "name": "Games from Windows Vista (from 5259 and 5270 builds)",
-                "architecture": "any"
-            },
-            "moviemaker": {
-                "aliases": ["vista_moviemaker", "windows_vista_moviemaker", "vista moviemaker", "windows vista moviemaker"],
-                "filename": "Windows.MovieMaker.Vista.zip",
-                "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/Windows.Movie.Maker.zip",
-                "name": "Movie Maker from Windows Vista (from beta 5270)",
-                "architecture": "any"
-            }
-        }
-    ],
-    "testing":  [
-        {
-            "test1": {
-                "aliases": ["vista_games", "windows_vista_games", "ms_games", "vista games", "windows vista games", "ms games"],
-                "filename": "Microsoft.Games.Windows.Vista.zip",
-                "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/Microsoft.Games.Windows.Vista.zip",
-                "name": "Games from Windows Vista (from 5259 and 5270 builds)",
-                "architecture": "any"
-            },
-            "test2": {
-                "aliases": ["vista_moviemaker", "windows_vista_moviemaker", "vista moviemaker", "windows vista moviemaker"],
-                "filename": "Windows.MovieMaker.Vista.zip",
-                "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/Windows.Movie.Maker.zip",
-                "name": "Movie Maker from Windows Vista (from beta 5270)",
-                "architecture": "any"
-            }
-        }
-    ]
+  "browsers": [
+    {
+      "chromium121.x64": {
+        "aliases": [
+          "chromium121",
+          "chromium"
+        ],
+        "filename": "chromium121_x64.zip",
+        "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/chromium121_x64.zip",
+        "name": "Chromium",
+        "architecture": "x64"
+      },
+      "chromium121.x86": {
+        "aliases": [
+          "chromium121",
+          "chromium"
+        ],
+        "filename": "chromium121_x86.zip",
+        "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/chromium121_x86.zip",
+        "name": "Chromium",
+        "architecture": "x86"
+      },
+      "catsxp.117": {
+        "aliases": [
+          "catsxp117",
+          "catsxp.v117",
+          "catsxp_v117"
+        ],
+        "filename": "catsxp.chrome.117.zip",
+        "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/catsxp.chrome.117.zip",
+        "name": "CatsXP (117)",
+        "architecture": "any"
+      },
+      "catsxp.118": {
+        "aliases": [
+          "catsxp118",
+          "catsxp.v118",
+          "catsxp_v118"
+        ],
+        "filename": "catsxp.chrome.118.zip",
+        "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/catsxp.chrome.118.zip",
+        "name": "CatsXP (118)",
+        "architecture": "any"
+      },
+      "brave": {
+        "aliases": [
+          "brave.101",
+          "bravebrowser"
+        ],
+        "filename": "brave.zip",
+        "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/brave.101.zip",
+        "name": "Brave (101)",
+        "architecture": "any"
+      },
+      "microsoft.edge": {
+        "aliases": [
+          "microsoft edge",
+          "msedge",
+          "edge",
+          "microsoftedge"
+        ],
+        "filename": "Microsoft.Edge.109.zip",
+        "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/Microsoft.Edge.109.zip",
+        "name": "Microsoft Edge (109)",
+        "architecture": "any"
+      },
+      "opera": {
+        "aliases": [
+          "opera",
+          "opera.95",
+          "opera95",
+          "opera 95"
+        ],
+        "filename": "Opera95.zip",
+        "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/Opera95.zip",
+        "name": "Opera (95)",
+        "architecture": "any"
+      },
+      "epic.privacy.browser": {
+        "aliases": [
+          "epic privacy browser",
+          "epic privacy browser 104"
+        ],
+        "filename": "Epic.Browser.104.zip",
+        "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/Epic.Browser.104.zip",
+        "name": "Epic Privacy Browser (104)",
+        "architecture": "any"
+      },
+      "firefox": {
+        "aliases": [
+          "firefox",
+          "firefox.79",
+          "firefox79",
+          "mozilla.firefox"
+        ],
+        "filename": "Firefox.79.zip",
+        "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/Firefox.79.zip",
+        "name": "Firefox (79)",
+        "architecture": "any"
+      },
+      "internet.download.manager": {
+        "aliases": [
+          "internet download manager",
+          "idm",
+          "internetdownloadmanager"
+        ],
+        "filename": "Internet.Download.Manager.6.40.build.11.zip",
+        "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/Internet.Download.Manager.6.40.build.11.zip",
+        "name": "Internet Download Manager (6.40 build 11)",
+        "architecture": "any"
+      }
+    }
+  ],
+  "vista_apps": [
+    {
+      "games": {
+        "aliases": [
+          "vista_games",
+          "windows_vista_games",
+          "ms_games",
+          "vista games",
+          "windows vista games",
+          "ms games"
+        ],
+        "filename": "Microsoft.Games.Windows.Vista.zip",
+        "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/Microsoft.Games.Windows.Vista.zip",
+        "name": "Games from Windows Vista (from 5259 and 5270 builds)",
+        "architecture": "any"
+      },
+      "moviemaker": {
+        "aliases": [
+          "vista_moviemaker",
+          "windows_vista_moviemaker",
+          "vista moviemaker",
+          "windows vista moviemaker"
+        ],
+        "filename": "Windows.MovieMaker.Vista.zip",
+        "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/Windows.Movie.Maker.zip",
+        "name": "Movie Maker from Windows Vista (from beta 5270)",
+        "architecture": "any"
+      },
+      "sidebar": {
+        "aliases": [
+          "vista_sidebar",
+          "windows_vista_sidebar",
+          "ms_sidebar",
+          "vista_sidebar",
+          "windows vista_sidebar",
+          "ms sidebar",
+          "vista_sidebar_6001",
+          "windows_vista_sidebar_6001",
+          "ms_sidebar_6001",
+          "vista sidebar 6001",
+          "windows vista sidebar 6001",
+          "ms sidebar 6001",
+          "vista_sidebar_5259",
+          "windows_vista_sidebar_5259",
+          "ms_sidebar_5259",
+          "vista sidebar 5259",
+          "windows vista sidebar 5259",
+          "ms sidebar 5259"
+        ],
+        "filename": "Windows.Sidebars.zip",
+        "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/Windows.Sidebars.zip",
+        "name": "Sidebar from Windows Vista (from beta 5259 and 6001 builds)",
+        "architecture": "any"
+      }
+    }
+  ],
+  "windows_7_apps": [
+    {
+      "games": {
+        "aliases": [
+          "windows_7_games",
+          "ms_games",
+          "windows 7 games",
+          "ms games"
+        ],
+        "filename": "Windows.7.Games.zip",
+        "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/Windows.7.Games.zip",
+        "name": "Games from Windows 7",
+        "architecture": "any"
+      },
+      "wordpad": {
+        "aliases": [
+          "windows_7_wordpad",
+          "ms_wordpad",
+          "windows 7 wordpad",
+          "ms wordpad"
+        ],
+        "filename": "wordpad.zip",
+        "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/wordpad.zip",
+        "name": "Wordpad from Windows 7",
+        "architecture": "any"
+      },
+      "paint": {
+        "aliases": [
+          "windows_7_paint",
+          "ms_paint",
+          "windows 7 paint",
+          "ms paint"
+        ],
+        "filename": "Microsoft.Paint.Windows.7.zip",
+        "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/Microsoft.Paint.Windows.7.zip",
+        "name": "Paint from Windows 7",
+        "architecture": "any"
+      }
+    }
+  ],
+  "Codec_video_audio": [
+    {
+      "K-lite Codec": {
+        "aliases": [
+          "k-lite codec",
+          "k_lite_codec"
+        ],
+        "filename": "k-lite.zip",
+        "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/k-lite.zip",
+        "architecture": "any"
+      },
+      "AIMP": {
+        "aliases": [
+          "aimp",
+          "aimp 5"
+        ],
+        "filename": "AIMP.zip",
+        "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/AIMP.zip",
+        "architecture": "any"
+      },
+      "FL-studio": {
+        "aliases": [
+          "fl_studio",
+          "fl studio",
+          "fl studio 20.9.2",
+          "fl studio 20.9.2.2963"
+        ],
+        "filename": "FL-studio_20_9_2.zip",
+        "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/Image-Line.FL.Studio.Producer.Edition.v20.9.2.2963.zip ",
+        "architecture": "x64"
+      },
+      "Spotify": {
+        "aliases": [
+          "spotify"
+        ],
+        "filename": "Spotify.zip",
+        "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/Spotify.zip",
+        "architecture": "any"
+      }
+    }
+  ],
+  "Utilities": [
+    {
+      ".net framework 4.8": {
+        "aliases": [
+          ".net framework 4.8",
+          ".net 4.8",
+          ".net4.8",
+          ".net_4.8",
+          ".net_4_8",
+          ".net_framework_4.8"
+        ],
+        "filename": "dotnet.4.8.zip",
+        "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/dotnet.4.8.zip",
+        "architecture": "any"
+      },
+      ".net framework 4.7.2": {
+        "aliases": [
+          ".net framework 4.7.2",
+          ".net 4.7.2",
+          ".net4.7.2",
+          ".net_4.7.2",
+          ".net_4_7.2",
+          ".net_framework_4.7.2"
+        ],
+        "filename": "dot.net.472.zip",
+        "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/dot.net.472.zip",
+        "architecture": "any"
+      },
+      ".net framework 4.5.2": {
+        "aliases": [
+          ".net framework 4.5.2",
+          ".net 4.5.2",
+          ".net4.5.2",
+          ".net_4.5.2",
+          ".net_4_5.2",
+          ".net_framework_4.5.2"
+        ],
+        "filename": "dot.net.452.zip",
+        "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/dot.net.452.zip",
+        "architecture": "any"
+      },
+      "jdk 21 x64": {
+        "aliases": [
+          "jdk.21",
+          "jdk_21",
+          "java.21",
+          "java_21",
+          "java.21.0.1"
+        ],
+        "filename": "jdk-21.0.1_x64.zip",
+        "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/jdk-21.0.1_x64.zip",
+        "architecture": "x64"
+      },
+      "jdk 21 x86": {
+        "aliases": [
+          "jdk.21",
+          "jdk_21",
+          "java.21",
+          "java_21",
+          "java.21.0.1"
+        ],
+        "filename": "jdk21.java.21.zip",
+        "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/jdk21.java.21.zip",
+        "architecture": "x86"
+      },
+      "jdk 11 x64": {
+        "aliases": [
+          "jdk.11",
+          "jdk_11",
+          "java.11",
+          "java_11",
+          "java.11.0.15"
+        ],
+        "filename": "jdk-11.0.21_x64.zip",
+        "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/jdk-11.0.21_x64.zip",
+        "architecture": "x64"
+      },
+      "jdk 11 x86": {
+        "aliases": [
+          "jdk.11",
+          "jdk_11",
+          "java.11",
+          "java_11",
+          "java.11.0.15"
+        ],
+        "filename": "jdk11.java.11.zip",
+        "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/jdk11.java.11.zip",
+        "architecture": "x86"
+      },
+      "jdk 8": {
+        "aliases": [
+          "jdk.8",
+          "jdk_8",
+          "java.8",
+          "java_8",
+          "java.8.0.242"
+        ],
+        "filename": "openjdk-1.8_openjdk-17.zip",
+        "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/openjdk-1.8_openjdk-17.zip",
+        "architecture": "any"
+      }
+    }
+  ],
+  "Other": [
+    {
+      "Adobe Photoshop CC 2018": {
+        "aliases": [
+          "adobe.photoshop",
+          "adobe_photoshop",
+          "adobe.photoshop.2018",
+          "photoshop.2018",
+          "photoshop 2018"
+        ],
+        "filename": "photoshop.cc.2018.zip",
+        "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/photoshop.cc.2018.zip",
+        "architecture": "any"
+      }
+    },
+    {
+      "ShareX": {
+        "aliases": [
+          "sharex"
+        ],
+        "filename": "ShareX.zip",
+        "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/ShareX.zip",
+        "architecture": "any"
+      }
+    },
+    {
+      "telegram": {
+        "aliases": [
+          "telegram",
+          "telegram_desktop"
+        ],
+        "filename": "Telegram.zip",
+        "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/Telegram.zip",
+        "architecture": "any"
+      }
+    }
+  ],
+  "Office": [
+    {
+      "LibreOffice": {
+        "aliases": [
+          "libreoffice",
+          "libre office",
+          "libreoffice.6",
+          "libreoffice.6.0"
+        ],
+        "filename": "LibreOfficePortable.zip",
+        "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/LibreOfficePortable.zip",
+        "architecture": "any"
+      },
+      "Free Office": {
+        "aliases": [
+          "freeoffice",
+          "free office",
+          "free_office"
+        ],
+        "filename": "freeoffice.zip",
+        "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/freeoffice.zip",
+        "architecture": "any"
+      }
+    }
+  ],
+  "Programming": [
+    {
+      "Python 3.9.13": {
+        "aliases": [
+          "python.3.9",
+          "python3.9",
+          "python.3.9.13"
+        ],
+        "filename": "Python.3.9.13+.zip",
+        "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/Python.3.9.13+.zip",
+        "architecture": "any"
+      },
+      "Visual Studio Code": {
+        "aliases": [
+          "vscode",
+          "visual_studio_code.1.70.3",
+          "visual_studio_code"
+        ],
+        "filename": "Visual.Studio.Code.1.70.3.zip",
+        "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/Visual.Studio.Code.1.70.3.zip",
+        "architecture": "x86"
+      },
+      "Visual Studio Code x64": {
+        "aliases": [
+          "vscode",
+          "visual_studio_code.1.83.1",
+          "visual_studio_code"
+        ],
+        "filename": "Visual.Studio.Code.1.83.1.zip",
+        "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/Visual.Studio.Code.1.83.1.zip",
+        "architecture": "x64"
+      },
+      "PyCharm Community 2017.3.4": {
+        "aliases": [
+          "jetbrains.pycharm.2017",
+          "jetbrains.pycharm.2017.3.4",
+          "pycharm.2017",
+          "pycharm_community_2017",
+          "pycharm_community.2017.3.4",
+          "pycharm.community.2017.3.4"
+        ],
+        "filename": "pycharm2017.zip",
+        "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/pycharm2017.zip",
+        "architecture": "any"
+      },
+      "PyCharm Community 2018.3.7": {
+        "aliases": [
+          "jetbrains.pycharm.2018.3.7",
+          "jetbrains.pycharm.2018",
+          "pycharm.2018",
+          "pycharm_professional_2018",
+          "pycharm_professional.2018.3.7",
+          "pycharm.professional.2018.3.7"
+        ],
+        "filename": "pycharm2018.zip",
+        "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/pycharm2018.zip",
+        "architecture": "any"
+      },
+      "CLion 2021.3.4": {
+        "aliases": [
+          "jetbrains.clion.2021.3.4",
+          "jetbrains.clion.2021",
+          "clion.2021",
+          "clion",
+          "clion.2021.3.4"
+        ],
+        "filename": "clion_2021_3_4.zip",
+        "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/clion_2021_3_4.zip",
+        "architecture": "x64"
+      },
+      "CLion 2023.2.2": {
+        "aliases": [
+          "jetbrains.clion.2023.2.2",
+          "jetbrains.clion.2023",
+          "clion.2023",
+          "clion",
+          "clion.2023.2.2"
+        ],
+        "filename": "clion2023_2_2.zip",
+        "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/clion2023_2_2.zip",
+        "architecture": "x64"
+      },
+      "PyCharm 2023.2.2": {
+        "aliases": [
+          "jetbrains.pycharm.2023.2.2",
+          "jetbrains.pycharm.2023",
+          "pycharm.2023",
+          "pycharm",
+          "pycharm.2023.2.2"
+        ],
+        "filename": "pycharm2023.zip",
+        "url": "https://github.com/nixxoq/xp-apps/releases/download/2023_10_11_17_52/pycharm2023.zip",
+        "architecture": "x64"
+      }
+    }
+  ]
 }
