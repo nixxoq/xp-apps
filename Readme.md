@@ -1,4 +1,4 @@
-## xp-apps
+## xp-apps (currently paused)
 
 > [!IMPORTANT]  
 > This is the development build of xp-apps.
