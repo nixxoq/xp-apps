@@ -9,15 +9,15 @@ namespace xp_apps
     {
         public static void Main()
         {
-            SimpleLogger.SetupLog("xp-apps");
+            Logger.SetupLog("xp-apps");
 
 #if DEBUG
-            SimpleLogger.Logger.Debug(
+            Logger.LogManager.Debug(
                 $"Current architecture: {Helper.OsArchitecture} | Current OS: {Environment.OSVersion}");
             var args = Helper.GetCommandArgs()?.Length > 0
                 ? string.Join(" ", Helper.GetCommandArgs())
                 : "No additional arguments";
-            SimpleLogger.Logger.Debug($"Used command-line arguments: {args}");
+            Logger.LogManager.Debug($"Used command-line arguments: {args}");
 #endif
             Console.CancelKeyPress += OnExit;
 
@@ -28,10 +28,6 @@ namespace xp_apps
                 Thread.Sleep(2000);
             }
 
-            // Cache.FetchLatestVersion();
-            // Checks if current operating system is Windows XP (NT 5.1 & NT 5.2)
-            // However, I am thinking about adding support for Windows Vista when the One-Core-API 4.1.0 will be released 👀
-
             // Funny moment: this program works on Linux too
             if (MainScreen.IsWindowsNt5)
             {
@@ -40,17 +36,6 @@ namespace xp_apps
                 Console.ReadLine();
                 return;
             }
-
-            // Checks if .NET Framework 4.5 or newer is installed
-            // Its need for TLS 1.2 protocol
-            // if (!MainScreen.IsDotNet45OrNewer())
-            // {
-            //     Console.WriteLine(
-            //         "This program works only with installed .NET Framework 4.0 and 4.5+\nMake sure you have installed the One-Core-API before installing .NET Framework 4.5+!");
-            //     Console.WriteLine("Press any key to exit...");
-            //     Console.ReadLine();
-            //     return;
-            // }
 
             MainScreen.ParseArgs();
         }

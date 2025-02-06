@@ -5,9 +5,9 @@ using NLog.Targets;
 
 namespace xp_apps.sources
 {
-    public abstract class SimpleLogger
+    public abstract class Logger
     {
-        public static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+        public static readonly NLog.Logger LogManager = NLog.LogManager.GetCurrentClassLogger();
 
         public static void SetupLog(string appName)
         {
@@ -30,7 +30,7 @@ namespace xp_apps.sources
             };
             config.AddRule(LogLevel.Debug, LogLevel.Debug, consoleTarget);
             config.AddRule(LogLevel.Debug, LogLevel.Info, fileTarget);
-            LogManager.Configuration = config;
+            NLog.LogManager.Configuration = config;
         }
     }
 }

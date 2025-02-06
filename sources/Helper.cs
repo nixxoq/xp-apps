@@ -57,64 +57,17 @@ namespace xp_apps.sources
             return reply != null && reply.Status == IPStatus.Success;
         }
 
-        public static WebClient GetClient()
-        {
-            var client = new WebClient();
-            return client;
-        }
-
         /// <summary>
         ///     Downloads a file from the specified URL and saves it with the given filename.
         ///     Displays a progress animation in the console while downloading.
+        ///
+        ///     HINT: This is a refference to CurlWrapper.DownloadFile
         /// </summary>
         /// <param name="url">The URL of the file to download.</param>
         /// <param name="filename">The name of the file to save the downloaded content to.</param>
         public static void DownloadFile(string url, string filename)
         {
-            // .NET 4.5 supports TLS 1.2
-            // I tested on Windows XP and Windows Server 2003, not sure about Windows Vista and Later
-            if (url.StartsWith("https", StringComparison.OrdinalIgnoreCase) && !MainScreen.IsDotnet45)
-            {
-                CurlWrapper.DownloadFile(url, filename);
-                return;
-            }
-
-            using (var client = new WebClient())
-            {
-                char[] animationChars = { '/', '-', '\\', '|' };
-                var animationIndex = 0;
-                var stopwatch = new Stopwatch();
-
-                client.DownloadProgressChanged += (sender, e) =>
-                {
-                    var speed = e.BytesReceived / 1024d / stopwatch.Elapsed.TotalSeconds;
-                    var remainingBytes = e.TotalBytesToReceive - e.BytesReceived;
-                    var remainingSeconds = remainingBytes / 1024d / speed;
-
-                    var remainingTime = TimeSpan.FromSeconds(remainingSeconds);
-                    var animationChar = animationChars[animationIndex++ % animationChars.Length];
-
-                    Console.Write(
-                        $"\r{animationChar} " +
-                        $@"Downloading {filename} | {e.ProgressPercentage}% completed | {speed / 1024d:0.00} MB/s | {remainingTime:hh\:mm\:ss} remaining"
-                    );
-                };
-
-                client.DownloadFileCompleted += (sender, e) =>
-                {
-                    Thread.Sleep(1000);
-                    Console.WriteLine(e.Error != null
-                        ? $"\nError: {e.Error.Message}"
-                        : $"\n{filename} download completed.\n");
-                };
-
-                stopwatch.Start();
-                client.DownloadFileAsync(new Uri(url), filename);
-
-                while (client.IsBusy) Thread.Sleep(100);
-
-                stopwatch.Stop();
-            }
+            CurlWrapper.DownloadFile(url, filename);
         }
 
         public static string[] GetCommandArgs()
@@ -140,7 +93,7 @@ namespace xp_apps.sources
             var curlFromArgs = GetArgValue(args, "--curl");
             if (!string.IsNullOrEmpty(curlFromArgs))
             {
-                SimpleLogger.Logger.Info("Picked up curl from command-line arguments");
+                Logger.LogManager.Info("Picked up curl from command-line arguments");
                 return curlFromArgs;
             }
 
@@ -148,11 +101,11 @@ namespace xp_apps.sources
             var curlPath = Environment.GetEnvironmentVariable("CURL_PATH");
 
             if (string.IsNullOrEmpty(curlPath) || !File.Exists(curlPath))
-                SimpleLogger.Logger.Info(
+                Logger.LogManager.Info(
                     "Could not find curl in the CURL_PATH environment variable or the file does not exist.");
             else
             {
-                SimpleLogger.Logger.Info("Picked up curl from the CURL_PATH environment");
+                Logger.LogManager.Info("Picked up curl from the CURL_PATH environment");
                 return curlPath;
             }
 
@@ -165,7 +118,7 @@ namespace xp_apps.sources
             }
 
             Console.WriteLine("Could not find curl. Exiting");
-            SimpleLogger.Logger.Info("Could not find curl. Exiting");
+            Logger.LogManager.Info("Could not find curl. Exiting");
             Environment.Exit(0);
 
             return null;
@@ -176,7 +129,7 @@ namespace xp_apps.sources
             var startInfo = new ProcessStartInfo
             {
                 FileName = Curl,
-                Arguments = $"-s \"{url}\"",
+                Arguments = $"-Ls \"{url}\"",
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
                 UseShellExecute = false,
@@ -302,13 +255,13 @@ namespace xp_apps.sources
                     {
                         Console.WriteLine(
                             $"Could not download {filename}\nUnable to resolve host. Are you sure you entered the correct URL?");
-                        SimpleLogger.Logger.Info(
+                        Logger.LogManager.Info(
                             $"Could not download {filename}\n    -> Unable to resolve host. Are you sure you entered the correct URL?\n");
                     }
                     else if (line.Contains("timeout"))
                     {
                         Console.WriteLine($"Could not download {filename}\nRequest timed out. Is the website alive?\n");
-                        SimpleLogger.Logger.Info(
+                        Logger.LogManager.Info(
                             $"Could not download {filename}\n    -> Request timed out. Is the website alive?");
                     }
                 }
@@ -364,10 +317,6 @@ namespace xp_apps.sources
                 $"\r[{progressBar}] {progress:0.00}% | {speed:0.00} MB/s | {remainingTime:hh\\:mm\\:ss} remaining";
 
             Console.Write(progressText);
-            // if (!string.IsNullOrEmpty(filename))
-            // {
-            //     Console.WriteLine($" | {filename}");
-            // }
         }
     }
 }

@@ -11,7 +11,8 @@ namespace xp_apps.sources
 
         // todo: search another ways to check for latest release version
         // P.S. I know only one - upload data.json on every release
-        private const string LatestReleaseVersion = "http://data.nixxoq.xyz/xp-apps/data.json";
+        private const string LatestReleaseVersion = "https://github.com/nixxoq/xp-apps/releases/latest/download/data.json";
+        // private const string LatestReleaseVersion = "https://github.com/nixxoq/xp-apps/releases/latest/download/data.json";
         public const string LatestReleaseZip = "https://github.com/nixxoq/xp-apps/releases/latest/download/xp_apps.zip";
 
         // application version

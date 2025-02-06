@@ -47,7 +47,7 @@ namespace xp_apps.sources
                 return true;
 
 #if DEBUG
-            SimpleLogger.Logger.Debug("main application list is up-to-date.");
+            Logger.LogManager.Debug("Main application list is up-to-date.");
 #endif
             return false;
         }
@@ -99,7 +99,7 @@ namespace xp_apps.sources
             string categoryName)
         {
 #if DEBUG
-            SimpleLogger.Logger.Debug($"Searching {appName} in {categoryName} category...");
+            Logger.LogManager.Debug($"Searching {appName} in {categoryName} category...");
 #endif
 
             foreach (var (programName, programDetails) in GetProgramDetails(category))

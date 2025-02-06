@@ -1,4 +1,4 @@
-## xp-apps (currently paused)
+## xp-apps
 
 > [!IMPORTANT]  
 > This is the development build of xp-apps.
@@ -6,7 +6,8 @@
 >
 > Otherwise, go to [main](https://github.com/nixxoq/xp-apps/tree/main) branch to view the old README and other files
 
-### A Package manager for Windows XP
+### A Package manager for original Windows XP
+
 
 ### TODO:
 

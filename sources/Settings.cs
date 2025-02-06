@@ -21,7 +21,7 @@ namespace xp_apps.sources
             File.WriteAllText(SettingsPath, json);
 
 #if DEBUG
-            SimpleLogger.Logger.Info($"Settings file content:\n{json}");
+            Logger.LogManager.Info($"Settings file content:\n{json}");
 #endif
         }
 

@@ -6,7 +6,6 @@ namespace xp_apps.sources
 {
     internal static class MainScreen
     {
-        public static readonly bool IsDotnet45 = IsDotNet45OrNewer();
         public static readonly bool IsWindowsNt5 = IsWindowsXp();
 
         private static readonly string Help = $"xp-apps ver {Updater.ProgramVersion}" +
@@ -73,7 +72,7 @@ namespace xp_apps.sources
         /// <summary>
         ///     Checks if the current Windows version is Windows XP
         /// </summary>
-        public static bool IsWindowsXp()
+        private static bool IsWindowsXp()
         {
             var os = Environment.OSVersion;
             var osv = os.Version;
@@ -87,18 +86,6 @@ namespace xp_apps.sources
                     return true;
                 default:
                     return false;
-            }
-        }
-
-        // https://learn.microsoft.com/en-us/dotnet/framework/migration-guide/how-to-determine-which-versions-are-installed#query-the-registry-using-code
-        private static bool IsDotNet45OrNewer()
-        {
-            using (var dotNetKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32)
-                       .OpenSubKey(@"SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full\"))
-            {
-                if (dotNetKey?.GetValue("Release") == null) return false;
-
-                return (int)dotNetKey.GetValue("Release") >= 378389;
             }
         }
     }

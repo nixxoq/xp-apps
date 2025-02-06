@@ -160,7 +160,7 @@ namespace xp_apps.Updater
         private static void Main()
         {
             Thread.Sleep(2000);
-            
+
             CurlWrapperL.DownloadFile(sources.Updater.LatestReleaseZip, "xp-apps.zip");
 
             using (var zipFile = new ZipFile("xp-apps.zip"))
